@@ -1,0 +1,84 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '2.7.14'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+//	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' // 추가
+	implementation 'javax.servlet:jstl' // 추가
+
+	//02CONTROLLER_VALIDATION
+	implementation 'org.hibernate.validator:hibernate-validator'
+	implementation 'javax.validation:validation-api'
+
+	// 03 DB연동
+	implementation 'com.mysql:mysql-connector-j:8.1.0'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+	// 04 MyBatis
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+
+	// 05 JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// ASSERT TEST
+	testImplementation 'org.assertj:assertj-core:3.24.2'
+
+	// Tymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// RESTAPI
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.14.2'
+	implementation 'com.google.code.gson:gson:2.10.1'
+
+	// NaverCloud SMS
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+
+	// Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+    // OAUTH2 인증
+    implementation 'org.springframework.security:spring-security-oauth2-client'
+    implementation 'org.springframework.security:spring-security-oauth2-jose'
+
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
