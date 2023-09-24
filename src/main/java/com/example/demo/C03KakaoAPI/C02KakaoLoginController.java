@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
@@ -20,7 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/th/kakao")
 public class C02KakaoLoginController {
 
-    private final String Client_code = "d1c6d78de634feda6de63d2500b400c4";
+    @Value("${spring.security.oauth2.client.registration.kakao.client-id}")
+    private String Client_code;
 
     private final String Redirect_url = "http://localhost:8080/th/kakao/callback";
 

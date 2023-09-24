@@ -2,6 +2,7 @@ package com.example.demo.C04NaverAPI;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,9 +21,11 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/th/naver")
 public class NaverSearchAPIController {
 
-    private final String Client_Id ="cTuSw8PXse5QQD2t2jHL";
+    @Value("${naver-cloud-sms.accessKey}")
+    private String Client_Id;
 
-    private final String Client_Secret="Flgd4RS8Fi";
+    @Value("${naver-cloud-sms.secretKey}")
+    private String Client_Secret;
 
     @GetMapping("/local/{page}/{keyWord}")
     public @ResponseBody String  local(@PathVariable String page, @PathVariable  String keyWord){

@@ -16,5 +16,9 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/Import")
+    public  String main1(){
+        return "Import";
+    }
 
 }
