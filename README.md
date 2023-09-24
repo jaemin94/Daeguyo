@@ -25,12 +25,12 @@
 
 ## ▶️ 구성인원 
 
-##### 이재민(조장)  : BackEnd (BackEnd 기본 레이아웃 및 틀 정리, API 문서정리 , BackEnd 장바구니 결제 코드 구현)
-##### 김승훈(조원1) :  ()
-##### 백승하(조원2) :  ()
-##### 정세인(조원3) : FrontEnd (웹 기획)
-##### 박민영(조원4) :  ()
-##### 양우성(조원5) :  ()
+##### 이재민(조장)  : FrontEnd,BackEnd (BackEnd 기본 레이아웃 및 틀 정리, API 문서정리)
+##### 김승훈(조원1) : FrontEnd,BackEnd ()
+##### 백승하(조원2) : FrontEnd,BackEnd ()
+##### 정세인(조원3) : FrontEnd,BackEnd (웹 기획)
+##### 박민영(조원4) : FrontEnd,BackEnd ()
+##### 양우성(조원5) : FrontEnd,BackEnd ()
 <br/>
 
 ## ▶️ 개발 환경(플랫폼)
