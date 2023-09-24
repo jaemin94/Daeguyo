@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/js/**").permitAll()// 인가 처리
 				.antMatchers("/image/**").permitAll()// 인가 처리
 
-				.antMatchers("/", "/public","/verifyIamport/getToken","/verifyIamport/getTokenPage","/verifyIamport/cancel").permitAll()
+				.antMatchers("/", "/public","/verifyIamport2/getToken","/verifyIamport2/cancel","/verifyIamport2/searchOne","/index","/verifyIamport2/searchAll").permitAll()
 																				// hasRole을 사용시 기본적으로 Role_ 이 제공된다
 				.antMatchers("/user").hasRole("User")                            // Role_User
 				.antMatchers("/member").hasRole("Member")                        // Role_Member
