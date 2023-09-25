@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
@@ -150,10 +151,10 @@ public class VerifyController2 {
 
 //     결제 취소 아직 미완성
         @GetMapping("/cancel")
-        public String refound(String payment_id){
+        public String refound(@PathVariable String payment_id){
 
             // URL
-            payment_id = "paymentId_1695364952148";
+            payment_id = "paymentId_1695619928309";
             String IMPORT_CANCEL_URL = "https://api.portone.io/v2/payments/"+payment_id+"/cancel";
             //HEADER
             HttpHeaders headers = new HttpHeaders();
