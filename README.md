@@ -5,7 +5,7 @@
 
 ## ▶️ 개발 동기
 
-##### 
+#####  현재 비대면 소비로의 급격한 전환이 이뤄지고 있다. 그리고 그 흐름은 배달 서비스가 주도한다. 해당 상황을 인식하고 우리 팀은 배달 서비스 특성을 이해할 필요성을 느꼈다. 팀 프로젝트가 가장 효과적인 학습법이 될 것이라 판단했다. 특히 기존 플랫폼의 수수료 문제로 인해 대안 서비스에 대한 수요가 확대되고 있다는 점에 기인해 지역 밀착형 배달 서비스 구현을 목표로 하는 '대구요' 프로젝트를 진행하게 되었다. 
 ##### 
 <br/>
 
@@ -25,12 +25,12 @@
 
 ## ▶️ 구성인원 
 
-##### 이재민(조장)  : FrontEnd,BackEnd (BackEnd 기본 레이아웃 및 틀 정리, API 문서정리)
-##### 김승훈(조원1) : FrontEnd,BackEnd ()
-##### 백승하(조원2) : FrontEnd,BackEnd ()
-##### 정세인(조원3) : FrontEnd,BackEnd (웹 기획)
-##### 박민영(조원4) : FrontEnd,BackEnd ()
-##### 양우성(조원5) : FrontEnd,BackEnd ()
+##### 이재민(조장)  : FrontEnd,BackEnd (FrontEnd(매장선택, 메뉴상세), BackEnd(기본 레이아웃 및 틀 정리, API 문서정리))
+##### 김승훈(조원1) : FrontEnd,BackEnd (FrontEnd(회원정보 수정/가입 , 리뷰페이지) , BackEnd())
+##### 백승하(조원2) : FrontEnd,BackEnd (FrontEnd(매장결제 승인, 입점회원가입,로그) , BackEnd())
+##### 정세인(조원3) : FrontEnd,BackEnd (FrontEnd(웹 기획, 메인페이지 구현) , BackEnd())
+##### 박민영(조원4) : FrontEnd,BackEnd (FrontEnd(마이페이지, 주문내) , BackEnd())
+##### 양우성(조원5) : FrontEnd,BackEnd (FrontEnd(카테고리, 장바구니) , BackEnd())
 <br/>
 
 ## ▶️ 개발 환경(플랫폼)
@@ -50,11 +50,16 @@
 ## ▶️ Software 목록
 
 ##### IDE : IntelliJ IDEA 2023.06
-##### SpringBoot 2.7.15
+##### SpringBoot 2.7.14
 ##### Gradle
 ##### GitHub
-##### Mysql Server 8.x.x
-##### Mysql Workbench 8.x.x
+##### Mysql Server 8.1.0
+##### Mysql Workbench 8.0.34
+##### MyBatis 2.3.1
+##### NaverCloud SMS 4.5.13
+##### JSON 1.1.1
+##### JACKSON 2.14.2
+##### GSON 2.10.1
 <br/>
 
 ## ▶️ DevOps 
@@ -79,18 +84,22 @@
 
 ## ▶️ 기술스택
 
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
-![SpringBoot](https://img.shields.io/badge/SpringBoot-6DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)
+##### FrontEnd
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) </br>
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) </br>
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) </br>
+![jQueary](https://img.shields.io/badge/jquery-0769AD.svg?style=for-the-badge&logo=jquery&logoColor=%23F7DF1E) </br>
+![fontawesome](https://img.shields.io/badge/fontawesome-528DD7.svg?style=for-the-badge&logo=fontawesome&logoColor=%23F7DF1E) </br>
 
+##### BackEnd
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white) </br>
 
-
-[참고 배지 싸이트] <br/>
-https://badgen.net/ <br/>
-https://shields.io/
+##### DEV TOOL
+![SpringBoot](https://img.shields.io/badge/SpringBoot-6DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white) </br>
+![InteliJ Idea](https://img.shields.io/badge/intellijidea-000000.svg?style=for-the-badge&logo=intellijidea&logoColor=white) </br>
+![AWS](https://img.shields.io/badge/AWS-232F3E.svg?style=for-the-badge&logo=amazonaws&logoColor=white) </br>
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white) </br>
+![GitHub](https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=github&logoColor=white) 
 
 
 <br/>
