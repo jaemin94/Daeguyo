@@ -49,14 +49,12 @@
 
 ## ▶️ Software 목록
 
-##### IDE : IntelliJ IDEA 버전명
+##### IDE : IntelliJ IDEA 2023.06
 ##### SpringBoot 2.7.15
-##### maven version 3.1.2
-##### Git 3.1.1
+##### Gradle
+##### GitHub
 ##### Mysql Server 8.x.x
 ##### Mysql Workbench 8.x.x
-##### DbWeaver x.x
-##### ...
 <br/>
 
 ## ▶️ DevOps 
@@ -64,18 +62,17 @@
 ##### Amazon Web Service EC2(Deploy Server)
 ##### Amazon Web Service RDS(Remote Datebase Server)
 ##### Git & Github
-##### Docker(Server Image)
-##### Swagger(API Document)
 ##### Adobe XD
+
 <br/>
 
 
 
 ## ▶️ 사용(or 예정) API
 
-##### 원포트 결제시스템 API
+##### 원포트 결제 API
 ##### 카카오맵 API
-##### OAuth2 로그인 API
+##### 이메일 인증 API
 ##### 네이버 SMS API
 ##### 다음 주소 API
 <br/>
