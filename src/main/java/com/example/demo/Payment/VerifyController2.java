@@ -151,10 +151,10 @@ public class VerifyController2 {
 
 //     결제 취소 아직 미완성
         @GetMapping("/cancel")
-        public String refound(@PathVariable String payment_id){
+        public String refound(){
 
             // URL
-            payment_id = "paymentId_1695619928309";
+            String payment_id = "paymentId1695699982554";
             String IMPORT_CANCEL_URL = "https://api.portone.io/v2/payments/"+payment_id+"/cancel";
             //HEADER
             HttpHeaders headers = new HttpHeaders();
