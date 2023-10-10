@@ -19,18 +19,21 @@
 #### 2023-09-16 ~ 2023-09-17(02Day) : 개발환경 구축(GITHUB, GIT, INTELIJ, MYSQL)
 #### 2023-09-18 ~ 2023-09-24(07Day) : 사용할 api 정리 및 기능 테스트
 #### 2023-09-25 ~ 2023-10-04(10Day) : 보여질 view 페이지 작성
+#### 2023-10-05 ~ 2023-10-09(05Day) : view 페이지 수정
+#### 2023-10-10 ~ 2023-10-19(10Day) : Back-End 작업
+#### 2023-10-20 ~ 2023-10-20(01Day) : 모든 작업 수정 및 완
 
 
 <br/>
 
 ## ▶️ 구성인원 
 
-##### 이재민(조장)  : FrontEnd,BackEnd (FrontEnd(매장선택, 메뉴상세), BackEnd(기본 레이아웃 및 틀 정리, API 문서정리))
-##### 김승훈(조원1) : FrontEnd,BackEnd (FrontEnd(회원정보 수정/가입 , 리뷰페이지) , BackEnd())
-##### 백승하(조원2) : FrontEnd,BackEnd (FrontEnd(매장결제 승인, 입점회원가입,로그인) , BackEnd())
-##### 정세인(조원3) : FrontEnd,BackEnd (FrontEnd(웹 기획, 메인페이지 구현) , BackEnd())
-##### 박민영(조원4) : FrontEnd,BackEnd (FrontEnd(마이페이지, 주문내역) , BackEnd())
-##### 양우성(조원5) : FrontEnd,BackEnd (FrontEnd(카테고리, 장바구니) , BackEnd())
+##### 이재민(조장)  : FrontEnd,BackEnd (FrontEnd(매장선택, 메뉴상세), BackEnd(기본 레이아웃 및 틀 정리, RESTful api, 매장결제승인,회원가입)
+##### 김승훈(조원1) : FrontEnd,BackEnd (FrontEnd(회원정보 수정/가입 , 리뷰페이지) , BackEnd(카테고리,매장선택 BackEnd)
+##### 백승하(조원2) : FrontEnd,BackEnd (FrontEnd(매장결제 승인, 입점회원가입,로그인) , BackEnd(입점회원가입,회원정보수정 BackEnd)
+##### 정세인(조원3) : FrontEnd,BackEnd (FrontEnd(웹 기획, 메인페이지 구현) , BackEnd(로그인,주문내역 BackEnd)
+##### 박민영(조원4) : FrontEnd,BackEnd (FrontEnd(마이페이지, 주문내역) , BackEnd(메뉴상세,마이페이지 BackEnd)
+##### 양우성(조원5) : FrontEnd,BackEnd (FrontEnd(카테고리, 장바구니) , BackEnd(매인페이지,장바구니 BackEnd)
 <br/>
 
 ## ▶️ 개발 환경(플랫폼)
