@@ -18,10 +18,10 @@
         </header>
   
         <main class="align">
-        <form class="login-form" id="form">
+        <form class="login-form" id="form" action="/login" method="post">
             <h2 class="title">로그인</h2>
             <label class="_object-label">
-                <input autofocus class="_object-input" maxlength="50" name="email"  type="email">
+                <input autofocus class="_object-input" maxlength="50" name="u_email"  type="email">
             </label>
             <h2 class="title">비밀번호</h2>
             <label class="_object-label">
@@ -29,14 +29,16 @@
             </label>            
             
             <input class="login-button" type="submit" value="로그인" />
-            <a class="register-button" href="memberJoin.html" >회원가입</a>
-            <a class="res-register-button" href="resJoin.html">매장 회원가입</a>
+<!--            <a class="register-button" href="/memberJoin" >회원가입</a>-->
+<!--            <a class="res-register-button" href="resJoin.html">매장 회원가입</a>-->
             <ul class="menu">
                 <li class="item">
                     <a class="link">아이디/비밀번호 찾기</a>
                 </li>
             </ul>
         </form>
+            <a class="register-button" href="/memberJoin" >회원가입</a>
+            <a class="res-register-button" href="resJoin.html">매장 회원가입</a>
     </main>
       
         <footer>

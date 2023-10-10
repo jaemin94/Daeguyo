@@ -206,68 +206,47 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-//제안보내기
-document.addEventListener("DOMContentLoaded", function () {
-  // 이름, 생년월일 (year, day), 이메일 (email), 비밀번호 (password1, password2), 휴대폰 (phone) 입력 상자 요소를 가져옵니다.
-  const nameInput = document.getElementById("name");
-  const yearInput = document.getElementById("year");
-  const dayInput = document.getElementById("day");
-  const emailInput = document.getElementById("email_id");
-  const password1Input = document.getElementById("password1");
-  const password2Input = document.getElementById("password2");
-  const phoneInput = document.getElementById("phone");
-  const plz1Button = document.getElementById("plz1");
-  const plz2Button = document.getElementById("plz2");
-  const submitButton = document.querySelector(".agree_submit_box");
+const btnJoin = document.getElementById("btnJoin");
+btnJoin.onclick = function () {
+    //주소
+    var postNumber = document.getElementById("addr_number").value;
+    var address = document.getElementById("address").value;
+    var extraAddress = document.getElementById("extraAddress").value;
+    var detailAddress = document.getElementById("detailAddress").value;
 
-  // plz1, plz2 버튼 클릭 여부를 나타내는 변수를 초기화합니다.
-  let isPlz1Clicked = false;
-  let isPlz2Clicked = false;
+    var password = document.getElementById("password").value;
+    var username = document.getElementById("name").value;
+    var phoneNumber = document.getElementById("phoneNumber").value;
 
-  // 입력 상자에 입력 이벤트 리스너를 추가하여 모든 입력 상자가 채워지면 버튼을 활성화합니다.
-  function checkInputs() {
-    const isAllInputsFilled =
-      nameInput.value.trim() !== "" &&
-      yearInput.value.trim() !== "" &&
-      dayInput.value.trim() !== "" &&
-      emailInput.value.trim() !== "" &&
-      password1Input.value.trim() !== "" &&
-      password2Input.value.trim() !== "" &&
-      phoneInput.value.trim() !== "";
+    // 주소합병
+    var  fullAddress = postNumber + " " + address + " " + extraAddress + " " + detailAddress;
 
-    submitButton.disabled = !(isAllInputsFilled && isPlz1Clicked && isPlz2Clicked);
-  }
-
-  // 입력 상자에 입력 이벤트 리스너를 추가합니다.
-  nameInput.addEventListener("input", checkInputs);
-  yearInput.addEventListener("input", checkInputs);
-  dayInput.addEventListener("input", checkInputs);
-  emailInput.addEventListener("input", checkInputs);
-  password1Input.addEventListener("input", checkInputs);
-  password2Input.addEventListener("input", checkInputs);
-  phoneInput.addEventListener("input", checkInputs);
-
-  // plz1 버튼 클릭 시 이벤트 리스너를 추가합니다.
-  plz1Button.addEventListener("click", function () {
-    isPlz1Clicked = !isPlz1Clicked;
-    plz1Button.classList.toggle("checked", isPlz1Clicked);
-    checkInputs();
-  });
-
-  // plz2 버튼 클릭 시 이벤트 리스너를 추가합니다.
-  plz2Button.addEventListener("click", function () {
-    isPlz2Clicked = !isPlz2Clicked;
-    plz2Button.classList.toggle("checked", isPlz2Clicked);
-    checkInputs();
-  });
-
-  // 제안 보내기 버튼 클릭 시 naver.com으로 이동합니다.
-  submitButton.addEventListener("click", function () {
-    if (submitButton.disabled === false) {
-      window.location.href = "https://www.naver.com";
+    //이메일합병
+    var emailInput = document.getElementById("email_id").value;
+    if (!emailInput) {
+        var emailSelect = document.getElementById("email_adr").value;
+        var fullEmail = emailInput + "@" + emailSelect;
     }
-  });
-});
+
+    const requestData = {
+        addr: fullAddress,
+        u_email: fullEmail,
+        password: password,
+        nickname: username,
+        phone: phoneNumber
+    };
+
+    axios.post('/memberJoin', requestData)
+        .then(response => {
+
+            console.log(response.data);
+            window.location.href="/login";
+
+        })
+        .catch(error => {
+            console.error("Error sending data: ", error);
+        });
+}
 
 
 
