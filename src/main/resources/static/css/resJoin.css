@@ -1,0 +1,661 @@
+header {
+  height: 100px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+header > .align {
+display: flex;
+justify-content: space-around;
+flex: 1;
+}
+header > .align > a > img {
+  width: 100px;
+  height: 100px;
+}
+
+/* 메인-조인헤더(홈>회원가입, STEP그림) */
+main>.section_join_header {
+  width: 1200px;
+  height: 500px;
+  margin: 0 auto;
+
+}
+
+
+.section_join_header>.info_text {
+  display: flex;
+  justify-content: flex-end;
+  height: 100px;
+  width: 1100px;
+  line-height: 100px;
+  font-size: 20px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+
+.section_join_header>.join_step {
+  display: flex;
+  margin: 0 auto;
+  width: 1200px;
+  height: 300px;
+  align-items: center;
+  justify-content: center;
+}
+
+.join_step>.step_box {
+  width: 250px;
+  height: 120px;
+  background-color: #01cafe;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step_box>.img_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 300px;
+}
+
+.img_container>.img_box {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img_box>img {
+  width: 70%;
+  height: 70%;
+}
+
+.step_box>.step_text {
+  width: 100px;
+  text-align: center;
+  margin-right: 20px;
+  color: #ffffff;
+}
+
+.step_text>.step_head {
+  font-size: 30px;
+}
+
+.step_text>.step_foot {
+  font-size: 12px;
+}
+
+.join_step>.sign_box {
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign_box>span {
+  font-size: 100px;
+  color: #919191;
+}
+
+/* 조인헤더 끝 */
+
+
+
+/* 입점 제안 정보 시작 */
+.insertres_enterInfo{
+  height: 600px;
+}
+.insertres_enterInfo>.insertres_section{
+  display: flex;
+  text-align: left;
+  margin-top: 150px;
+  font-size: 25px;
+  padding-bottom:  10px;
+  border-bottom: 1px solid gray;
+  font-family: 'yg-jalnan';
+  margin: 0 auto;
+}
+
+form {
+  margin-top: 20px;
+}
+
+form div{
+  margin-bottom: 20px;
+}
+
+form > .title > label{
+  display: block;
+  font-size: 20px;
+}
+
+form > .content > label{
+  display: block;
+  font-size: 20px;
+}
+
+.proposalTitle{
+ width: 1000px;
+  border: none; 
+  border-bottom: 1px solid; 
+  outline: none;
+  font-size: 20px;
+}
+.proposalContent {
+  width: 1000px; 
+  height: 200px; /* 높이 설정 */
+  resize:none;
+  background-color: #e8e8e8;
+  border: none;
+  outline:none;
+} 
+.proposalContent::placeholder{
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.attach label{
+font-size: 15px;
+
+}
+
+/* 입점 제안 정보 끝*/
+
+
+/* 제안 업체정보 시작 */
+.section_enterInfo {
+
+  width: 1200px;
+  height: 900px;
+  margin: 0 auto;
+}
+
+.section_enterInfo>.section_header {
+  display: flex;
+  text-align: left;
+  margin-top: 150px;
+  font-size: 25px;
+  padding-bottom:  10px;
+  border-bottom: 1px solid gray;
+  font-family: 'yg-jalnan';
+  margin: 0 auto;
+}
+
+.section_enterInfo>.big_container {
+  width: 100%;
+  /* height: 2000px; */
+  margin-top: 50px;
+  font-size: 20px;
+  padding-bottom: 10px;
+  font-family: 'yg-jalnan';
+  display: flex;
+  /* 내용을 가로로 정렬하기 위해 Flexbox 사용 */
+  flex-direction: column;
+  /* 내용을 세로로 정렬 */
+  align-items: center;
+  /* 수평 중앙 정렬 */
+  justify-content: center;
+  /* 수직 중앙 정렬 */
+}
+
+/* 이름 */
+.big_container>.name_container {
+  height: 150px;
+}
+
+.name_container>.name_box {
+  height: 50px;
+}
+
+.name_container>.name_input {
+  width: 1000px;
+  border-left: none;
+  /* 왼쪽 테두리 제거 */
+  border-right: none;
+  /* 오른쪽 테두리 제거 */
+  border-top: none;
+  border-bottom: #919191 solid;
+  outline: none;
+}
+
+.name_input>#name {
+  width: 950px;
+  height: 50px;
+  font-size: 20px;
+  border: none;
+  line-height: 50px;
+}
+
+.name_input>button {
+  height: 100%;
+}
+
+.name_input>button>img {
+  width: 40px;
+}
+
+.name_input>button:hover {
+  cursor: pointer;
+}
+
+.name_input input {
+  outline:none;
+}
+
+/* 생년월일 */
+.big_container>.year_container {
+  width: 1000px;
+  height: 150px;
+}
+
+.year_container>.year_box {
+  height: 50px;
+}
+
+.year_container>#year,
+#month,
+#day {
+  margin-top: 10px;
+  height: 50px;
+  width: 30.8%;
+  margin-right: 2%;
+  line-height: 50px;
+  font-size: 18px;
+  text-align: center;
+  outline:none;
+}
+
+.year_container>#month{
+  padding-right:10px;
+}
+
+.year_container>select{
+  appearance: none;
+  background: url(../images/drop.png) no-repeat right 70px center;
+  background-size: 25px 25px;
+}
+
+
+/* 이메일 */
+.big_container>.email_container {
+  width: 1000px;
+  height: 150px;
+}
+
+.email_container>.email_box {
+  height: 50px;
+}
+
+.email_container>.email_input {
+  display: flex;
+}
+
+.email_input input {
+  outline:none;
+}
+
+.email_input>#email_id,
+#email_adr {
+  width: 36%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.email_input>#email_gol {
+  width: 15%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  text-align: center;
+
+}
+
+.email_input>select{
+  appearance: none;
+  background: url(../images/drop.png) no-repeat right 70px center;
+  background-size: 25px 25px;
+}
+
+.email_input>#email_btn {
+  background-color: #eaeaea;
+  width: 50px;
+  height: 50px;
+  margin-left: 5%;
+}
+
+#email_btn>button {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+#email_btn>button:hover {
+  cursor: pointer;
+}
+
+
+/* 비밀번호 */
+.big_container>.password1_container {
+  height: 150px;
+}
+
+.password1_container>.password1_box {
+  height: 50px;
+}
+
+.password1_container>.password1_input {
+  width: 1000px;
+  border-left: none;
+  /* 왼쪽 테두리 제거 */
+  border-right: none;
+  /* 오른쪽 테두리 제거 */
+  border-top: none;
+  border-bottom: #919191 solid;
+  outline: none;
+}
+
+.password1_input>#password1 {
+  width: 950px;
+  height: 50px;
+  font-size: 20px;
+  border: none;
+  line-height: 50px;
+}
+
+.password1_input>button {
+  height: 100%;
+}
+
+.password1_input>button>img {
+  width: 40px;
+}
+
+.password1_input>button:hover {
+  cursor: pointer;
+}
+
+.password1_input input {
+  outline:none;
+}
+/* 비밀번호 확인 */
+.big_container>.password2_container {
+  height: 150px;
+}
+
+.password2_container>.password2_box {
+  height: 50px;
+}
+
+.password2_container>.password2_input {
+  width: 1000px;
+  border-left: none;
+  /* 왼쪽 테두리 제거 */
+  border-right: none;
+  /* 오른쪽 테두리 제거 */
+  border-top: none;
+  border-bottom: #919191 solid;
+  outline: none;
+}
+
+.password2_input>#password2 {
+  width: 950px;
+  height: 50px;
+  font-size: 20px;
+  border: none;
+  line-height: 50px;
+}
+
+.password2_input>button {
+  height: 100%;
+}
+
+.password2_input>button>img {
+  width: 40px;
+}
+
+.password2_input>button:hover {
+  cursor: pointer;
+}
+.password2_input input {
+  outline:none;
+}
+
+/* 휴대폰번호 확인 */
+.big_container>.phone_container {
+  height: 150px;
+}
+
+.phone_container>.phone_box {
+  height: 50px;
+}
+
+.phone_container>.phone_input {
+  width: 1000px;
+  border-left: none;
+  /* 왼쪽 테두리 제거 */
+  border-right: none;
+  /* 오른쪽 테두리 제거 */
+  border-top: none;
+  border-bottom: #919191 solid;
+  outline: none;
+}
+
+.phone_input>#phone {
+  width: 940px;
+  height: 50px;
+  font-size: 20px;
+  border: none;
+  line-height: 50px;
+}
+.phone_input input {
+  outline:none;
+}
+
+.phone_input>#phone_btn {
+  background-color: #eaeaea;
+  width: 50px;
+  height: 50px;
+}
+
+#phone_btn {
+  text-align: center;
+}
+
+#phone_btn:hover {
+  cursor: pointer;
+}
+.phone_input input {
+  outline:none;
+}
+
+/*  주소입력 */
+.big_container>.addr_container {
+  height: 250px;
+  width: 1000px;
+}
+
+.addr_container>.addr_box {
+  height: 50px;
+}
+
+.addr_container>.addr {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.addr>#addr_number {
+  width: 200px;
+  height: 40px;
+}
+
+.addr>#addr_btn {
+  width: 150px;
+  height: 40px;
+}
+
+#addr_btn>input {
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+}
+
+.addr>#layer {}
+
+.addr>input{
+  outline:none;
+}
+
+.address>input{
+  outline:none;
+}
+
+
+
+.addr_container>.address {
+  margin-bottom: 10px;
+}
+
+.address>#address {
+  width: 970px;
+  height: 35px;
+}
+
+.address>#detailAddress {
+  width: 49%;
+  height: 35px;
+}
+
+.address>#extraAddress {
+  width: 49%;
+  height: 35px;
+}
+
+
+/* 회원정보 입력 끝 */
+/* 동의상자 작업 시작 */
+.section_agree {
+  width: 1200px;
+  height: 500px;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.section_agree>.agree_big_container {
+  width: 1000px;
+  height: 350px;
+  margin: 0 auto;
+}
+
+.agree_big_container>.all_agree {
+  width: 1000px;
+  height: 50px;
+  border: solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.all_agree>.all_agree_btn {
+  width: 30px;
+  height: 30px;
+}
+
+.all_agree_btn>img {
+  width: 100%;
+  height: 100%;
+}
+
+.all_agree>.all_agree_text {
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.agree_big_container>.agree_container {
+  width: 1000px;
+  height: 250px;
+}
+
+.agree_container>.agree_box {
+  width: 1000px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.agree_box>button {
+  width: 30px;
+  height: 30px;
+}
+
+.agree_box>button>img {
+  width: 100%;
+  height: 100%;
+}
+
+.agree_box>.agree_text {
+  font-size: 20px;
+  margin-left: 20px;
+  width: 800px;
+  text-align: left;
+}
+
+.agree_box>.open_box {
+  font-size: 20px;
+  color: #919191;
+  width: 100px;
+  margin-left: 50px;
+  border-bottom: solid #919191;
+  ;
+}
+
+.section_agree>.agree_submit_zone {
+  width: 1100px;
+  height: 100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agree_submit_zone>.agree_submit_box {
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  color:#01cafe;
+  line-height: 50px;
+  text-align: center;
+  border: solid #01cafe;
+}
+
+.agree_submit_box:hover{
+  cursor: pointer;
+}
+
+.agree_submit_zone>.agree_submit_cancel {
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  border: solid #919191;
+  margin-left: 50px;
+}
+
+.agree_submit_cancel:hover{
+  cursor:pointer;
+}
+
+/* 동의상자 작업 끝 */

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>대구요 회원가입</title>
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/memberJoin_style.css" />
+  <!-- 구글아이콘 -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+</head>
+
+<body>
+  <div id="warp">
+    <div class="side_menu">
+      <div class="ide_login">
+        <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
+        <a href="#" class="close">&times;</a>
+      </div>
+      <div class="panner">
+        <ul>
+          <li><a href="javascript:void(0);">홈</a></li>
+          <li><a href="javascript:void(0);">주문</a></li>
+          <li><a href="javascript:void(0);">매장찾기</a></li>
+          <li><a href="javascript:void(0);">마이페이지</a></li>
+          <li><a href="javascript:void(0);">로그아웃</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="map_bg">
+      <div id="map">
+        <div class="map_search">
+          <input value="지번, 도로, 건물명으로 검색" />
+          <button>검색</button>
+        </div>
+
+        <div class="current_location_group">
+          <img src="/images/gps.png" alt="" class="gps">
+          <div class="current_location">현재 위치에서 찾기</div>
+        </div>
+
+        <div class="location_select">
+          대구 광역시 동구 동촌로55길36
+        </div>
+
+        <div class="location_complete">선택하기</div>
+      </div>
+    </div>
+
+    <header>
+      <div class="align">
+        <a href="javascript:void(0);"><img src="/images/login_logo.png" alt="로고" /></a>
+      </div>
+    </header>
+    <!-- 김승훈 작업 시작 -->
+    <!-- 메인(조인헤더) -->
+    <main>
+      <section class="section_join_header">
+        <div class="info_text">
+          <span><a href="/index copy.html">홈</a></span>
+          <span>></span>
+          <span><a href="/ceoJoin.html" style="color:#01cafe;">회원가입</a></span>
+        </div>
+        <div class="join_step">
+          <div class="step_box">
+            <div class="img_container">
+              <div class="img_box"><img src="/images/account.png" alt=""></div>
+            </div>
+            <div class="step_text">
+              <span class="step_head">STEP1</span>
+              <br />
+              <span class="step_foot">정보인증</span>
+            </div>
+          </div>
+          <div class="sign_box"><span class="material-symbols-outlined">
+              chevron_right
+            </span></div>
+          <div class="step_box">
+            <div class="img_container">
+              <div class="img_box"><img src="/images/writing.png" alt=""></div>
+            </div>
+            <div class="step_text">
+              <span class="step_head">STEP2</span>
+              <br />
+              <span class="step_foot">정보입력</span>
+            </div>
+          </div>
+          <div class="sign_box"><span class="material-symbols-outlined">
+              chevron_right
+            </span></div>
+          <div class="step_box">
+            <div class="img_container">
+              <div class="img_box"><img src="/images/checklist.png" alt=""></div>
+            </div>
+            <div class="step_text">
+              <span class="step_head">STEP3</span>
+              <br />
+              <span class="step_foot">가입완료</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- 메인(조인헤더 끝) -->
+    <section class="section_enterInfo">
+      <div class="section_header">회원정보</div>
+      <div class="big_container"> <!--정보입력창-->
+        <div class="name_container">
+          <div class="name_box">이름</div>
+          <div class="name_input">
+            <input type="text" id="name">
+            <button>
+              <img src="/images/cancel.png" alt="">
+            </button>
+          </div>
+        </div>
+        <div class="year_container">
+          <div class="year_box">생년월일</div>
+          <input type="text" placeholder="YEAR" id="year">
+          <select id="month" name="month">
+            <option value="" disabled selected>MONTH</option>
+            <option value="1">1월</option>
+            <option value="2">2월</option>
+            <option value="3">3월</option>
+            <option value="4">4월</option>
+            <option value="5">5월</option>
+            <option value="6">6월</option>
+            <option value="7">7월</option>
+            <option value="8">8월</option>
+            <option value="9">9월</option>
+            <option value="10">10월</option>
+            <option value="11">11월</option>
+            <option value="12">12월</option>
+          </select>
+          <input type="text" placeholder="DAY" id="day">
+        </div>
+        <div class="email_container">
+          <div class="email_box">이메일</div>
+          <div class="email_input">
+            <input type="text" placeholder="daguyo" id="email_id">
+            <span class="material-symbols-outlined" id="email_gol">
+              alternate_email
+            </span>
+            <select id="email_adr" name="email_adr">
+              <option value="naver.com">naver.com</option>
+              <option value="google.com">google.com</option>
+              <option value="hanmail.net">hanmail.net</option>
+              <option value="nate.com">nate.com</option>
+              <option value="kakao.com">kakao.com</option>
+            </select>
+            <div id="email_btn"><button onclick="">인증</button></div>
+          </div>
+        </div>
+        <div class="password1_container">
+          <div class="password1_box">비밀번호</div>
+          <div class="password1_input">
+            <input type="password" id="password1">
+            <button id="pass1_btn">
+              <img src="/images/eye.png" alt="" id="eyeImage1">
+            </button>
+          </div>
+        </div>
+        <div class="password2_container">
+          <div class="password2_box">비밀번호</div>
+          <div class="password2_input">
+            <input type="password" id="password2">
+            <button id="pass2_btn">
+              <img src="/images/eye.png" alt="" id="eyeImage2">
+            </button>
+          </div>
+        </div>
+        <div class="phone_container">
+          <div class="phone_box">휴대폰 번호</div>
+          <div class="phone_input">
+            <input type="tel" id="phone">
+            <button onclick="" id="phone_btn">인증</button>
+          </div>
+
+        </div>
+        <div class="addr_container">
+          <div class="addr_box">주소</div>
+          <div class="addr">
+            <label for="addr"></label>
+            <input type="text" id="addr_number" placeholder="우편번호" />
+            <div id="addr_btn">
+              <input type="button" onclick="Postcode()" value="우편번호 찾기" />
+            </div>
+            <div id="layer"
+              style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+              <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer"
+                style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1;width:20px;height:20px;"
+                onclick="closeDaumPostcode()" alt="닫기 버튼">
+            </div>
+          </div>
+          <div class="address">
+            <input type="text" id="address" placeholder="주소" />
+          </div>
+          <div class="address">
+            <input type="text" id="detailAddress" placeholder="상세주소" />
+            <input type="text" id="extraAddress" placeholder="참고항목" />
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="section_agree">
+      <div class="agree_big_container">
+        <div class="all_agree">
+          <button class="all_agree_btn"><img src="/images/check.png" alt=""></button>
+          <div class="all_agree_text">아래의 내용에 모두 동의합니다.</div>
+        </div>
+        <div class="agree_container">
+          <div class="agree_box">
+            <button id="plz1"><img src="/images/nemo.png" alt=""></button>
+            <div class="agree_text">이용약관, 개인정보 수집/이용동의</div>
+            <div class="open_box"><a href="https://policy.naver.com/policy-mobile/term.html?type=1?type=1"
+                target="_blank">확인하기</a></div>
+          </div>
+          <div class="agree_box">
+            <button id="plz2"><img src="/images/nemo.png" alt=""></button>
+            <div class="agree_text">만 14세 이상입니다.</div>
+          </div>
+          <div class="agree_box">
+            <button id="cho1"><img src="/images/nemo.png" alt=""></button>
+            <div class="agree_text">위치기반서비스 약관동의(선택)</div>
+            <div class="open_box"><a href="https://policy.naver.com/policy-mobile/term.html?type=1?type=1"
+                target="_blank">보기</a></div>
+          </div>
+          <div class="agree_box">
+            <button id="cho2"><img src="/images/nemo.png" alt=""></button>
+            <div class="agree_text">홍보성 정보 수신동의(선택)</div>
+          </div>
+        </div>
+      </div>
+      <div class="agree_submit_zone">
+        <button onclick="" class="agree_submit_box">회원가입</button>
+        <button onclick="" class="agree_submit_cancel">취소</button>
+      </div>
+    </section>
+
+
+    <!-- 김승훈 작업 끝 -->
+    <footer>
+      <div class="align">
+        <div class="sns">
+          <a href="javascript:void(0);"><img src="/images/facebook.png" alt="페이스북"></a>
+          <a href="javascript:void(0);"><img src="/images/instagram.png" alt="인스타그램"></a>
+        </div>
+        <div class="footer_logo">
+          <a href="javascript:void(0);">
+            <img src="/images/footer_logo.png" alt="하단로고">
+          </a>
+          <div>1661 - 5270</div>
+        </div>
+        <div class="footer_nav">
+          <ul>
+            <li><a href="javascript:void(0);">이용약관</a></li>
+            <li><a href="javascript:void(0);">개인정보처리방침</a></li>
+            <li><a href="javascript:void(0);">위치기반서비스</a></li>
+            <li><a href="javascript:void(0);">고객센터</a></li>
+            <li><a href="javascript:void(0);">인재채용</a></li>
+            <li><a href="javascript:void(0);">단체주문</a></li>
+          </ul>
+        </div>
+        <div class="copyright">
+          <div>
+            주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
+            대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
+            상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
+            <p>Copyright DagueYO. All Rights Reserved.</p>
+          </div>
+          <div class="familysite">
+            <select name="" id="" class="select2">
+              <option value="">Global site</option>
+              <option value="">KOREA</option>
+              <option value="">USA</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/memberJoin.js"></script>
+</body>
+
+
+</html>

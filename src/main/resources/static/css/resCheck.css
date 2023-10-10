@@ -1,0 +1,226 @@
+
+/* main css */
+.main-container {
+  height: 400px; 
+  position: relative;
+}
+
+.orderSection {
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  flex-direction: column; 
+  width: 700px;
+}
+
+.navigationLinks {
+  position: absolute; 
+  right: 0; 
+  top: 0; 
+  margin-top: 30px;
+}
+
+.infoBox {
+ width: 700px;
+ height: 90px; 
+ background-color: #ffffff;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 60px;
+ font-size: 25px;
+}
+
+.cart-link{
+  color: #01cafe;
+}
+
+.infoImage {
+ width :50px;
+ height :50px;
+ margin-right :20px ;
+}
+
+
+.highlightText{
+color:#01cafe;
+
+}
+
+.cart__title1 {
+  position: absolute;
+  z-index: 888;
+  background: #01cafe;
+  display: block;
+  border: none;
+  width: 300px;
+  border-radius: 50px;
+  top: 0;
+  color: white;
+  text-align: center;
+  font-size: 15px;
+}
+
+.cart__title2 {
+  position: relative;
+  text-align: right;
+  line-height: 60px;
+  display: block;
+  width: 500px;
+  margin: 0 auto;
+  padding-right: 100px;
+  border-radius: 50px;
+  background: #dfdfdf;
+  font-size: 15px;
+}
+
+.howMOP {
+  display: flex;
+  align-items: center;
+}
+
+.highlightText {
+  color:#01cafe;
+}
+
+/* main css */
+
+
+/* section 1 css */
+.order-container {
+  height: 400px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.order-details {
+ width: 700px;
+ height: 350px;
+ background-color:#ffffff;
+ display:flex;
+ flex-direction :column; 
+ gap: 10px; 
+ align-items: center; 
+ justify-content: center;
+}
+
+.order-title {
+  margin-top: 30px;
+}
+
+.order-title h2 {
+   font-size :25px;
+   margin-bottom: 10px;
+}
+
+.title-line{
+   width :650px;margin:auto;
+}
+
+.order-list{
+   display:flex; flex-direction :column; justify-content:center;width:
+   600px;height:
+   100%;gap:
+   40px;
+
+}
+.order-item{
+    display:flex ;justify-content :space-between
+}
+.order-item li{
+    font-size :20px;
+
+}
+.order-item span:last-child{
+     font-size :15px;
+     color :gray;
+
+}
+/* section 1 css */
+
+
+/* section 2 css */
+.delivery-section{
+  height: 400px; 
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+.delivery-section>.delivery-container{
+  width: 700px; 
+  height: 350px;  
+  background-color:#ffffff;
+  display:flex;
+  flex-direction :column; 
+  gap: 10px; 
+  align-items: center; 
+  justify-content: center; 
+}
+.delivery-section>.delivery-container>.delivery-header{
+  margin-top: 30px;
+  
+}
+
+.delivery-section>.delivery-container>.delivery-header>.delivery-title{
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+.delivery-section>.delivery-container>.delivery-header>.header-line{
+  width: 650px;
+  margin: auto;
+}
+.delivery-section>.delivery-container>.info-container{
+  display:flex; 
+  flex-direction :column; 
+  justify-content:center;  
+  width: 600px; 
+  height: 100%; 
+  gap: 40px;
+}
+.delivery-section>.delivery-container>.info-container>.info-item{
+  display:flex; 
+  gap: 30px;
+}
+.delivery-section>.delivery-container>.info-container>.info-item span:first-child{
+  font-size: 20px;
+  color: gray;
+  white-space: nowrap;
+}
+
+.delivery-section>.delivery-container>.info-container>.info-item span:last-child{
+  font-size: 20px; 
+}
+
+
+/* section 2 css */
+
+
+.payBtn{
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  gap: 10px;  
+  flex-direction: column;
+}
+.payCancel {
+    width: 700px;
+    height: 60px;
+    color: #ffffff;
+    background-color: #363636;
+    border: none;
+    font-size: 17px;
+}
+.payOk {
+    width: 700px;
+    height: 60px;
+    color: #ffffff;
+    background-color: #01cafe;
+    border: none;
+    font-size: 17px;
+}
+
+
+
+
+

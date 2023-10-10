@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>대구요</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/menu_catagory.css" />
+    <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    
+  </head>
+  <body>
+  <div id="warp">
+      <div class="side_menu">
+        <div class="ide_login">
+          <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
+          <a href="#" class="close">&times;</a>
+        </div>
+        <div class="panner">
+          <ul>
+            <li><a href="javascript:void(0);">홈</a></li>
+            <li><a href="javascript:void(0);">주문</a></li>
+            <li><a href="javascript:void(0);">매장찾기</a></li>
+            <li><a href="javascript:void(0);">마이페이지</a></li>
+            <li><a href="javascript:void(0);">로그아웃</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="map_bg">
+        <div id="map">
+          <div class="map_search">
+            <input value="지번, 도로, 건물명으로 검색" />
+            <button>검색</button>
+          </div>
+
+          <div class="current_location_group">
+            <img src="/images/gps.png" alt="" class="gps">
+            <div class="current_location">현재 위치에서 찾기</div>
+          </div>
+          
+          <div class="location_select">
+            대구 광역시 동구 동촌로55길36
+          </div>
+
+          <div class="location_complete">선택하기</div>
+        </div>
+    </div>
+
+    <header>
+
+      <div class="align">
+        <div class="hamburger_btn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        
+        <h1 class="logo">
+          <a href="javascript:void(0);"><img src="/images/header_logo.png" alt= "로고"/></a>
+        </h1>
+        <nav>
+          <ul class="mainmenu">
+            <li>
+              <a href="javascript:void(0);">홈</a>
+              <div class="sub_menu">
+                <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
+                <ul class="drop_list">
+                  <li><a href="javascript:void(0);">회사소개</a></li>
+                  <li><a href="javascript:void(0);">회사연혁</a></li>
+                  <li><a href="javascript:void(0);">브랜드소개</a></li>
+                  <li><a href="javascript:void(0);">찾아오시는길</a></li>
+                </ul>
+              </div>
+            </li>
+            <li><a href="javascript:void(0);">주문</a></li>
+            <li><a href="javascript:void(0);">마이페이지</a></li>
+          </ul>
+        </nav>
+        <div class="quick_menu">
+          <a href="javascript:void(0);">SEIN 님</a>
+          <a href="javascript:void(0);"><img src="/images/storage.png" alt="장바구니"></a>
+          <a href="javascript:void(0);"><img src="/images/login.png" alt="로그아웃"></a>
+          <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
+        </div>
+      </div>
+    </header>
+        
+
+
+      <main>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"></div>
+            <div class="swiper-slide"></div>
+            <div class="swiper-slide"></div>
+            <div class="swiper-slide"></div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </main>
+  
+      
+
+
+      <div class="move_page">
+        
+            <div class="page_tag">
+                <div class="left">
+                    <a href="javascript:void(0);">
+                        <span>배달주문</span><br>
+                        <span>등급별 최대 80%</span>
+                        <img src="/images/next.png" alt="">
+                    </a>
+                </div>
+                <div class="middle">
+                    <a href="javascript:void(0);">
+                        <span>포장주문</span><br>
+                        <span>산책하는 기분으로</span>
+                        <img src="/images/next.png" alt="">
+                    </a>
+                </div>
+                <div class="right">
+                    <a href="javascript:void(0);">
+                        <span>선물하기</span><br>
+                        <span>감사한 마음을 전해요</span>
+                        <img src="/images/next.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+   
+    
+
+      <div class="category"> 
+          <div class="category-img">
+              <div class="tag">
+                  <span class="tag_child">
+                    <img src="/images/KakaoTalk_20231006_183032250_01.png" alt="">
+                    <span>추천메뉴</span>
+                  </span>
+              </div>
+              <div class="tag">
+                  <span class="tag_child">1인분</span>
+              </div>
+              <div class="tag">
+                  <span class="tag_child">한식</span>
+              </div>
+              <div class="tag">
+                  <span class="tag_child">중식</span>
+              </div>
+          </div>
+  
+          <div class="category-img">
+              <div class="tag">
+                
+                  <span class="tag_child">
+                    <img src="/images/KakaoTalk_20231006_183032250_02.png" alt="">
+                    <span>선물찾기</span>
+                  </span>
+              </div>
+              <div class="tag">
+                  <span class="tag_child">양식</span>
+              </div>
+              <div class="tag">
+                  <span class="tag_child">족발/보쌈</span>
+              </div>
+              <div class="tag">
+                  <span class="tag_child">디저트</span>
+              </div>
+          </div>
+      </div>
+
+    
+      <footer>
+        <div class="align">
+          <div class="sns">
+            <a href="javascript:void(0);"><img src="/images/facebook.png" alt="페이스북"></a>
+            <a href="javascript:void(0);"><img src="/images/instagram.png" alt="인스타그램"></a>
+          </div>
+          <div class="footer_logo">
+            <a href="javascript:void(0);">
+              <img src="/images/footer_logo.png" alt="하단로고">
+            </a>
+            <div>1661 - 5270</div>
+          </div>
+          <div class="footer_nav">
+            <ul>
+              <li><a href="javascript:void(0);">이용약관</a></li>
+              <li><a href="javascript:void(0);">개인정보처리방침</a></li>
+              <li><a href="javascript:void(0);">위치기반서비스</a></li>
+              <li><a href="javascript:void(0);">고객센터</a></li>
+              <li><a href="javascript:void(0);">인재채용</a></li>
+              <li><a href="javascript:void(0);">단체주문</a></li>
+            </ul>
+          </div>
+          <div class="copyright">
+            <div>
+              주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
+            대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
+            상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
+            <p>Copyright DagueYO. All Rights Reserved.</p>
+            </div>
+           
+            <div class="familysite">
+              <select name="" id="" class="select2">
+                <option value="">Global site</option>
+                <option value="">KOREA</option>
+                <option value="">USA</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </footer> 
+      <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+      <script src="/js/index.js"></script>
+  </body>
+</html>
