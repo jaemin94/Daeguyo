@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>대구요</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/selectRest.css" />
+    <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  </head>
+  <body>
+    <div id="warp">
+      <div class="side_menu">
+        <div class="ide_login">
+          <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
+          <a href="#" class="close">&times;</a>
+        </div>
+        <div class="panner">
+          <ul>
+            <li><a href="javascript:void(0);">홈</a></li>
+            <li><a href="javascript:void(0);">주문</a></li>
+            <li><a href="javascript:void(0);">매장찾기</a></li>
+            <li><a href="javascript:void(0);">마이페이지</a></li>
+            <li><a href="javascript:void(0);">로그아웃</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="map_bg">
+        <div id="map">
+          <div class="map_search">
+            <input value="지번, 도로, 건물명으로 검색" />
+            <button>검색</button>
+          </div>
+
+          <div class="current_location_group">
+            <img src="/images/gps.png" alt="" class="gps">
+            <div class="current_location">현재 위치에서 찾기</div>
+          </div>
+          
+          <div class="location_select">
+            대구 광역시 동구 동촌로55길36
+          </div>
+
+          <div class="location_complete">선택하기</div>
+        </div>
+    </div>
+
+    <header>
+      <div class="scroll_btn">
+        <ul>
+          <li><a href="javascript:void(0);"><img src="/images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
+          <li><a href="javascript:void(0);"><img src="/images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
+          <li><a href="javascript:void(0);"><img src="/images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
+          <li><a href="javascript:void(0);"><img src="/images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
+        </ul>
+      </div>
+      <div class="align">
+        <div class="hamburger_btn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        
+        <h1 class="logo">
+          <a href="javascript:void(0);"><img src="/images/header_logo.png" alt= "로고"/></a>
+        </h1>
+        <nav>
+          <ul class="mainmenu">
+            <li>
+              <a href="javascript:void(0);">홈</a>
+              <div class="sub_menu">
+                <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
+                <ul class="drop_list">
+                  <li><a href="javascript:void(0);">회사소개</a></li>
+                  <li><a href="javascript:void(0);">회사연혁</a></li>
+                  <li><a href="javascript:void(0);">브랜드소개</a></li>
+                  <li><a href="javascript:void(0);">찾아오시는길</a></li>
+                </ul>
+              </div>
+            </li>
+            <li><a href="javascript:void(0);">주문</a></li>
+            <li><a href="javascript:void(0);">마이페이지</a></li>
+          </ul>
+        </nav>
+        <div class="quick_menu">
+          <a href="javascript:void(0);">SEIN 님</a>
+          <a href="javascript:void(0);"><img src="/images/storage.png" alt="장바구니"></a>
+          <a href="javascript:void(0);"><img src="/images/login.png" alt="로그아웃"></a>
+          <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+    <section class="SRBannerSec">
+      <img src="/images/selectRestBanner.jpg" alt="selectRestBanner" class="selectRestBanner">
+    </section>
+
+      <div class="align">
+        <ul class="order_list">
+          <li><a href="#" data-sort="default">기본순</a></li>
+          <li><a href="#" data-sort="rating">별점순</a></li>
+          <li><a href="#" data-sort="delivery">배달팁</a></li>
+          <li><a href="#" data-sort="price">주문금액</a></li>
+          <li><a href="#" data-sort="etc">기타</a></li>
+        </ul>
+      </div>  
+      
+    <section  class="align rest_list">
+      <div>
+        <ul th:each="restaurant : ${restaurant}" class="Rest">
+          <img th:src="${restaurant.res_image}" class="res-logo">
+          <div class="res-info">
+            <div class="name-category">
+              <span th:text="${restaurant.res_name}" class="resName">호랑이 반점</span>
+              <span th:text="${restaurant.food_catagory}" class="food_category">중화전문점</span>
+            </div>
+            <div class="star">
+              <p>
+                ⭐
+                <span th:text=" '별점: ' + ${restaurant.res_rating}" class="star-score">
+                 5.0 
+                </span>
+              </p>
+            </div>
+
+            <div class="order-delivery-info">
+              <span class="min-price">
+                <span th:text="'최소주문 ₩' + ${restaurant.min_order_price}">₩20,000</span>
+              </span>
+              <span class="delivery-fee">
+                <span th:text="'배달팁 ₩' + ${restaurant.order_tax}"> ₩2,000</span>
+              </span>
+            </div>
+            <div class="keywords">
+              <span th:each="keyword : ${#strings.listSplit(restaurant.keywords, ',')}" class="keyword">
+              <span th:text="${keyword}" class="keyword"></span>
+              </span>
+            </div>
+          </div>
+        </ul>
+
+<!--        <ul class="Rest">-->
+<!--          <img src="/images/chinesres.jpeg" class="res-logo">-->
+<!--          <div class="res-info">-->
+<!--            <div class="name-category">-->
+<!--              <span th:text="${res_name}" class="resName">오늘의 반점</span>-->
+<!--              <span th:text="${food_category}" class="food_category">퓨전중화전문점</span>-->
+<!--            </div>-->
+<!--            <div class="star">-->
+<!--              <p>-->
+<!--                ⭐-->
+<!--                <span th:text = " ' ' + ${res_rating}" class="star-score">-->
+<!--                 5.0 </span>-->
+<!--              </p>-->
+<!--            </div>-->
+
+<!--            <div class="order-delivery-info">-->
+<!--              <span class="min-price">-->
+<!--                최소주문 -->
+<!--                <span th:text=" '₩'+ ${min_price} ">₩20,000</span>-->
+<!--              </span>-->
+<!--              <span class="delivery-fee">-->
+<!--                배달팁-->
+<!--                <span th:text=" '₩' + ${delivery_fee}"> ₩2,000</span>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div class="keywords">-->
+<!--              <span th:each="${keywords}" class="keyword">퓨전중화</span>-->
+<!--              <span th:each="${keywords}" class="keyword">단체예약가능</span>-->
+<!--              <span th:each="${keywords}" class="keyword">양식가능</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </ul>-->
+
+<!--        <ul class="Rest">-->
+<!--          <img src="/images/slamonres.jpg" class="res-logo">-->
+<!--          <div class="res-info">-->
+<!--            <div class="name-category">-->
+<!--              <span th:text="${res_name}" class="resName">연어식탁</span>-->
+<!--              <span th:text="${food_category}" class="food_category">한식</span>-->
+<!--            </div>-->
+<!--            <div class="star">-->
+<!--              <p>-->
+<!--                ⭐-->
+<!--                <span th:text = " ' ' + ${res_rating}" class="star-score">-->
+<!--                 5.0 </span>-->
+<!--              </p>-->
+<!--            </div>-->
+
+<!--            <div class="order-delivery-info">-->
+<!--              <span class="min-price">-->
+<!--                최소주문 -->
+<!--                <span th:text=" '₩'+ ${min_price} ">₩10,000</span>-->
+<!--              </span>-->
+<!--              <span class="delivery-fee">-->
+<!--                배달팁-->
+<!--                <span th:text=" '₩' + ${delivery_fee}"> ₩2,000</span>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div class="keywords">-->
+<!--              <span th:each="${keywords}" class="keyword">매운음식</span>-->
+<!--              <span th:each="${keywords}" class="keyword">고기</span>-->
+<!--              <span th:each="${keywords}" class="keyword">야식</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </ul>-->
+
+<!--        <ul class="Rest">-->
+<!--          <img src="/images/resres.jpg" class="res-logo">-->
+<!--          <div class="res-info">-->
+<!--            <div class="name-category">-->
+<!--              <span th:text="${res_name}" class="resName">레소토랑트</span>-->
+<!--              <span th:text="${food_category}" class="food_category">배달전문</span>-->
+<!--            </div>-->
+<!--            <div class="star">-->
+<!--              <p>-->
+<!--                ⭐-->
+<!--                <span th:text = " ' ' + ${res_rating}" class="star-score">-->
+<!--                 5.0 </span>-->
+<!--              </p>-->
+<!--            </div>-->
+
+<!--            <div class="order-delivery-info">-->
+<!--              <span class="min-price">-->
+<!--                최소주문 -->
+<!--                <span th:text=" '₩'+ ${min_price} ">₩20,000</span>-->
+<!--              </span>-->
+<!--              <span class="delivery-fee">-->
+<!--                배달팁-->
+<!--                <span th:text=" '₩' + ${delivery_fee}"> ₩2,000</span>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div class="keywords">-->
+<!--              <span th:each="${keywords}" class="keyword">중화전문점</span>-->
+<!--              <span th:each="${keywords}" class="keyword">단체예약가능</span>-->
+<!--              <span th:each="${keywords}" class="keyword">짬뽕 맛집</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </ul>-->
+
+<!--        <ul class="Rest">-->
+<!--          <img src="/images/slamonres.jpg" class="res-logo">-->
+<!--          <div class="res-info">-->
+<!--            <div class="name-category">-->
+<!--              <span th:text="${res_name}" class="resName">연어식탁</span>-->
+<!--              <span th:text="${food_category}" class="food_category">한식</span>-->
+<!--            </div>-->
+<!--            <div class="star">-->
+<!--              <p>-->
+<!--                ⭐-->
+<!--                <span th:text = " ' ' + ${res_rating}" class="star-score">-->
+<!--                 5.0 </span>-->
+<!--              </p>-->
+<!--            </div>-->
+
+<!--            <div class="order-delivery-info">-->
+<!--              <span class="min-price">-->
+<!--                최소주문 -->
+<!--                <span th:text=" '₩'+ ${min_price} ">₩10,000</span>-->
+<!--              </span>-->
+<!--              <span class="delivery-fee">-->
+<!--                배달팁-->
+<!--                <span th:text=" '₩' + ${delivery_fee}"> ₩2,000</span>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div class="keywords">-->
+<!--              <span th:each="${keywords}" class="keyword">매운음식</span>-->
+<!--              <span th:each="${keywords}" class="keyword">고기</span>-->
+<!--              <span th:each="${keywords}" class="keyword">야식</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </ul>-->
+
+<!--        <ul class="Rest">-->
+<!--          <img src="/images/slamonres.jpg" class="res-logo">-->
+<!--          <div class="res-info">-->
+<!--            <div class="name-category">-->
+<!--              <span th:text="${res_name}" class="resName">연어식탁</span>-->
+<!--              <span th:text="${food_category}" class="food_category">한식</span>-->
+<!--            </div>-->
+<!--            <div class="star">-->
+<!--              <p>-->
+<!--                ⭐-->
+<!--                <span th:text = " ' ' + ${res_rating}" class="star-score">-->
+<!--                 5.0 </span>-->
+<!--              </p>-->
+<!--            </div>-->
+
+<!--            <div class="order-delivery-info">-->
+<!--              <span class="min-price">-->
+<!--                최소주문 -->
+<!--                <span th:text=" '₩'+ ${min_price} ">₩10,000</span>-->
+<!--              </span>-->
+<!--              <span class="delivery-fee">-->
+<!--                배달팁-->
+<!--                <span th:text=" '₩' + ${delivery_fee}"> ₩2,000</span>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div class="keywords">-->
+<!--              <span th:each="${keywords}" class="keyword">매운음식</span>-->
+<!--              <span th:each="${keywords}" class="keyword">고기</span>-->
+<!--              <span th:each="${keywords}" class="keyword">야식</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </ul>-->
+
+<!--        <ul class="Rest">-->
+<!--          <img src="/images/slamonres.jpg" class="res-logo">-->
+<!--          <div class="res-info">-->
+<!--            <div class="name-category">-->
+<!--              <span th:text="${res_name}" class="resName">연어식탁</span>-->
+<!--              <span th:text="${food_category}" class="food_category">한식</span>-->
+<!--            </div>-->
+<!--            <div class="star">-->
+<!--              <p>-->
+<!--                ⭐-->
+<!--                <span th:text = " ' ' + ${res_rating}" class="star-score">-->
+<!--                 5.0 </span>-->
+<!--              </p>-->
+<!--            </div>-->
+
+<!--            <div class="order-delivery-info">-->
+<!--              <span class="min-price">-->
+<!--                최소주문 -->
+<!--                <span th:text=" '₩'+ ${min_price} ">₩10,000</span>-->
+<!--              </span>-->
+<!--              <span class="delivery-fee">-->
+<!--                배달팁-->
+<!--                <span th:text=" '₩' + ${delivery_fee}"> ₩2,000</span>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div class="keywords">-->
+<!--              <span th:each="${keywords}" class="keyword">매운음식</span>-->
+<!--              <span th:each="${keywords}" class="keyword">고기</span>-->
+<!--              <span th:each="${keywords}" class="keyword">야식</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </ul>-->
+
+<!--        <ul class="Rest">-->
+<!--          <img src="/images/slamonres.jpg" class="res-logo">-->
+<!--          <div class="res-info">-->
+<!--            <div class="name-category">-->
+<!--              <span th:text="${res_name}" class="resName">연어식탁</span>-->
+<!--              <span th:text="${food_category}" class="food_category">한식</span>-->
+<!--            </div>-->
+<!--            <div class="star">-->
+<!--              <p>-->
+<!--                ⭐-->
+<!--                <span th:text = " ' ' + ${res_rating}" class="star-score">-->
+<!--                 5.0 </span>-->
+<!--              </p>-->
+<!--            </div>-->
+
+<!--            <div class="order-delivery-info">-->
+<!--              <span class="min-price">-->
+<!--                최소주문 -->
+<!--                <span th:text=" '₩'+ ${min_price} ">₩10,000</span>-->
+<!--              </span>-->
+<!--              <span class="delivery-fee">-->
+<!--                배달팁-->
+<!--                <span th:text=" '₩' + ${delivery_fee}"> ₩2,000</span>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div class="keywords">-->
+<!--              <span th:each="${keywords}" class="keyword">매운음식</span>-->
+<!--              <span th:each="${keywords}" class="keyword">고기</span>-->
+<!--              <span th:each="${keywords}" class="keyword">야식</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </ul>-->
+
+      </div>
+
+   </section>
+  </main>
+
+    <footer>
+      <div class="align">
+        <div class="sns">
+          <a href="javascript:void(0);"><img src="/images/facebook.png" alt="페이스북"></a>
+          <a href="javascript:void(0);"><img src="/images/instagram.png" alt="인스타그램"></a>
+        </div>
+        <div class="footer_logo">
+          <a href="javascript:void(0);">
+            <img src="/images/footer_logo.png" alt="하단로고">
+          </a>
+          <div>1661 - 5270</div>
+        </div>
+        <div class="footer_nav">
+          <ul>
+            <li><a href="javascript:void(0);">이용약관</a></li>
+            <li><a href="javascript:void(0);">개인정보처리방침</a></li>
+            <li><a href="javascript:void(0);">위치기반서비스</a></li>
+            <li><a href="javascript:void(0);">고객센터</a></li>
+            <li><a href="javascript:void(0);">인재채용</a></li>
+            <li><a href="javascript:void(0);">단체주문</a></li>
+          </ul>
+        </div>
+        <div class="copyright">
+          <div>
+            주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
+          대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
+          상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
+          <p>Copyright DagueYO. All Rights Reserved.</p>
+          </div>
+          <div class="familysite">
+            <select name="" id="" class="select2">
+              <option value="">Global site</option>
+              <option value="">KOREA</option>
+              <option value="">USA</option>
+          </div>
+        </div>
+      </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/selectRest.js"></script>
+  </body>
+</html>

@@ -17,5 +17,9 @@ public class ResDto {
     private double res_rating;
     private boolean open_status;
     private String food_catagory;
+    private String res_image;
+    private String min_order_price;
+    private String order_tax;
+    private String keywords;
 
 }
