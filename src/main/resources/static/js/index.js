@@ -77,8 +77,8 @@ select.addEventListener("click", function () {
   map.style.display = "none";
 });
 
-lct.addEventListener("click", function () {
-  map.style.display = "block";
-});
+//lct.addEventListener("click", function () {
+//  map.style.display = "block";
+//});
 
 /* 지도 */

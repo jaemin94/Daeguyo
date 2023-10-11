@@ -648,3 +648,8 @@ main>.section_join_header {
 
 /* 동의상자 작업 끝 */
 /* 김승훈 작업 끝 */
+
+/* 핸드폰 인증 팝업창 */
+.hidden{
+display:none;
+}

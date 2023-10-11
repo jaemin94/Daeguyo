@@ -194,7 +194,13 @@
           <div class="phone_box">휴대폰 번호</div>
           <div class="phone_input">
             <input type="tel" id="phoneNumber">
-            <button onclick="" id="phone_btn">인증</button>
+            <button onclick="phoneCheck()" id="phone_btn">인증</button>
+          </div>
+
+          <div id="popup" class="hidden">
+            <!-- 팝업 창 내용 -->
+            <input type="text" name="checkphone" id="smscomfirmcheck">
+            <button onclick="" id="check">확인</button>
           </div>
 
         </div>

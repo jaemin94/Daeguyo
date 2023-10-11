@@ -248,6 +248,33 @@ btnJoin.onclick = function () {
         });
 }
 
+const phoneBtn = document.getElementById("phone_btn");
+phoneBtn.addEventListener("click",function(){
+document.getElementById('popup').classList.remove('hidden');
+var smscomfirmcheckEl = document.getElementById("smscomfirmcheck").value;
+if(smscomfirmcheckEl){
+
+}
+
+
+});
+function phoneCheck(){
+console.log("phoneCheck clicked")
+
+var phonenum = document.getElementById("phoneNumber").value;
+ var data = {to:phonenum};
+    axios.post("/sms/send",data)
+    .then(response=> {
+
+        console.log(response.data);
+        alert("인증번호가 전송되었습니다");
+    })
+    .catch(error=>{
+    console.error("Error sending data: ", error);
+    });
+
+}
+
 
 
 
