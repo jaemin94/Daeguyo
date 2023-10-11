@@ -28,7 +28,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			System.out.println(role_str);
 			request.getSession().setAttribute("role", role_str);
 			request.getSession().setAttribute("username", member_id);
-			request.setAttribute("username1",member_id);
 			
 			
 			try {
@@ -36,15 +35,15 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			{
 				System.out.println("USER 페이지로 이동!");
 				
-					response.sendRedirect(request.getContextPath()+"");
+					response.sendRedirect(request.getContextPath()+"/");
 			}else if(role_str.equals("ROLE_Member"))
 			{
 				System.out.println("Member 페이지로 이동!");
-				response.sendRedirect(request.getContextPath()+"");
+				response.sendRedirect(request.getContextPath()+"/");
 			}else if(role_str.equals("ROLE_Admin"))
 			{
 				System.out.println("Admin 페이지로 이동!");
-				response.sendRedirect(request.getContextPath()+"");
+				response.sendRedirect(request.getContextPath()+"/");
 			}
 			
 			} catch (IOException e) {

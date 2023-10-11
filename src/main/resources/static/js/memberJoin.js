@@ -206,68 +206,156 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-//제안보내기
-document.addEventListener("DOMContentLoaded", function () {
-  // 이름, 생년월일 (year, day), 이메일 (email), 비밀번호 (password1, password2), 휴대폰 (phone) 입력 상자 요소를 가져옵니다.
-  const nameInput = document.getElementById("name");
-  const yearInput = document.getElementById("year");
-  const dayInput = document.getElementById("day");
-  const emailInput = document.getElementById("email_id");
-  const password1Input = document.getElementById("password1");
-  const password2Input = document.getElementById("password2");
-  const phoneInput = document.getElementById("phone");
-  const plz1Button = document.getElementById("plz1");
-  const plz2Button = document.getElementById("plz2");
-  const submitButton = document.querySelector(".agree_submit_box");
+const btnJoin = document.getElementById("btnJoin");
+btnJoin.onclick = function () {
+    //주소
+    var postNumber = document.getElementById("addr_number").value;
+    var address = document.getElementById("address").value;
+    var extraAddress = document.getElementById("extraAddress").value;
+    var detailAddress = document.getElementById("detailAddress").value;
 
-  // plz1, plz2 버튼 클릭 여부를 나타내는 변수를 초기화합니다.
-  let isPlz1Clicked = false;
-  let isPlz2Clicked = false;
+    var password = document.getElementById("password").value;
+    var username = document.getElementById("name").value;
+    var phoneNumber = document.getElementById("phoneNumber").value;
 
-  // 입력 상자에 입력 이벤트 리스너를 추가하여 모든 입력 상자가 채워지면 버튼을 활성화합니다.
-  function checkInputs() {
-    const isAllInputsFilled =
-      nameInput.value.trim() !== "" &&
-      yearInput.value.trim() !== "" &&
-      dayInput.value.trim() !== "" &&
-      emailInput.value.trim() !== "" &&
-      password1Input.value.trim() !== "" &&
-      password2Input.value.trim() !== "" &&
-      phoneInput.value.trim() !== "";
+    // 주소합병
+    var  fullAddress = postNumber + " " + address + " " + extraAddress + " " + detailAddress;
 
-    submitButton.disabled = !(isAllInputsFilled && isPlz1Clicked && isPlz2Clicked);
-  }
-
-  // 입력 상자에 입력 이벤트 리스너를 추가합니다.
-  nameInput.addEventListener("input", checkInputs);
-  yearInput.addEventListener("input", checkInputs);
-  dayInput.addEventListener("input", checkInputs);
-  emailInput.addEventListener("input", checkInputs);
-  password1Input.addEventListener("input", checkInputs);
-  password2Input.addEventListener("input", checkInputs);
-  phoneInput.addEventListener("input", checkInputs);
-
-  // plz1 버튼 클릭 시 이벤트 리스너를 추가합니다.
-  plz1Button.addEventListener("click", function () {
-    isPlz1Clicked = !isPlz1Clicked;
-    plz1Button.classList.toggle("checked", isPlz1Clicked);
-    checkInputs();
-  });
-
-  // plz2 버튼 클릭 시 이벤트 리스너를 추가합니다.
-  plz2Button.addEventListener("click", function () {
-    isPlz2Clicked = !isPlz2Clicked;
-    plz2Button.classList.toggle("checked", isPlz2Clicked);
-    checkInputs();
-  });
-
-  // 제안 보내기 버튼 클릭 시 naver.com으로 이동합니다.
-  submitButton.addEventListener("click", function () {
-    if (submitButton.disabled === false) {
-      window.location.href = "https://www.naver.com";
+    //이메일합병
+    var emailInput = document.getElementById("email_id").value;
+    if (!emailInput) {
+        var emailSelect = document.getElementById("email_adr").value;
+        var fullEmail = emailInput + "@" + emailSelect;
     }
-  });
-});
+
+    const requestData = {
+        addr: fullAddress,
+        u_email: fullEmail,
+        password: password,
+        nickname: username,
+        phone: phoneNumber
+    };
+
+    axios.post('/memberJoin', requestData)
+        .then(response => {
+
+            console.log(response.data);
+            window.location.href="/login";
+
+        })
+        .catch(error => {
+            console.error("Error sending data: ", error);
+        });
+}
+
+const phoneBtn = document.getElementById("phone_btn");
+const checkBtn = document.getElementById("check");
+
+// 휴대폰 인증번호 확인
+phoneBtn.addEventListener("click",function(){
+document.getElementById('popup').classList.remove('hidden');
+
+checkBtn.addEventListener("click",function(){
+var phoneNum = document.getElementById("phoneNumber").value;
+console.log(phoneNum);
+axios.get("/checkPhone?phoneNum=" + phoneNum)
+.then(response=>{
+        var userInput = document.getElementById('smscomfirmcheck').value;
+        console.log(userInput);
+        var serverVerificationCode = response.data;
+        console.log("serverVerificationCode:" ,serverVerificationCode);
+
+        if (userInput === String(serverVerificationCode)) {
+            // 인증이 성공한 경우
+            alert('인증이 성공했습니다.');
+            document.getElementById('popup').classList.add('hidden');
+        } else {
+            // 인증이 실패한 경우
+            alert('인증이 실패했습니다.');
+
+        }
+    })
+    .catch(error => {
+        console.error('데이터를 가져오지 못했습니다: ' + error);
+    });
+})
+
+
+})
+
+// 번호 인증
+function phoneCheck(){
+console.log("phoneCheck clicked")
+
+var phonenum = document.getElementById("phoneNumber").value;
+ var data = {to:phonenum};
+    axios.post("/sms/send",data)
+    .then(response=> {
+
+        console.log(response.data);
+        alert("인증번호가 전송되었습니다");
+    })
+    .catch(error=>{
+    console.error("Error sending data: ", error);
+    });
+
+}
+
+// 이메일 인증
+function emailCheck(){
+console.log("emailCheck clicked")
+
+var emailadr = document.getElementById("email_id").value;
+var emailSelection = document.getElementById("email_adr").value;
+var FullEmail = emailadr+"@"+emailSelection;
+    axios.post("/sendEmail",{ FullEmail: FullEmail })
+    .then(response=> {
+        console.log(response.data1);
+        alert("인증번호가 전송되었습니다");
+    })
+    .catch(error=>{
+    console.error("Error sending data: ", error);
+    });
+
+}
+
+const emailBtn = document.getElementById("emailbtn");
+const checkBtn1 = document.getElementById("check1");
+
+// 이메일 인증번호 확인
+emailBtn.addEventListener("click",function(){
+document.getElementById('popup1').classList.remove('hidden1');
+
+checkBtn1.addEventListener("click",function(){
+    var emailInput1 = document.getElementById("email_id").value;
+    var emailSelect1 = document.getElementById("email_adr").value;
+    var fullEmail1 = emailInput1 + "@" + emailSelect1;
+
+console.log(fullEmail1);
+axios.get("/checkEmail?email=" + fullEmail1)
+.then(response=>{
+        var userInput1 = document.getElementById('emailcomfirmcheck').value;
+        console.log(userInput1);
+        var serverVerificationCode1 = response.data;
+        console.log("serverVerificationCode:" ,serverVerificationCode1);
+
+        if (userInput1 === String(serverVerificationCode1)) {
+            // 인증이 성공한 경우
+            alert('인증이 성공했습니다.');
+            document.getElementById('popup1').classList.add('hidden1');
+        } else {
+            // 인증이 실패한 경우
+            alert('인증이 실패했습니다.');
+
+        }
+    })
+    .catch(error => {
+        console.error('데이터를 가져오지 못했습니다: ' + error);
+    });
+})
+
+
+})
 
 
 

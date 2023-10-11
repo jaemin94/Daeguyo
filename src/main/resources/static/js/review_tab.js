@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let basketCount = 0;
 
   // .menu_add 버튼 클릭 시
-  document.querySelectorAll(".menu_add").forEach(function (button) {
+  document.querySelectorAll(".addButton").forEach(function (button) {
     button.addEventListener("click", function () {
       // data-price 속성에서 가격을 가져와 정수로 변환
       const price = parseInt(button.getAttribute("data-price"));
@@ -35,19 +35,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // .menu_add2 버튼 클릭 시
-  document.querySelectorAll(".menu_add2").forEach(function (button) {
-    button.addEventListener("click", function () {
-      // data-price 속성에서 가격을 가져와 정수로 변환
-      const price = parseInt(button.getAttribute("data-price"));
-      // 현재 장바구니 개수가 99를 넘지 않도록 확인
-      if (basketCount < 99) {
-        // basketCount 증가
-        basketCount++;
-        // .basket_count 업데이트
-        document.querySelector(".basket_count").textContent = basketCount;
-      }
-    });
-  });
+//  document.querySelectorAll(".addButton").forEach(function (button) {
+//    button.addEventListener("click", function () {
+//      // data-price 속성에서 가격을 가져와 정수로 변환
+//      const price = parseInt(button.getAttribute("data-price"));
+//      // 현재 장바구니 개수가 99를 넘지 않도록 확인
+//      if (basketCount < 99) {
+//        // basketCount 증가
+//        basketCount++;
+//        // .basket_count 업데이트
+//        document.querySelector(".basket_count").textContent = basketCount;
+//      }
+//    });
+//  });
 });
 
 // 랜덤한 색상을 생성하는 함수
