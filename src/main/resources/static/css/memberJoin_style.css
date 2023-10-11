@@ -653,3 +653,8 @@ main>.section_join_header {
 .hidden{
 display:none;
 }
+
+/* 이메일 인증 팝업창 */
+.hidden1{
+display:none;
+}

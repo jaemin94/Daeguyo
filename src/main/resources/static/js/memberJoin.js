@@ -249,15 +249,41 @@ btnJoin.onclick = function () {
 }
 
 const phoneBtn = document.getElementById("phone_btn");
+const checkBtn = document.getElementById("check");
+
+// 휴대폰 인증번호 확인
 phoneBtn.addEventListener("click",function(){
 document.getElementById('popup').classList.remove('hidden');
-var smscomfirmcheckEl = document.getElementById("smscomfirmcheck").value;
-if(smscomfirmcheckEl){
 
-}
+checkBtn.addEventListener("click",function(){
+var phoneNum = document.getElementById("phoneNumber").value;
+console.log(phoneNum);
+axios.get("/checkPhone?phoneNum=" + phoneNum)
+.then(response=>{
+        var userInput = document.getElementById('smscomfirmcheck').value;
+        console.log(userInput);
+        var serverVerificationCode = response.data;
+        console.log("serverVerificationCode:" ,serverVerificationCode);
+
+        if (userInput === String(serverVerificationCode)) {
+            // 인증이 성공한 경우
+            alert('인증이 성공했습니다.');
+            document.getElementById('popup').classList.add('hidden');
+        } else {
+            // 인증이 실패한 경우
+            alert('인증이 실패했습니다.');
+
+        }
+    })
+    .catch(error => {
+        console.error('데이터를 가져오지 못했습니다: ' + error);
+    });
+})
 
 
-});
+})
+
+// 번호 인증
 function phoneCheck(){
 console.log("phoneCheck clicked")
 
@@ -274,6 +300,62 @@ var phonenum = document.getElementById("phoneNumber").value;
     });
 
 }
+
+// 이메일 인증
+function emailCheck(){
+console.log("emailCheck clicked")
+
+var emailadr = document.getElementById("email_id").value;
+var emailSelection = document.getElementById("email_adr").value;
+var FullEmail = emailadr+"@"+emailSelection;
+    axios.post("/sendEmail",{ FullEmail: FullEmail })
+    .then(response=> {
+        console.log(response.data1);
+        alert("인증번호가 전송되었습니다");
+    })
+    .catch(error=>{
+    console.error("Error sending data: ", error);
+    });
+
+}
+
+const emailBtn = document.getElementById("emailbtn");
+const checkBtn1 = document.getElementById("check1");
+
+// 이메일 인증번호 확인
+emailBtn.addEventListener("click",function(){
+document.getElementById('popup1').classList.remove('hidden1');
+
+checkBtn1.addEventListener("click",function(){
+    var emailInput1 = document.getElementById("email_id").value;
+    var emailSelect1 = document.getElementById("email_adr").value;
+    var fullEmail1 = emailInput1 + "@" + emailSelect1;
+
+console.log(fullEmail1);
+axios.get("/checkEmail?email=" + fullEmail1)
+.then(response=>{
+        var userInput1 = document.getElementById('emailcomfirmcheck').value;
+        console.log(userInput1);
+        var serverVerificationCode1 = response.data;
+        console.log("serverVerificationCode:" ,serverVerificationCode1);
+
+        if (userInput1 === String(serverVerificationCode1)) {
+            // 인증이 성공한 경우
+            alert('인증이 성공했습니다.');
+            document.getElementById('popup1').classList.add('hidden1');
+        } else {
+            // 인증이 실패한 경우
+            alert('인증이 실패했습니다.');
+
+        }
+    })
+    .catch(error => {
+        console.error('데이터를 가져오지 못했습니다: ' + error);
+    });
+})
+
+
+})
 
 
 
