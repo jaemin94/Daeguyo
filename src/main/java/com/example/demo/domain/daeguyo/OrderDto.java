@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class OrderDto {
 
     private String order_id;
-    private String counpon_id;
+    private String coupon_id;
     private String u_email;
     private String menu_id;
     private String res_id;

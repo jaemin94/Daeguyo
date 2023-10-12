@@ -19,7 +19,7 @@
     <div id="warp">
         <div class="side_menu">
           <div class="ide_login">
-            <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
+            <a href="#"> 안녕하세요! <strong >SEIN</strong>님</a>
             <a href="#" class="close">&times;</a>
           </div>
           <div class="panner">
@@ -44,7 +44,7 @@
               <img src="/images/gps.png" alt="" class="gps">
               <div class="current_location">현재 위치에서 찾기</div>
             </div>
-            
+
             <div class="location_select">
               대구 광역시 동구 동촌로55길36
             </div>
@@ -66,7 +66,7 @@
           <div class="hamburger_btn">
             <i class="fa-solid fa-bars"></i>
           </div>
-          
+
           <h1 class="logo">
             <a href="javascript:void(0);"><img src="/images/header_logo.png" alt= "로고"/></a>
           </h1>
@@ -107,25 +107,25 @@
 
       <!-- //-----------------------main start---------------------------------------------------------------------------------------------- -->
      <div class="main">
-       
-       <section class="s1">
+
+       <section class="s1" th:each="orders : ${orders}">
        <div class="align">
            <div class="s1d1">
                <input type="hidden">
                <button class="orderstatus-deletebtn"><span>내역삭제</span></button>
-           </div>         
+           </div>
            <table class="order-details">
              <tbody>
                  <tr class="odtr1">
-                   <td><span th:text="${orderDate}" id="bigspan">2023.10.01</span></td>
+                   <td><span th:text="${orders.order_date}" id="bigspan">2023.10.01</span></td>
                    <td>
-                     <span>주문번호 : <span th:text="${Orderid}">aa3453838</span></span> 
+                     <span>주문번호 : <span th:text="${orders.order_id}">aa3453838</span></span>
                    </td>
                  </tr>
                  <tr class="odtr2">
                    <td>
                     <!-- orderStatus.js : "주문취소"일 경우 .cancelled-text class 추가 -> css 적용-->
-                     <p th:text="${orderStatus}" class="status-text">주문취소</p>
+                     <p th:text="${orders.order_status}" class="status-text">주문취소</p>
                    </td>
                    <td>
                      <a href="#">주문 / 배송 상세 ></a>
@@ -138,28 +138,29 @@
                    </td>
                    <td>
                      <div class="menu-details">
-                       <p th:text="${Menu-name}">비건 마라, 오늘의 베스트</p>
-                       <ul>
-                         <li th:each="${selectedOption}">고기추가 : 1000원</li>
-                         <li th:each="${selectedOption}">맛선택 : 중간맵기</li>
+                       <p>비건 마라, 오늘의 베스트</p>
+                       <!--th:text="${Menu-name}-->
+                       <ul th:each="selecte: ${#strings.listSplit(orders.selecte_option,',') }" class="selecte">
+                         <li th:text="${selecte}">고기추가 : 1000원</li>
+                         <li th:text="${selecte}">맛선택 : 중간맵기</li>
                        </ul>
                      </div>
                    </td>
                  </tr>
                  <tr class="odtr4">
                    <th>
-                     <span id="bigspan">결제금액</span>
+                     <span class="bigspan">결제금액</span>
                    </th>
                    <td>
-                     <p th:text="${totalPrice}+'원'">26,900원</p>
+                     <p th:text="${orders.total_price}+'원'">26,900원</p>
                    </td>
                  </tr>
                  <tr class="odtr5">
                    <td>
-      
+
                    </td>
                    <td>
-                       <span th:text="${restaurantName}" id="bigspan">데일리 비건</span>
+                       <span  class="bigspan">데일리 비건</span>
                        <button class="contactbtn"><span>문의하기</span></button>
                    </td>
                  </tr>
@@ -171,48 +172,48 @@
              <button class="reviewbtn hidden"><span>리뷰쓰기</span></button>
              <button class="cancelledbtn hidden"><span>취소정보</span></button>
            </div>
-       </div>         
+       </div>
        </section>
-      
-      
+
+
        <section class="s2">
            <div class="align">
                <h2>배송지 정보</h2>
                <hr>
-             <table class="d-info">
+             <table class="d-info" th:each="users : ${users}">
                <tbody>
                  <tr>
                    <th>수령인</th>
-                   <td><p th:text="${name}">김은숙</p></td>
+                   <td><p th:text="${users.nickname}">김은숙</p></td>
                  </tr>
                  <tr>
                    <th>휴대폰</th>
-                   <td><p th:text="${phone}">010-2465-5578</p></td>
+                   <td><p th:text="${users.phone}">010-2465-5578</p></td>
                  </tr>
                  <tr>
                    <th>주소지</th>
                    <td>
-                     <p th:text="${address}">[04435]서울 구로구 구일로 4길 22(구로동,구로 주공아파트) 118동 1405호</p>
+                     <p th:text="${users.addr}">[04435]서울 구로구 구일로 4길 22(구로동,구로 주공아파트) 118동 1405호</p>
                    </td>
                  </tr>
-                 <tr>
-                   <th>가게 메세지</th>
-                   <td><p th:text="${message}">단무지 많이요</p></td>
-                 </tr>
-                 <tr>
-                   <th>배달 메세지</th>
-                   <td><p th:text="${messageToDeliveryman}"> 문 앞에 두고, 벨 눌러주세요</p></td>
-                 </tr>
+<!--                 <tr>-->
+<!--                   <th>가게 메세지</th>-->
+<!--                   <td><p>단무지 많이요</p></td>-->
+<!--                 </tr>-->
+<!--                 <tr>-->
+<!--                   <th>배달 메세지</th>-->
+<!--                   <td><p> 문 앞에 두고, 벨 눌러주세요</p></td>-->
+<!--                 </tr>-->
                </tbody>
              </table>
            </div>
        </section>
-     </div class="main">
+     </div >
 
       <!-- //-----------------------main end------------------------------------------------------------------------------------------------ -->
-    
-    
-    
+
+
+
       <footer>
         <div class="align">
           <div class="sns">
@@ -250,9 +251,9 @@
               </select>
             </div>
           </div>
-        </div>  
-    
-      </footer>  
+        </div>
+
+      </footer>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script src="/js/index.js"></script>
@@ -260,3 +261,5 @@
 
  </body>
 </html>
+
+
