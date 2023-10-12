@@ -65,6 +65,7 @@ dependencies {
 
 	// Tymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 	// RESTAPI
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'

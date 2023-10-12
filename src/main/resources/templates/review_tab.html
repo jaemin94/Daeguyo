@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8" />
@@ -20,86 +20,87 @@
 </head>
 
 <body>
-  <div id="warp">
-    <div class="side_menu">
-      <div class="ide_login">
-        <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
-        <a href="#" class="close">&times;</a>
+<div id="warp">
+  <div class="side_menu">
+    <div class="ide_login">
+      <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
+      <a href="#" class="close">&times;</a>
+    </div>
+    <div class="panner">
+      <ul>
+        <li><a href="javascript:void(0);">홈</a></li>
+        <li><a href="javascript:void(0);">주문</a></li>
+        <li><a href="javascript:void(0);">매장찾기</a></li>
+        <li><a href="javascript:void(0);">마이페이지</a></li>
+        <li><a href="javascript:void(0);">로그아웃</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="map_bg">
+    <div id="map">
+      <div class="map_search">
+        <input value="지번, 도로, 건물명으로 검색" />
+        <button>검색</button>
       </div>
-      <div class="panner">
-        <ul>
-          <li><a href="javascript:void(0);">홈</a></li>
+
+      <div class="current_location_group">
+        <img src="/images/gps.png" alt="" class="gps">
+        <div class="current_location">현재 위치에서 찾기</div>
+      </div>
+
+      <div class="location_select">
+        대구 광역시 동구 동촌로55길36
+      </div>
+
+      <div class="location_complete">선택하기</div>
+    </div>
+  </div>
+
+  <header>
+    <div class="scroll_btn">
+      <ul>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
+      </ul>
+    </div>
+    <div class="align">
+      <div class="hamburger_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <h1 class="logo">
+        <a th:href="@{/}"><img src="/images/header_logo.png" alt= "로고"/></a>
+      </h1>
+      <nav>
+        <ul class="mainmenu">
+          <li>
+            <a href="javascript:void(0);">홈</a>
+            <div class="sub_menu">
+              <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
+              <ul class="drop_list">
+                <li><a href="javascript:void(0);">회사소개</a></li>
+                <li><a href="javascript:void(0);">회사연혁</a></li>
+                <li><a href="javascript:void(0);">브랜드소개</a></li>
+                <li><a href="javascript:void(0);">찾아오시는길</a></li>
+              </ul>
+            </div>
+          </li>
           <li><a href="javascript:void(0);">주문</a></li>
-          <li><a href="javascript:void(0);">매장찾기</a></li>
           <li><a href="javascript:void(0);">마이페이지</a></li>
-          <li><a href="javascript:void(0);">로그아웃</a></li>
         </ul>
+      </nav>
+      <div class="quick_menu">
+        <a th:href="@{/myPage}">SEIN 님</a>
+        <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
+        <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
+        <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
       </div>
     </div>
-
-    <div class="map_bg">
-      <div id="map">
-        <div class="map_search">
-          <input value="지번, 도로, 건물명으로 검색" />
-          <button>검색</button>
-        </div>
-
-        <div class="current_location_group">
-          <img src="/images/gps.png" alt="" class="gps">
-          <div class="current_location">현재 위치에서 찾기</div>
-        </div>
-
-        <div class="location_select">
-          대구 광역시 동구 동촌로55길36
-        </div>
-
-        <div class="location_complete">선택하기</div>
-      </div>
-    </div>
-
-    <header>
-      <div class="scroll_btn">
-        <ul>
-          <li><a href="javascript:void(0);"><img src="./images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
-          <li><a href="javascript:void(0);"><img src="./images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
-          <li><a href="javascript:void(0);"><img src="./images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
-          <li><a href="javascript:void(0);"><img src="./images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
-        </ul>
-      </div>
-      <div class="align">
-        <div class="hamburger_btn">
-          <i class="fa-solid fa-bars"></i>
-        </div>
-
-        <h1 class="logo">
-          <a href="javascript:void(0);"><img src="/images/header_logo.png" alt="로고" /></a>
-        </h1>
-        <nav>
-          <ul class="mainmenu">
-            <li>
-              <a href="javascript:void(0);">홈</a>
-              <div class="sub_menu">
-                <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
-                <ul class="drop_list">
-                  <li><a href="javascript:void(0);">회사소개</a></li>
-                  <li><a href="javascript:void(0);">회사연혁</a></li>
-                  <li><a href="javascript:void(0);">브랜드소개</a></li>
-                  <li><a href="javascript:void(0);">찾아오시는길</a></li>
-                </ul>
-              </div>
-            </li>
-            <li><a href="javascript:void(0);">주문</a></li>
-            <li><a href="javascript:void(0);">마이페이지</a></li>
-          </ul>
-        </nav>
-        <div class="quick_menu">
-          <a href="javascript:void(0);">SEIN 님</a>
-          <a href="javascript:void(0);"><img src="/images/storage.png" alt="장바구니"></a>
-          <a href="javascript:void(0);"><img src="/images/login.png" alt="로그아웃"></a>
-          <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
-        </div>
-      </div>
-    </header>
+  </header>
 
     <main>
       <div class="main-img">

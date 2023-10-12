@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -65,7 +65,7 @@
         </div>
         
         <h1 class="logo">
-          <a href="javascript:void(0);"><img src="/images/header_logo.png" alt= "로고"/></a>
+          <a th:href="@{/}"><img src="/images/header_logo.png" alt= "로고"/></a>
         </h1>
         <nav>
           <ul class="mainmenu">
@@ -86,9 +86,10 @@
           </ul>
         </nav>
         <div class="quick_menu">
-          <a href="javascript:void(0);">SEIN 님</a>
-          <a href="javascript:void(0);"><img src="/images/storage.png" alt="장바구니"></a>
-          <a href="javascript:void(0);"><img src="/images/login.png" alt="로그아웃"></a>
+          <a th:href="@{/myPage}">SEIN 님</a>
+          <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
+          <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
+          <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
           <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
         </div>
       </div>
