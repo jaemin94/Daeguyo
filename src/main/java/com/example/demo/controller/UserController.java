@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @Controller
 @Slf4j
 @RequestMapping()
@@ -32,18 +34,14 @@ public class UserController {
 
     }
 
+
+
+
     @GetMapping("/login")
-    public String getLoginForm() {
-        return "login";
+    public void getLoginForm() {
     }
 
-    @PostMapping("/login")
-    public String login(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        // 사용자 정보를 세션에 저장
-        UserDto user = userService.select(userDetails.getUsername());
-        model.addAttribute("user", user);
-        return "/orderStatus";
-    }
+
 
 
 }

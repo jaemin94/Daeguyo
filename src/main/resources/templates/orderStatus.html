@@ -16,6 +16,10 @@
   </head>
 
   <body>
+  <script th:if="${session.username !=null}" th:inline="javascript">
+    var username =[[${session.username}]]
+     console.log(username);
+  </script>
     <div id="warp">
         <div class="side_menu">
           <div class="ide_login">
@@ -106,7 +110,10 @@
 
 
       <!-- //-----------------------main start---------------------------------------------------------------------------------------------- -->
-     <div class="main">
+
+
+
+      <div class="main">
 
        <section class="s1" th:each="orders : ${orders}">
        <div class="align">
@@ -258,6 +265,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script src="/js/index.js"></script>
   <script src="/js/orderStatus.js"></script>
+
 
  </body>
 </html>

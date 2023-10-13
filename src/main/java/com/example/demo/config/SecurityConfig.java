@@ -50,7 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.and()
 
 				.formLogin()													// 로그인이 되지 않은 상태에서 자동으로 로그인 페이지로 리다이렉팅이 된다
-				.loginPage("/login").permitAll()                        // 커스텀 로그인 페이지 설정
+				.loginPage("/login").permitAll()
+				.usernameParameter("u_email")// 커스텀 로그인 페이지 설정
 				.successHandler(new CustomLoginSuccessHandler())				// 로그인시 역활에 따른 페이지 설정
 				.failureHandler(new CustomAuthenticationFailureHandler())		// 로그인 실패 예외처리
 

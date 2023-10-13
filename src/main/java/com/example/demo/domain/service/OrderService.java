@@ -23,7 +23,5 @@ public class OrderService {
         return mapper.selectAll();
     }
 
-    public List<OrderDto> getOrdersByUserId(int userId) {
-        return mapper.selectByUserId(userId);
-    }
+
 }

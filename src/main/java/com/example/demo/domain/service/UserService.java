@@ -19,9 +19,6 @@ public class UserService {
         return mapper.selectAll();
     }
 
-    public UserDto select(String u_email) {
-        return mapper.selectOne(u_email);
-    }
 
 
 }
