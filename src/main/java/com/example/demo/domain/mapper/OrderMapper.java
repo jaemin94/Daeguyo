@@ -12,7 +12,7 @@ public interface OrderMapper {
     @Select("select * from tbl_order")
     public List<OrderDto> selectAll();
     @Select("select * from tbl_order where order_id=#{order_id}")
-    public OrderDto selectOne(String order_id);
+    public List<OrderDto> selectOne(String order_id);
     @Insert("")
     public int insertOrder();
     @Update("")

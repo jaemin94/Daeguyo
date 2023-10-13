@@ -223,10 +223,11 @@ btnJoin.onclick = function () {
 
     //이메일합병
     var emailInput = document.getElementById("email_id").value;
-    if (!emailInput) {
+
         var emailSelect = document.getElementById("email_adr").value;
         var fullEmail = emailInput + "@" + emailSelect;
-    }
+        console.log(fullEmail);
+
 
     const requestData = {
         addr: fullAddress,

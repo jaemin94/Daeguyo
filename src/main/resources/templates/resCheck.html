@@ -31,6 +31,13 @@
       </div>
 
     <header>
+        <script th:if="${session.username != null}"  th:inline="javascript">
+
+            var username = [[${session.username}]];
+            console.log(username);
+
+        </script>
+
 
       <div class="align">
         <div class="hamburger_btn">
@@ -98,24 +105,19 @@
         </div>
         
         <div class="order-list"> 
-            <div class='order-item'>
+            <div th:each="orderdto : ${orderdto}" class='order-item'>
               <div style="display: flex; flex-direction: column;">
-                <span><li>깐풍탕수 소</li></span>
-                <span style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
+                <span th:text="${orderdto.menu_name}"><li>깐풍탕수 소</li></span>
+                  <div>
+                      <span th:each="select_option : ${#strings.listSplit(orderdto.select_option, ',')}">
+                        <span th:text="${select_option}" style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
+                      </span>
+                  </div>
               </div>
                 
-                <div><span>13,200원</span></div>
+l                <div><span th:text="${orderdto.order_amount}">13,200원</span></div>
             </div>
-
-            <div class='order-item'>
-              <div style="display: flex; flex-direction: column;">
-                <span><li>깐풍탕수 소</li></span>
-                <span style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
-                <span style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
-              </div>
-                
-                <div><span>13,200원</span></div>
-            </div>
+        </div>
     </div>
 </section>
 
