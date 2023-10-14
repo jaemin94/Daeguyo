@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/user").hasRole("User")                            // Role_User
 				.antMatchers("/member").hasRole("Member")                        // Role_Member
 				.antMatchers("/admin").hasRole("Admin")                            // Role_Admin
-				.antMatchers("/deleteOrder/**").permitAll()
+				.antMatchers("/deleteOrder/**").authenticated()
 				.anyRequest().authenticated()									// 나머지 URL은 모두 인증작업이 완료된 이후 접근가능
 
 				.and()
