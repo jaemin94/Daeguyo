@@ -1,273 +1,271 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>대구요</title>
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/orderStatus.css" />
-    <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>대구요</title>
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/orderStatus.css" />
+  <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  </head>
+</head>
 
-  <body>
-  <script th:if="${session.username !=null}" th:inline="javascript">
-    var username =[[${session.username}]]
-     console.log(username);
-  </script>
-    <div id="warp">
-        <div class="side_menu">
-          <div class="ide_login">
-            <a href="#"> 안녕하세요! <strong >SEIN</strong>님</a>
-            <a href="#" class="close">&times;</a>
-          </div>
-          <div class="panner">
-            <ul>
-              <li><a href="javascript:void(0);">홈</a></li>
-              <li><a href="javascript:void(0);">주문</a></li>
-              <li><a href="javascript:void(0);">매장찾기</a></li>
-              <li><a href="javascript:void(0);">마이페이지</a></li>
-              <li><a href="javascript:void(0);">로그아웃</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="map_bg">
-          <div id="map">
-            <div class="map_search">
-              <input value="지번, 도로, 건물명으로 검색" />
-              <button>검색</button>
-            </div>
-
-            <div class="current_location_group">
-              <img src="/images/gps.png" alt="" class="gps">
-              <div class="current_location">현재 위치에서 찾기</div>
-            </div>
-
-            <div class="location_select">
-              대구 광역시 동구 동촌로55길36
-            </div>
-
-            <div class="location_complete">선택하기</div>
-          </div>
-        </div>
-
-      <header>
-        <div class="scroll_btn">
-          <ul>
-            <li><a href="javascript:void(0);"><img src="/images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
-            <li><a href="javascript:void(0);"><img src="/images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
-            <li><a href="javascript:void(0);"><img src="/images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
-            <li><a href="javascript:void(0);"><img src="/images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
-          </ul>
-        </div>
-        <div class="align">
-          <div class="hamburger_btn">
-            <i class="fa-solid fa-bars"></i>
-          </div>
-
-          <h1 class="logo">
-            <a href="javascript:void(0);"><img src="/images/header_logo.png" alt= "로고"/></a>
-          </h1>
-          <nav>
-            <ul class="mainmenu">
-              <li>
-                <a href="javascript:void(0);">홈</a>
-                <div class="sub_menu">
-                  <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
-                  <ul class="drop_list">
-                    <li><a href="javascript:void(0);">회사소개</a></li>
-                    <li><a href="javascript:void(0);">회사연혁</a></li>
-                    <li><a href="javascript:void(0);">브랜드소개</a></li>
-                    <li><a href="javascript:void(0);">찾아오시는길</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li><a href="javascript:void(0);">주문</a></li>
-              <li><a href="javascript:void(0);">마이페이지</a></li>
-            </ul>
-          </nav>
-          <div class="quick_menu">
-            <a href="javascript:void(0);">SEIN 님</a>
-            <a href="javascript:void(0);"><img src="/images/storage.png" alt="장바구니"></a>
-            <a href="javascript:void(0);"><img src="/images/login.png" alt="로그아웃"></a>
-            <a href="javascript:void(0);" class="location"><img src="./images/location.png" alt="지도찾기"></a>
-          </div>
-        </div>
-      </header>
-      <nav aria-label="breadcrumb" class="breadcrumbwrap">
-        <ol class="breadcrumb align">
-          <li class="breadcrumb-item"><a href="/">홈</a></li>
-          <li class="breadcrumb-item"><a href="/">마이페이지</a></li>
-          <li class="breadcrumb-item active" aria-current="page">주문내역</li>
-        </ol>
-      </nav>
-
-
-      <!-- //-----------------------main start---------------------------------------------------------------------------------------------- -->
-
-
-
-      <div class="main">
-
-       <section class="s1" th:each="orders : ${orders}">
-       <div class="align">
-           <div class="s1d1">
-               <input type="hidden">
-               <button class="orderstatus-deletebtn"><span>내역삭제</span></button>
-           </div>
-           <table class="order-details">
-             <tbody>
-                 <tr class="odtr1">
-                   <td><span th:text="${orders.order_date}" id="bigspan">2023.10.01</span></td>
-                   <td>
-                     <span>주문번호 : <span th:text="${orders.order_id}">aa3453838</span></span>
-                   </td>
-                 </tr>
-                 <tr class="odtr2">
-                   <td>
-                    <!-- orderStatus.js : "주문취소"일 경우 .cancelled-text class 추가 -> css 적용-->
-                     <p th:text="${orders.order_status}" class="status-text">주문취소</p>
-                   </td>
-                   <td>
-                     <a href="#">주문 / 배송 상세 ></a>
-                   </td>
-                 </tr>
-                 <tr class="odtr3">
-                   <td>
-                     <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
-                     <img src="/images/sectionbg_01.jpg" alt="Menu Image" class="order-menu-img">
-                   </td>
-                   <td>
-                     <div class="menu-details">
-                       <p>비건 마라, 오늘의 베스트</p>
-                       <!--th:text="${Menu-name}-->
-                       <ul th:each="selecte: ${#strings.listSplit(orders.selecte_option,',') }" class="selecte">
-                         <li th:text="${selecte}">고기추가 : 1000원</li>
-                         <li th:text="${selecte}">맛선택 : 중간맵기</li>
-                       </ul>
-                     </div>
-                   </td>
-                 </tr>
-                 <tr class="odtr4">
-                   <th>
-                     <span class="bigspan">결제금액</span>
-                   </th>
-                   <td>
-                     <p th:text="${orders.total_price}+'원'">26,900원</p>
-                   </td>
-                 </tr>
-                 <tr class="odtr5">
-                   <td>
-
-                   </td>
-                   <td>
-                       <span  class="bigspan">데일리 비건</span>
-                       <button class="contactbtn"><span>문의하기</span></button>
-                   </td>
-                 </tr>
-             </tbody>
-           </table>
-           <div class="btndiv">
-             <button class="reorderbtn"><span>재구매</span></button>
-        <!-- orderStatus.js : orderStatus에 따라서 리뷰 or 취소정보 버튼 -->
-             <button class="reviewbtn hidden"><span>리뷰쓰기</span></button>
-             <button class="cancelledbtn hidden"><span>취소정보</span></button>
-           </div>
-       </div>
-       </section>
-
-
-       <section class="s2">
-           <div class="align">
-               <h2>배송지 정보</h2>
-               <hr>
-             <table class="d-info" th:each="users : ${users}">
-               <tbody>
-                 <tr>
-                   <th>수령인</th>
-                   <td><p th:text="${users.nickname}">김은숙</p></td>
-                 </tr>
-                 <tr>
-                   <th>휴대폰</th>
-                   <td><p th:text="${users.phone}">010-2465-5578</p></td>
-                 </tr>
-                 <tr>
-                   <th>주소지</th>
-                   <td>
-                     <p th:text="${users.addr}">[04435]서울 구로구 구일로 4길 22(구로동,구로 주공아파트) 118동 1405호</p>
-                   </td>
-                 </tr>
-<!--                 <tr>-->
-<!--                   <th>가게 메세지</th>-->
-<!--                   <td><p>단무지 많이요</p></td>-->
-<!--                 </tr>-->
-<!--                 <tr>-->
-<!--                   <th>배달 메세지</th>-->
-<!--                   <td><p> 문 앞에 두고, 벨 눌러주세요</p></td>-->
-<!--                 </tr>-->
-               </tbody>
-             </table>
-           </div>
-       </section>
-     </div >
-
-      <!-- //-----------------------main end------------------------------------------------------------------------------------------------ -->
-
-
-
-      <footer>
-        <div class="align">
-          <div class="sns">
-            <a href="javascript:void(0);"><img src="/images/facebook.png" alt="페이스북"></a>
-            <a href="javascript:void(0);"><img src="/images/instagram.png" alt="인스타그램"></a>
-          </div>
-          <div class="footer_logo">
-            <a href="javascript:void(0);">
-              <img src="/images/footer_logo.png" alt="하단로고">
-            </a>
-            <div>1661 - 5270</div>
-          </div>
-          <div class="footer_nav">
-            <ul>
-              <li><a href="javascript:void(0);">이용약관</a></li>
-              <li><a href="javascript:void(0);">개인정보처리방침</a></li>
-              <li><a href="javascript:void(0);">위치기반서비스</a></li>
-              <li><a href="javascript:void(0);">고객센터</a></li>
-              <li><a href="javascript:void(0);">인재채용</a></li>
-              <li><a href="javascript:void(0);">단체주문</a></li>
-            </ul>
-          </div>
-          <div class="copyright">
-            <div>
-              주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
-            대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
-            상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
-            <p>Copyright DagueYO. All Rights Reserved.</p>
-            </div>
-            <div class="familysite">
-              <select name="" id="" class="select2">
-                <option value="">Global site</option>
-                <option value="">KOREA</option>
-                <option value="">USA</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-      </footer>
+<body>
+<script th:if="${session.username !=null}" th:inline="javascript">
+  var username =[[${session.username}]]
+   console.log(username);
+</script>
+<div id="warp">
+  <div class="side_menu">
+    <div class="ide_login">
+      <a href="#"> 안녕하세요! <strong >SEIN</strong>님</a>
+      <a href="#" class="close">&times;</a>
+    </div>
+    <div class="panner">
+      <ul>
+        <li><a href="javascript:void(0);">홈</a></li>
+        <li><a href="javascript:void(0);">주문</a></li>
+        <li><a href="javascript:void(0);">매장찾기</a></li>
+        <li><a href="javascript:void(0);">마이페이지</a></li>
+        <li><a href="javascript:void(0);">로그아웃</a></li>
+      </ul>
+    </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-  <script src="/js/index.js"></script>
-  <script src="/js/orderStatus.js"></script>
+
+  <div class="map_bg">
+    <div id="map">
+      <div class="map_search">
+        <input value="지번, 도로, 건물명으로 검색" />
+        <button>검색</button>
+      </div>
+
+      <div class="current_location_group">
+        <img src="/images/gps.png" alt="" class="gps">
+        <div class="current_location">현재 위치에서 찾기</div>
+      </div>
+
+      <div class="location_select">
+        대구 광역시 동구 동촌로55길36
+      </div>
+
+      <div class="location_complete">선택하기</div>
+    </div>
+  </div>
+
+  <header>
+    <div class="scroll_btn">
+      <ul>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
+      </ul>
+    </div>
+    <div class="align">
+      <div class="hamburger_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <h1 class="logo">
+        <a href="javascript:void(0);"><img src="/images/header_logo.png" alt= "로고"/></a>
+      </h1>
+      <nav>
+        <ul class="mainmenu">
+          <li>
+            <a href="javascript:void(0);">홈</a>
+            <div class="sub_menu">
+              <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
+              <ul class="drop_list">
+                <li><a href="javascript:void(0);">회사소개</a></li>
+                <li><a href="javascript:void(0);">회사연혁</a></li>
+                <li><a href="javascript:void(0);">브랜드소개</a></li>
+                <li><a href="javascript:void(0);">찾아오시는길</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="javascript:void(0);">주문</a></li>
+          <li><a href="javascript:void(0);">마이페이지</a></li>
+        </ul>
+      </nav>
+      <div class="quick_menu">
+        <a href="javascript:void(0);">SEIN 님</a>
+        <a href="javascript:void(0);"><img src="/images/storage.png" alt="장바구니"></a>
+        <a href="javascript:void(0);"><img src="/images/login.png" alt="로그아웃"></a>
+        <a href="javascript:void(0);" class="location"><img src="./images/location.png" alt="지도찾기"></a>
+      </div>
+    </div>
+  </header>
+  <nav aria-label="breadcrumb" class="breadcrumbwrap">
+    <ol class="breadcrumb align">
+      <li class="breadcrumb-item"><a href="/">홈</a></li>
+      <li class="breadcrumb-item"><a href="/">마이페이지</a></li>
+      <li class="breadcrumb-item active" aria-current="page">주문내역</li>
+    </ol>
+  </nav>
 
 
- </body>
+  <!-- //-----------------------main start---------------------------------------------------------------------------------------------- -->
+
+
+
+  <div class="main">
+
+    <section class="s1" th:each="orders : ${orders}">
+      <div class="align">
+        <div class="s1d1">
+          <input type="hidden">
+          <button class="orderstatus-deletebtn" onclick = "deleteOrder(this)"><span>내역삭제</span></button>
+        </div>
+        <table class="order-details">
+          <tbody>
+          <tr class="odtr1">
+            <td><span th:text="${orders.order_date}" id="bigspan">2023.10.01</span></td>
+            <td>
+              <span>주문번호 : <span id="order" th:text="${orders.order_id}">aa3453838</span></span>
+            </td>
+          </tr>
+          <tr class="odtr2">
+            <td>
+              <!-- orderStatus.js : "주문취소"일 경우 .cancelled-text class 추가 -> css 적용-->
+              <p th:text="${orders.order_status}" class="status-text">주문취소</p>
+            </td>
+            <td>
+              <a href="#">주문 / 배송 상세 ></a>
+            </td>
+          </tr>
+          <tr class="odtr3">
+            <td>
+              <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
+              <img src="/images/sectionbg_01.jpg" alt="Menu Image" class="order-menu-img">
+            </td>
+            <td>
+              <div class="menu-details">
+                <p>비건 마라, 오늘의 베스트</p>
+                <!--th:text="${Menu-name}-->
+                <ul th:each="select: ${#strings.listSplit(orders.selecte_option,',') }" class="selecte">
+                  <li th:text="${orders.selecte_option}">고기추가 : 1000원</li>
+                  <li th:text="${orders.selecte_option}">맛선택 : 중간맵기</li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          <tr class="odtr4">
+            <th>
+              <span class="bigspan">결제금액</span>
+            </th>
+            <td>
+              <p th:text="${orders.total_price}+'원'">26,900원</p>
+            </td>
+          </tr>
+          <tr class="odtr5">
+            <td>
+
+            </td>
+            <td>
+              <span  class="bigspan">데일리 비건</span>
+              <button class="contactbtn"><span>문의하기</span></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="btndiv">
+          <button class="reorderbtn"><span>재구매</span></button>
+          <!-- orderStatus.js : orderStatus에 따라서 리뷰 or 취소정보 버튼 -->
+          <button class="reviewbtn hidden"><span>리뷰쓰기</span></button>
+          <button class="cancelledbtn hidden"><span>취소정보</span></button>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="s2">
+      <div class="align">
+        <h2>배송지 정보</h2>
+        <hr>
+        <table class="d-info" th:each="users : ${users}">
+          <tbody>
+          <tr>
+            <th>수령인</th>
+            <td><p th:text="${users.nickname}">김은숙</p></td>
+          </tr>
+          <tr>
+            <th>휴대폰</th>
+            <td><p th:text="${users.phone}">010-2465-5578</p></td>
+          </tr>
+          <tr>
+            <th>주소지</th>
+            <td>
+              <p th:text="${users.addr}">[04435]서울 구로구 구일로 4길 22(구로동,구로 주공아파트) 118동 1405호</p>
+            </td>
+          </tr>
+          <!--                 <tr>-->
+          <!--                   <th>가게 메세지</th>-->
+          <!--                   <td><p>단무지 많이요</p></td>-->
+          <!--                 </tr>-->
+          <!--                 <tr>-->
+          <!--                   <th>배달 메세지</th>-->
+          <!--                   <td><p> 문 앞에 두고, 벨 눌러주세요</p></td>-->
+          <!--                 </tr>-->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div >
+
+  <!-- //-----------------------main end------------------------------------------------------------------------------------------------ -->
+
+
+
+  <footer>
+    <div class="align">
+      <div class="sns">
+        <a href="javascript:void(0);"><img src="/images/facebook.png" alt="페이스북"></a>
+        <a href="javascript:void(0);"><img src="/images/instagram.png" alt="인스타그램"></a>
+      </div>
+      <div class="footer_logo">
+        <a href="javascript:void(0);">
+          <img src="/images/footer_logo.png" alt="하단로고">
+        </a>
+        <div>1661 - 5270</div>
+      </div>
+      <div class="footer_nav">
+        <ul>
+          <li><a href="javascript:void(0);">이용약관</a></li>
+          <li><a href="javascript:void(0);">개인정보처리방침</a></li>
+          <li><a href="javascript:void(0);">위치기반서비스</a></li>
+          <li><a href="javascript:void(0);">고객센터</a></li>
+          <li><a href="javascript:void(0);">인재채용</a></li>
+          <li><a href="javascript:void(0);">단체주문</a></li>
+        </ul>
+      </div>
+      <div class="copyright">
+        <div>
+          주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
+          대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
+          상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
+          <p>Copyright DagueYO. All Rights Reserved.</p>
+        </div>
+        <div class="familysite">
+          <select name="" id="" class="select2">
+            <option value="">Global site</option>
+            <option value="">KOREA</option>
+            <option value="">USA</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/orderStatus.js"></script>
+
+
+</body>
 </html>
-
-

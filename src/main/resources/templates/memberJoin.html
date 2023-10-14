@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8" />
@@ -21,6 +21,8 @@
         'opsz' 24
     }
   </style>
+<!-- axios cdn -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -68,7 +70,7 @@
 
     <header>
       <div class="align">
-        <a href="javascript:void(0);"><img src="/images/login_logo.png" alt="로고" /></a>
+        <a th:href="@{/}"><img src="/images/login_logo.png" alt="로고" /></a>
       </div>
     </header>
     <!-- 김승훈 작업 시작 -->
@@ -133,26 +135,26 @@
             </button>
           </div>
         </div>
-        <div class="year_container">
-          <div class="year_box">생년월일</div>
-          <input type="text" placeholder="YEAR" id="year">
-          <select id="month" name="month">
-            <option value="" disabled selected>MONTH</option>
-            <option value="1">1월</option>
-            <option value="2">2월</option>
-            <option value="3">3월</option>
-            <option value="4">4월</option>
-            <option value="5">5월</option>
-            <option value="6">6월</option>
-            <option value="7">7월</option>
-            <option value="8">8월</option>
-            <option value="9">9월</option>
-            <option value="10">10월</option>
-            <option value="11">11월</option>
-            <option value="12">12월</option>
-          </select>
-          <input type="text" placeholder="DAY" id="day">
-        </div>
+<!--        <div class="year_container">-->
+<!--          <div class="year_box">생년월일</div>-->
+<!--          <input type="text" placeholder="YEAR" id="year">-->
+<!--          <select id="month" name="month">-->
+<!--            <option value="" disabled selected>MONTH</option>-->
+<!--            <option value="1">1월</option>-->
+<!--            <option value="2">2월</option>-->
+<!--            <option value="3">3월</option>-->
+<!--            <option value="4">4월</option>-->
+<!--            <option value="5">5월</option>-->
+<!--            <option value="6">6월</option>-->
+<!--            <option value="7">7월</option>-->
+<!--            <option value="8">8월</option>-->
+<!--            <option value="9">9월</option>-->
+<!--            <option value="10">10월</option>-->
+<!--            <option value="11">11월</option>-->
+<!--            <option value="12">12월</option>-->
+<!--          </select>-->
+<!--          <input type="text" placeholder="DAY" id="day">-->
+<!--        </div>-->
         <div class="email_container">
           <div class="email_box">이메일</div>
           <div class="email_input">
@@ -162,18 +164,23 @@
             </span>
             <select id="email_adr" name="email_adr">
               <option value="naver.com">naver.com</option>
-              <option value="google.com">google.com</option>
+              <option value="gmail.com">gmail.com</option>
               <option value="hanmail.net">hanmail.net</option>
               <option value="nate.com">nate.com</option>
               <option value="kakao.com">kakao.com</option>
             </select>
-            <div id="email_btn"><button onclick="">인증</button></div>
+            <div id="email_btn"><button onclick="emailCheck()" id="emailbtn">인증</button></div>
+            <div id="popup1" class="hidden1">
+              <!-- 팝업 창 내용 -->
+              <input type="text" name="checkemail" id="emailcomfirmcheck">
+              <input type="submit" id="check1" value="확인">
+            </div>
           </div>
         </div>
         <div class="password1_container">
           <div class="password1_box">비밀번호</div>
           <div class="password1_input">
-            <input type="password" id="password1">
+            <input type="password" id="password">
             <button id="pass1_btn">
               <img src="/images/eye.png" alt="" id="eyeImage1">
             </button>
@@ -191,8 +198,14 @@
         <div class="phone_container">
           <div class="phone_box">휴대폰 번호</div>
           <div class="phone_input">
-            <input type="tel" id="phone">
-            <button onclick="" id="phone_btn">인증</button>
+            <input type="tel" id="phoneNumber">
+            <button onclick="phoneCheck()" id="phone_btn">인증</button>
+          </div>
+
+          <div id="popup" class="hidden">
+            <!-- 팝업 창 내용 -->
+            <input type="text" name="checkphone" id="smscomfirmcheck">
+            <input type="submit" id="check" value="확인">
           </div>
 
         </div>
@@ -254,7 +267,7 @@
         </div>
       </div>
       <div class="agree_submit_zone">
-        <button onclick="" class="agree_submit_box">회원가입</button>
+        <input type="submit" class="agree_submit_box" id="btnJoin" value="회원가입">
         <button onclick="" class="agree_submit_cancel">취소</button>
       </div>
     </section>

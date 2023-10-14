@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8" />
@@ -10,252 +10,296 @@
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/review_tab.css" />
   <!-- 구글아이콘 -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <style>
-    .material-symbols-outlined {
-      font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24
-    }
-  </style>
+
   <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined|Material+Icons+Two+Tone" rel="stylesheet">
 
 </head>
 
 <body>
-  <div id="warp">
-    <div class="side_menu">
-      <div class="ide_login">
-        <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
-        <a href="#" class="close">&times;</a>
+<div id="warp">
+  <div class="side_menu">
+    <div class="ide_login">
+      <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
+      <a href="#" class="close">&times;</a>
+    </div>
+    <div class="panner">
+      <ul>
+        <li><a href="javascript:void(0);">홈</a></li>
+        <li><a href="javascript:void(0);">주문</a></li>
+        <li><a href="javascript:void(0);">매장찾기</a></li>
+        <li><a href="javascript:void(0);">마이페이지</a></li>
+        <li><a href="javascript:void(0);">로그아웃</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="map_bg">
+    <div id="map">
+      <div class="map_search">
+        <input value="지번, 도로, 건물명으로 검색" />
+        <button>검색</button>
       </div>
-      <div class="panner">
-        <ul>
-          <li><a href="javascript:void(0);">홈</a></li>
+
+      <div class="current_location_group">
+        <img src="/images/gps.png" alt="" class="gps">
+        <div class="current_location">현재 위치에서 찾기</div>
+      </div>
+
+      <div class="location_select">
+        대구 광역시 동구 동촌로55길36
+      </div>
+
+      <div class="location_complete">선택하기</div>
+    </div>
+  </div>
+
+  <header>
+    <div class="scroll_btn">
+      <ul>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
+      </ul>
+    </div>
+    <div class="align">
+      <div class="hamburger_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <h1 class="logo">
+        <a th:href="@{/}"><img src="/images/header_logo.png" alt= "로고"/></a>
+      </h1>
+      <nav>
+        <ul class="mainmenu">
+          <li>
+            <a href="javascript:void(0);">홈</a>
+            <div class="sub_menu">
+              <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
+              <ul class="drop_list">
+                <li><a href="javascript:void(0);">회사소개</a></li>
+                <li><a href="javascript:void(0);">회사연혁</a></li>
+                <li><a href="javascript:void(0);">브랜드소개</a></li>
+                <li><a href="javascript:void(0);">찾아오시는길</a></li>
+              </ul>
+            </div>
+          </li>
           <li><a href="javascript:void(0);">주문</a></li>
-          <li><a href="javascript:void(0);">매장찾기</a></li>
           <li><a href="javascript:void(0);">마이페이지</a></li>
-          <li><a href="javascript:void(0);">로그아웃</a></li>
         </ul>
+      </nav>
+      <div class="quick_menu">
+        <a th:href="@{/myPage}">SEIN 님</a>
+        <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
+        <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
+        <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
       </div>
     </div>
+  </header>
 
-    <div class="map_bg">
-      <div id="map">
-        <div class="map_search">
-          <input value="지번, 도로, 건물명으로 검색" />
-          <button>검색</button>
-        </div>
-
-        <div class="current_location_group">
-          <img src="/images/gps.png" alt="" class="gps">
-          <div class="current_location">현재 위치에서 찾기</div>
-        </div>
-
-        <div class="location_select">
-          대구 광역시 동구 동촌로55길36
-        </div>
-
-        <div class="location_complete">선택하기</div>
-      </div>
-    </div>
-
-    <header>
-      <div class="scroll_btn">
-        <ul>
-          <li><a href="javascript:void(0);"><img src="/images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
-          <li><a href="javascript:void(0);"><img src="/images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
-          <li><a href="javascript:void(0);"><img src="/images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
-          <li><a href="javascript:void(0);"><img src="/images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
-        </ul>
-      </div>
-      <div class="align">
-        <div class="hamburger_btn">
-          <i class="fa-solid fa-bars"></i>
-        </div>
-
-        <h1 class="logo">
-          <a href="javascript:void(0);"><img src="/images/header_logo.png" alt="로고" /></a>
-        </h1>
-        <nav>
-          <ul class="mainmenu">
-            <li>
-              <a href="javascript:void(0);">홈</a>
-              <div class="sub_menu">
-                <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
-                <ul class="drop_list">
-                  <li><a href="javascript:void(0);">회사소개</a></li>
-                  <li><a href="javascript:void(0);">회사연혁</a></li>
-                  <li><a href="javascript:void(0);">브랜드소개</a></li>
-                  <li><a href="javascript:void(0);">찾아오시는길</a></li>
-                </ul>
-              </div>
-            </li>
-            <li><a href="javascript:void(0);">주문</a></li>
-            <li><a href="javascript:void(0);">마이페이지</a></li>
-          </ul>
-        </nav>
-        <div class="quick_menu">
-          <a href="javascript:void(0);">SEIN 님</a>
-          <a href="javascript:void(0);"><img src="/images/storage.png" alt="장바구니"></a>
-          <a href="javascript:void(0);"><img src="/images/login.png" alt="로그아웃"></a>
-          <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
-        </div>
-      </div>
-    </header>
-    <!-- 김승훈 작업 시작 -->
-    <!-- 메인(조인헤더) -->
     <main>
-      <div class="header_img"><img src="/images/sectionbg_03.jpg"></div>
+      <div class="main-img">
+        <img src="/images/horangmain.jpeg" alt="menu-main" class="menu-main-img">
+      </div>
     </main>
-    <!-- 메인(조인헤더 끝) -->
+
 
     <!-- 탭부터 만들기 -->
-    <section id="pagination" class="section_Tab">
-      <div class="tab_header">
-        <div class="tab_header_res">호랑이 식당</div>
-        <div class="star-rating space-x-4 mx-auto">
-          <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings" />
-          <label for="5-stars" class="star pr-4">★</label>
-          <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings" />
-          <label for="4-stars" class="star">★</label>
-          <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings" />
-          <label for="3-stars" class="star">★</label>
-          <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings" />
-          <label for="2-stars" class="star">★</label>
-          <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
-          <label for="1-star" class="star">★</label>
+    <section class="res-main-info-sec">
+      <div class="res-main-info">
+          <p class="res-name">호랑이 식당</p>
+          <div class="star-ratings">
+            <!-- 별 모양 아이콘 예시 -->
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9734;</span>
+            <!-- <span class="material-symbols-outlined">grade</span> -->
+            <!-- <span class="material-symbols-outlined">star_rate_half</span> -->
+          </div>
+
+          <div class="rating-info">
+            <span class="rating-number">4.5</span>
+            <button class="favoritebtn">
+              <span class="favorite material-icons-two-tone" >favorite</span>
+            </button>
+            <button class="sharebtn">
+              <span class="sharebtn material-icons-outlined">share</span>
+            </button>
+          </div>
         </div>
-        <div class="point_zone">
-          5.0(100+)
-          <span class="love">♡</span>
-          <button onclick="" class="share_res"><img src="/images/share.png"></button>
+        <div class="buttons align">
+          <input type="button" value="메뉴" class="menubtn" onclick="showPage('page1')">
+          <input type="button" value="매장정보" class="store-info-btn" onclick="showPage('page2')">
+          <input type="button" value="리뷰" class="review-btn" onclick="showPage('page3')">
         </div>
-      </div>
-      <div class="button_container">
-        <button onclick="showPage('page1')">메뉴</button>
-        <button onclick="showPage('page2')">정보</button>
-        <button onclick="showPage('page3')">리뷰</button>
-      </div>
-    </section>
+      </section>
     <!-- 탭끝 -->
 
     <!-- 게시판섹션 -->
     <section class="section_Board" id="Board">
       <div id="boardContainer">
         <!-- 메뉴 페이지 시작-->
-        <div class="boardPage" id="page1">
-          <div class="menu_container">
-            <div class="main_menu_container">
-              <div class="main_name">
-                --------------------대표 메뉴--------------------
-              </div>
-              <div class="main_menu">
-                <div class="menu_image">
-                  <img src="/images/sectionbg_01.jpg">
-                </div>
-                <div class="menu_name">
-                  <div class="menu_name_box">
-                    <div class="good_menu">추천</div>마라파스타
+        <div class="wrapper boardPage" id="page1"> 
+          <div class="mainwrap align">
+              <section class="main-menu-sec"> 
+                  <div class="menu-category main">
+                    <div><hr></div>
+                    <span>대표메뉴</span>
+                    <div><hr></div>
                   </div>
-                  <div class="name_price">1인분|18,000원</div>
+                  <table class="menu-detail-table main">
+                    <tbody>
+                        <tr class="menu-tr main">
+                          <td>
+                            <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
+                            <img src="/images/sectionbg_01.jpg" alt="Menu Image" class="menu-img main">
+                          </td>
+                          <td>
+                            <div class="menu-details main">
+                              <div class="d1">
+                                <p class="menu-lable popular">인기</p>
+                                <p  id="bigText" class="menu-name main">마라파스타</p>
+                              </div>
+                              <ul>
+                                <li  class="menu-price main">1인분 : 18,000원 </li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td>
+                              <button class="addButton main material-icons-outlined">add</button>
+                          </td>
+                        </tr>
+                        <tr class="menu-tr main">
+                          <td>
+                            <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
+                            <img src="/images/horangmara.jpeg" alt="Menu Image" class="menu-img main">
+                          </td>
+                          <td>
+                            <div class="menu-details">
+                            <div class="d1">
+                                <p class="menu-lable">추천</p>
+                                <p  id="bigText" class="menu-name main">마라 또 찾지 마라</p>
+                            </div>
+                              <ul>
+                                <li class="menu-price main">1~2인분 : 17,500원 </li>
+                                <li  class="menu-price main">3~4인분 : 28,000원 </li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td>
+                            <button class="addButton main material-icons-outlined">add</button>
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+              </section>
+      
+              <section class="menu-sec">
+                <div class="menu-category">
+                  <div><hr></div>
+                  <span>메뉴</span>
+                  <div><hr></div>
                 </div>
-                <button onclick="" class="menu_add">
-                  +
-                </button>
-              </div>
-
-              <div class="main_menu">
-                <div class="menu_image">
-                  <img src="/images/sectionbg_02.jpg">
+                <table class="menu-detail-table">
+                  <tbody>
+                      <tr class="menu-tr">
+                        <td>
+                          <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
+                          <img src="/images/sectionbg_01.jpg" alt="Menu Image" class="menu-img">
+                        </td>
+                        <td>
+                          <div class="menu-detail">
+                            <div class="d1">
+                              <p  id="bigText" class="menu-name">고기짬뽕</p>
+                            </div>
+                            <ul>
+                              <li  class="menu-price">1인분 : 7000원 </li>
+                            </ul>
+                          </div>
+                        </td>
+                        <td>
+                            <button class="addButton material-icons-outlined">add</button>
+                        </td>
+                      </tr>
+                      <tr class="menu-tr">
+                        <td>
+                          <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
+                          <img src="/images/horangmara.jpeg" alt="Menu Image" class="menu-img">
+                        </td>
+                        <td>
+                          <div class="menu-detail">
+                            <div class="d1">
+                              <p  id="bigText" class="menu-name">마라 또 찾지 마라</p>
+                            </div>
+                            <ul>
+                              <li  class="menu-price">1~2인분 : 17,500원 </li>
+                              <li  class="menu-price">3~4인분 : 28,000원 </li>
+                            </ul>
+                          </div>
+                        </td>
+                        <td>
+                          <button class="addButton material-icons-outlined">add</button>
+                        </td>
+                      </tr>
+                      <tr class="menu-tr">
+                        <td>
+                          <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
+                          <img src="/images/horangmara.jpeg" alt="Menu Image" class="menu-img">
+                        </td>
+                        <td>
+                          <div class="menu-detail">
+                            <div class="d1">
+                              <p  id="bigText" class="menu-name">마라 또 찾지 마라</p>
+                            </div>
+                            <ul>
+                              <li  class="menu-price">1~2인분 : 17,500원 </li>
+                              <li  class="menu-price">3~4인분 : 28,000원 </li>
+                            </ul>
+                          </div>
+                        </td>
+                        <td>
+                          <button class="addButton material-icons-outlined">add</button>
+                        </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </section>
+              <section class="origin-info-sec">
+                <div class="menu-category origin">
+                  <div><hr></div>
+                  <span>원산지</span>
+                  <div><hr></div>
                 </div>
-                <div class="menu_name">
-                  <div class="menu_name_box">
-                    <div class="popular_menu">인기</div>눅눅하지마라치킨
-                  </div>
-                  <div class="name_price">
-                    1~2인분|17,500원 <br>
-                    3~4인분|28,500원
-                  </div>
-                  <button onclick="" class="menu_add">
-                    +
-                  </button>
+                <div class="origin-info">
+                  <ul>
+                    <li class="origin-li"><span>국내산 쌀</span></li>
+                    <li class="origin-li"><span>국내산 김치</span></li>
+                    <li class="origin-li"><span>국내산 돼지고기</span></li>
+                    <li class="origin-li"><span>수입산 소고기</span></li>
+                    <li class="origin-li"><span>국내산 고춧가루</span></li>
+                    <li class="origin-li"><span>노르웨이산 고등어</span></li>
+                    <li class="origin-li"><span>중국산 청경채</span></li>
+                  </ul>
                 </div>
-              </div>
-            </div>
-            <hr class="line">
-            <div class="side_menu_container">
-              <div class="side_name">
-                --------------------메뉴--------------------
-              </div>
-              <div class="side_menu_box">
-                <div class="menu_pre">
-                  준비중
-                </div>
-                <div class="menu_name2">
-                  <div class="menu_name_box2">
-                    고기짬뽕
-                  </div>
-                  <div class="name_price2">1인분|7,000원</div>
-                </div>
-                <button onclick="" class="menu_add2">
-                  +
-                </button>
-              </div>
-              <div class="side_menu_box">
-                <div class="menu_pre">
-                  준비중
-                </div>
-                <div class="menu_name2">
-                  <div class="menu_name_box2">
-                    해물짬뽕
-                  </div>
-                  <div class="name_price2">1인분|11,000원</div>
-                </div>
-                <button onclick="" class="menu_add2">
-                  +
-                </button>
-              </div>
-              <div class="side_menu_box">
-                <div class="menu_pre">
-                  준비중
-                </div>
-                <div class="menu_name2">
-                  <div class="menu_name_box2">
-                    쟁반짜장
-                  </div>
-                  <div class="name_price2">1인분|11,000원</div>
-                </div>
-                <button onclick="" class="menu_add2">
-                  +
-                </button>
-              </div>
-            </div>
-            <div class="origin">
-              <div class="origin_name">
-                ----------원산지----------
-              </div>
-              <div class="origin_list">
-                쌀|국내산 김치|국내산 돼지고기|수입산 <br>
-                소고기|국내산 고등어|노르웨이산 고추가루|중국산
-              </div>
-            </div>
-            <div class="basket-container">
-              <div class="basket_count">0</div>
-              <div class="basket_img"><img src="/images/basket.png"></div>
-            </div>
+              </section>
+              <div class="cartbtn">
+                <div class="basket_count">0</div>
+                <div class="basket_img"><img src="/images/basket.png" alt="장바구니버튼"></div>
+                  <!-- <p class="cart-count">5</p> -->
+                </a>
+              </div> 
           </div>
-        </div>
         <!-- 메뉴 페이지 끝 -->
 
-
         <!-- 가게 페이지 시작 -->
-        <div class="boardPage" id="page2">
+        <div class="wrapper boardPage" id="page2">
           <div class="res_container">
             <div class="res_name">호랑이 식당</div>
             <div class="res_map">
@@ -328,7 +372,7 @@
 
 
         <!-- 리뷰 페이지 시작 -->
-        <div class="boardPage" id="page3">
+        <div class="wrapper boardPage" id="page3">
           <div class="review_header">
             <img src="/images/dou1.png">
             <br>
@@ -481,7 +525,7 @@
                     </div>
                   </div>
                   <div class="review_img">
-                    <img src="/images/sectionbg_01.jpg">
+                    <img src="/sectionbg_01.jpg">
                     <img src="/images/sectionbg_02.jpg">
                   </div>
                   <div class="user_comment">
@@ -509,7 +553,7 @@
         </div>
         <!-- 리뷰 페이지 끝 -->
       </div>
-
+      </div>
     </section>
     <!-- 게시판 끝 -->
 
@@ -546,12 +590,6 @@
           <div>
             주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
             대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
-            상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
-            <p>Copyright DagueYO. All Rights Reserved.</p>
-          </div>
-          <div class="import">
-            주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다.<br> 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
-            대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 <br>주식회사 대구요는 책임을 지지 않습니다.<br>
             상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
             <p>Copyright DagueYO. All Rights Reserved.</p>
           </div>

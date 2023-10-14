@@ -14,12 +14,12 @@ public interface UserMapper {
     public List<UserDto> selectAll();
 
     // 회원 단건 조회
-    @Select("select * from tbl_user where u_email = #{u_email}")
-    public UserDto selectOne(String u_email);
+    @Select("select * from tbl_user where u_email=#{u_email}")
+    public UserDto selectOne(@Param("u_email") String u_email);
 
     // 회원 추가/가입
-    @Insert("insert into tbl_user values(id=#{id},u_email=#{u_email},addr=#{addr}, password =#{password}, phone=#{phone}, nickname=#{nickname},role=#{role})")
-    public int insertUser();
+    @Insert("insert into tbl_user values(#{id},#{u_email},#{addr}, #{password}, #{phone}, #{nickname},#{role})")
+    public int insertUser(UserDto dto);
 
     // 회원수정
     @Update("update tbl_user set addr = =#{addr}, password =#{password} , nickname =#{nickname}, phone =#{phone} where u_email=#{u_email}")

@@ -2,26 +2,34 @@ package com.example.demo.domain.service;
 
 import com.example.demo.domain.daeguyo.OrderDto;
 import com.example.demo.domain.mapper.OrderMapper;
-import com.example.demo.domain.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@Service
+@Controller
 @Slf4j
 public class OrderService {
 
     @Autowired
     private OrderMapper mapper;
 
-    @Autowired
-    private UserMapper userMapper;
+    public List<OrderDto> getOrder(){
+
+        return mapper.selectAll();
+    }
 
     public List<OrderDto> getAllOrders() {
         return mapper.selectAll();
     }
 
 
+
+    public String deleteOrder(String order_id){
+        mapper.delete(order_id);
+        return "redirect:/orderStatus";
+    }
 }

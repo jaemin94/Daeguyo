@@ -320,7 +320,7 @@ main>.section_join_header {
   outline: none;
 }
 
-.password1_input>#password1 {
+.password1_input>#password {
   width: 950px;
   height: 50px;
   font-size: 20px;
@@ -412,7 +412,7 @@ main>.section_join_header {
   outline: none;
 }
 
-.phone_input>#phone {
+.phone_input>#phoneNumber {
   width: 890px;
   height: 50px;
   font-size: 20px;
@@ -648,3 +648,13 @@ main>.section_join_header {
 
 /* 동의상자 작업 끝 */
 /* 김승훈 작업 끝 */
+
+/* 핸드폰 인증 팝업창 */
+.hidden{
+display:none;
+}
+
+/* 이메일 인증 팝업창 */
+.hidden1{
+display:none;
+}

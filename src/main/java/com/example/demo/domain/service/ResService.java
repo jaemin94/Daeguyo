@@ -22,4 +22,11 @@ public class ResService {
         return mapper.selectAll();
 
     }
+    public List<ResDto> searchCatagory(String food_catagory) {
+        ResDto dto = new ResDto();
+        dto.getKeywords();
+
+        return mapper.selectCatagory(food_catagory);
+    }
+
 }

@@ -32,22 +32,20 @@ header > .align > a > img {
 }
 
 main{
-    height: 1000px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+  gap: 30px;
     
 }
 
 main > .login-form{
-    margin-top: 100px;
-    height: 600px;
-    width: 350px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap: 20px;
+   width: 350px;
+   display:flex; 
+   flex-direction:column; 
+   align-items:center; 
+  
 
 }
 .title { 
@@ -65,11 +63,10 @@ main > .login-form{
     width: 350px;
     height: 60px;
     border: 1px solid #01cafe;
+    outline: none;
 }
 
 .login-button {
-display:block;
-text-align:center;
     width: 350px;
     height: 60px;
     color: #ffffff;
@@ -77,32 +74,51 @@ text-align:center;
     border: none;
     font-size: 17px;
     margin-top: 20px;
+    cursor: pointer;
+    
+}
+.regi-btn{
+  width: 350px;
+  height: 60px;
+  line-height: 60px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.regi-btn>.register-button{
+  width: 350px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  background-color: #919191;
+  border: none;
+  font-size: 17px;
+  text-decoration: none;
 }
 
-.register-button {
-text-align:center;
-display:block;
-    width: 350px;
-    line-height: 60px;
-    color: #ffffff;
-    background-color: #919191;
-    border: none;
-    font-size: 17px;
+.res-regi-btn{
+  width: 350px;
+  height: 60px;
+  line-height: 60px;
 }
-
-.res-register-button {
-   text-align:center;
-   display:block;
-       width: 350px;
-       line-height: 60px;
-       color: #ffffff;
-       background-color: #919191;
-       border: none;
-       font-size: 17px;
+.res-regi-btn>.res-register-button{
+  width: 350px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  background-color: #919191;
+  border: none;
+  font-size: 17px;
+  text-decoration: none;
 }
 .link{
     font-size: 15px;
     color: #919191;
+    text-decoration: none;
 }
 
 footer {

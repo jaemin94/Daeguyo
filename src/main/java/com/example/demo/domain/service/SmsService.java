@@ -1,13 +1,16 @@
 package com.example.demo.domain.service;
 
 import com.example.demo.domain.dto.MessageDto;
+import com.example.demo.domain.dto.SmsComfirmDto;
 import com.example.demo.domain.dto.SmsRequestDto;
 import com.example.demo.domain.dto.SmsResponseDto;
+import com.example.demo.domain.mapper.SmsComfirmMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
@@ -34,6 +37,9 @@ import java.util.Random;
 @RequiredArgsConstructor
 @Service
 public class SmsService {
+
+    @Autowired
+    private SmsComfirmMapper smsComfirmMapper;
 
     //휴대폰 인증 번호
     private final String smsConfirmNum = createSmsKey();
@@ -96,9 +102,15 @@ public class SmsService {
                 .contentType("COMM")
                 .countryCode("82")
                 .from(phone)
-                .content("[3ICE] 인증번호 [" + smsConfirmNum + "]를 입력해주세요")
+                .content("[대구요] 인증번호 [" + smsConfirmNum + "]를 입력해주세요")
                 .messages(messages)
                 .build();
+
+        // sms 인증번호 db에 저장
+        SmsComfirmDto smsComfirmDto = new SmsComfirmDto();
+        smsComfirmDto.setPhone(messageDto.getTo());
+        smsComfirmDto.setSmsComfirmnum(smsConfirmNum);
+        smsComfirmMapper.addSmsComfirmNum(smsComfirmDto);
 
         //쌓은 바디를 json형태로 반환
         ObjectMapper objectMapper = new ObjectMapper();

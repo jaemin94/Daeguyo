@@ -18,7 +18,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 		
 		request.getSession().setAttribute("msg", "[SERVER ERROR]ID/PW를 확인해주세요.");
 //		request.getSession().setAttribute("msg", exception.getMessage());
-		response.sendRedirect(request.getContextPath() + "");
+		response.sendRedirect(request.getContextPath() + "/login");
 	}
 
 }

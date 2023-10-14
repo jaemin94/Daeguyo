@@ -223,10 +223,10 @@ btnJoin.onclick = function () {
 
     //이메일합병
     var emailInput = document.getElementById("email_id").value;
-
+    if (!emailInput) {
         var emailSelect = document.getElementById("email_adr").value;
         var fullEmail = emailInput + "@" + emailSelect;
-
+    }
 
     const requestData = {
         addr: fullAddress,
@@ -356,3 +356,7 @@ axios.get("/checkEmail?email=" + fullEmail1)
 
 
 })
+
+
+
+

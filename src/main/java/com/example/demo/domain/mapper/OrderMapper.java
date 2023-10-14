@@ -10,19 +10,17 @@ import java.util.List;
 public interface OrderMapper {
 
     @Select("select * from tbl_order")
-     public List<OrderDto> selectAll();
+    public List<OrderDto> selectAll();
     @Select("select * from tbl_order where order_id=#{order_id}")
-    public OrderDto selectOne(String order_id);
-
-    @Select("select * from tbl_order where user_id = #{user_id}")
-    public List<OrderDto> selectByUserId(int user_id);
-
+    public List<OrderDto> selectOne(String order_id);
     @Insert("")
     public int insertOrder();
     @Update("")
     public int updateOrder();
-    @Delete("")
-    public int deleteOrder();
+
+    @Delete("DELETE FROM tbl_order WHERE order_id = #{order_id}")
+    int delete(String order_id);
+
 
 
 }
