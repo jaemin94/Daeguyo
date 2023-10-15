@@ -5,10 +5,13 @@ import com.example.demo.domain.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 @Controller
 @Slf4j
@@ -25,9 +28,25 @@ public class UserController {
 
 
     @GetMapping("/myPage")
-    public void myPage(){
 
+    public String getMyPage(Model model, Principal principal){
+        String u_email = principal.getName();
+        UserDto userDto = userService.userSearch(u_email);
+        String nickname = userDto.getNickname();
+        String  userGrade = userDto.getUser_grade();
+        int couponCount = userService.userCouponCount(u_email);
+        int reviewCount = userService.userReviewCount(u_email);
+        int orderCount = userService.userOrderCount(u_email);
+
+        model.addAttribute("username", nickname);
+        model.addAttribute("userGrade", userGrade);
+        model.addAttribute("couponCount", couponCount);
+        model.addAttribute("reviewCount", reviewCount);
+        model.addAttribute("orderHistoryCount", orderCount);
+
+        return "myPage";
     }
+
 
     @GetMapping("/memberJoin")
     public void memberJoinPage(){

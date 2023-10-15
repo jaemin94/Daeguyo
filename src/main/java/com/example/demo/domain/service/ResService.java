@@ -29,4 +29,10 @@ public class ResService {
         return (List<ResDto>) mapper.selectCatagory(food_catagory);
     }
 
+    // review_tab 에서 특정 식당 DTO 출력해야
+    public ResDto searchOne(String res_id){
+
+        return  mapper.selectOne(res_id);
+    }
 }
+
