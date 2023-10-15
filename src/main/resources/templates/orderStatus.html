@@ -187,20 +187,20 @@
       <div class="align">
         <h2>배송지 정보</h2>
         <hr>
-        <table class="d-info" th:each="users : ${users}">
+        <table class="d-info"  th:if="${not #lists.isEmpty(orders)}">
           <tbody>
           <tr>
             <th>수령인</th>
-            <td><p th:text="${users.nickname}">김은숙</p></td>
+            <td><p th:text="${#authentication.getPrincipal().getUserNickname()}"></p></td>
           </tr>
           <tr>
             <th>휴대폰</th>
-            <td><p th:text="${users.phone}">010-2465-5578</p></td>
+            <td><p th:text="${#authentication.getPrincipal().getUserPhoneNumber()}">010-2465-5578</p></td>
           </tr>
           <tr>
             <th>주소지</th>
             <td>
-              <p th:text="${users.addr}">[04435]서울 구로구 구일로 4길 22(구로동,구로 주공아파트) 118동 1405호</p>
+              <p th:text="${#authentication.getPrincipal().getUserAddress}">[04435]서울 구로구 구일로 4길 22(구로동,구로 주공아파트) 118동 1405호</p>
             </td>
           </tr>
           <!--                 <tr>-->

@@ -17,6 +17,8 @@ public interface UserMapper {
     @Select("select * from tbl_user where u_email=#{u_email}")
     public UserDto selectOne(@Param("u_email") String u_email);
 
+
+
     // 회원 추가/가입
     @Insert("insert into tbl_user values(#{id},#{u_email},#{addr}, #{password}, #{phone}, #{nickname},#{role})")
     public int insertUser(UserDto dto);
