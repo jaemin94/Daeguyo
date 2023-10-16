@@ -17,33 +17,43 @@ function showPage(pageId) {
 // 바스켓 숫자 올리기
 // 바스켓 숫자 올리기
 document.addEventListener("DOMContentLoaded", function () {
-    // 초기 카운트를 0으로 설정
-    let basketCount = 0;
-
-    // .addButton 버튼 클릭 시
     document.querySelectorAll(".addButton").forEach(function (button) {
         button.addEventListener("click", function () {
-            const menuId = button.closest("tr.menu-tr").querySelector("[name='menuId']").value;
-            const selectedOptions = Array.from(button.closest("tr.menu-tr").querySelectorAll(".menu-option")).map(select => select.value).join(', ');
+            var u_email = document.getElementById("u_email").value;
+            const menu_id = button.closest("tr.menu-tr").querySelector("[name='menu_id']").value;
+            const resId = document.querySelector(".res-main-info-sec").getAttribute("data-res-id");
+            const selected_option =  [];
+            button.closest("tr.menu-tr").querySelectorAll(".menu-option").forEach(select => {
+                selected_option.push(select.name + ":" + select.value);
+                });
 
-            // 현재 장바구니 개수가 99를 넘지 않도록 확인
-            if (basketCount < 99) {
-                // basketCount 증가
-                basketCount++;
-                // .basket_count 업데이트
-                document.querySelector(".basket_count").textContent = basketCount;
+                const selected_optionStr = selected_option.join(',');
+            // AJAX 요청을 통해 서버에 메뉴 정보 전송
+            fetch('/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    u_email: u_email,
+                    menu_id: menu_id,
+                    selected_option: selected_optionStr,
+                    count: 1,
+                    res_id: resId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 장바구니 카운트 업데이트
+                    document.querySelector(".basket_count").textContent = parseInt(document.querySelector(".basket_count").textContent) + 1;
+                } else {
+                    alert('장바구니에 추가하는 데 실패했습니다.');
 
-                // 선택된 메뉴 아이템과 옵션을 JSON 객체로 생성
-                const selectedItem = {
-                    menuId: menuId,
-                    selectedOptions: selectedOptions
-                };
-
-                // JSON 객체를 콘솔에 출력
-                console.log(selectedItem);
-            }
+                }
+            });
         });
-    });
+     });
 });
 
 

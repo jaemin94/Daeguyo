@@ -28,24 +28,23 @@ public class UserController {
 
 
     @GetMapping("/myPage")
-
-    public String getMyPage(Model model, Principal principal){
+    public String getMyPage(Principal principal, Model model) {
         String u_email = principal.getName();
-        UserDto userDto = userService.userSearch(u_email);
-        String nickname = userDto.getNickname();
-        String  userGrade = userDto.getUser_grade();
+
+        UserDto user = userService.userSearch(u_email);
         int couponCount = userService.userCouponCount(u_email);
         int reviewCount = userService.userReviewCount(u_email);
         int orderCount = userService.userOrderCount(u_email);
 
-        model.addAttribute("username", nickname);
-        model.addAttribute("userGrade", userGrade);
         model.addAttribute("couponCount", couponCount);
         model.addAttribute("reviewCount", reviewCount);
         model.addAttribute("orderHistoryCount", orderCount);
+        model.addAttribute("user", user);
 
         return "myPage";
     }
+
+
 
 
     @GetMapping("/memberJoin")

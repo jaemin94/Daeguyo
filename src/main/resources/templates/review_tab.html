@@ -110,7 +110,7 @@
 
 
   <!-- 탭부터 만들기 -->
-  <section class="res-main-info-sec">
+  <section class="res-main-info-sec" data-res-id="${res.res_id}">
     <div class="res-main-info">
       <p th:text="${res.res_name}" class="res-name">hohorang</p>
       <div class="star-ratings">
@@ -147,6 +147,7 @@
     <div id="boardContainer">
       <!-- 메뉴 페이지 시작-->
       <div class="wrapper boardPage" id="page1">
+        <input type="hidden" id="u_email" th:value="${#authentication.name}" />
         <div class="mainwrap align">
           <section class="main-menu-sec">
             <div class="menu-category main">
@@ -186,7 +187,7 @@
                     </div>
 
                     <!-- 메뉴 ID를 hidden input으로 추가하여 서버에 전송 -->
-                    <input type="hidden" th:value="${menu.menu_id}" name="menuId"/>
+                    <input type="hidden" th:value="${menu.menu_id}" name="menu_id"/>
                   </div>
                 </td>
                 <td>
@@ -234,7 +235,7 @@
                     </div>
 
                     <!-- 메뉴 ID를 hidden input으로 추가하여 서버에 전송 -->
-                    <input type="hidden" th:value="${menu.menu_id}" name="menuId"/>
+                    <input type="hidden" th:value="${menu.menu_id}" name="menu_id"/>
                   </div>
                 </td>
                 <td>
