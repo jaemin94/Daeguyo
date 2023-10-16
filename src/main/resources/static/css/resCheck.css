@@ -182,13 +182,13 @@ color:#01cafe;
   display:flex; 
   gap: 30px;
 }
-.delivery-section>.delivery-container>.info-container>.info-item span:first-child{
+.delivery-section>.delivery-container>.info-container>.info-item>.buyer,.phone,.addr{
   font-size: 20px;
   color: gray;
   white-space: nowrap;
 }
 
-.delivery-section>.delivery-container>.info-container>.info-item span:last-child{
+.delivery-section>.delivery-container>.info-container>.info-item>.buyer1,.phone1,.addr1{
   font-size: 20px; 
 }
 

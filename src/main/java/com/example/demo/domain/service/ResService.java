@@ -26,7 +26,7 @@ public class ResService {
         ResDto dto = new ResDto();
         dto.getKeywords();
 
-        return (List<ResDto>) mapper.selectCatagory(food_catagory);
+        return mapper.selectCatagory(food_catagory);
     }
 
 }
