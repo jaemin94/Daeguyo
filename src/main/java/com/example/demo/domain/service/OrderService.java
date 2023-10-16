@@ -20,4 +20,9 @@ public class OrderService {
         return mapper.selectAll();
     }
 
+    public OrderDto getSearchOrder(String order_id){
+
+        return mapper.selectOne(order_id);
+    }
+
 }
