@@ -75,144 +75,143 @@
           </div>
       </div>
     </header>
-        
 
-   <main class="align main-container">
-    <section class="align orderState orderSection">
-        <div class="info_text navigationLinks">
+    <main class="align">
+
+     <div class="navigationLinks ">
             <span><a href="/index copy.html" class="home-link">홈</a></span>
             <span>></span>
             <span><a href="/" class="cart-link">장바구니</a></span>
-        </div>
+     </div>
+ 
+
+    <section class="orderState orderSection">
         <div class="cart_order">
             <label class="cart__title2">조리시작 
                 <label class="cart__title1">주문승인</label>
             </label>
         </div>
-        <div>
+
+        <div class="howMOP infoBox">
+            <img src="./images/account.png" alt="" class="infoImage">
+            <span  class="orderText">우리가게, <span  class="highlightText">50번째</span> 주문한 손님이에요. </span>
+        </div>
+       <div class="order-id-div">
             <input type="text" id="order_id" name="order_id"/>
             <input type="submit" id="submit_id" value="확인"/>
         </div>
-        <div class="howMOP infoBox">
-            <img src="/images/account.png" alt="" class="infoImage">
-            <span  class="orderText">우리가게, <span  class="highlightText">50번째</span> 주문한 손님이에요. </span>
-         </div>
-        <div th:text="${order_id}" ></div>
      </section>
-</main>
 
-  <section class="align order-container" th:if="${order_id == null}">
+    <section class="order-container" th:if="${order_id == null}">
     <div class="order-details">
         <div class="order-title">
-            <h2>주문 내역</h2>
-            <hr class="title-line">
+            <h2>주문 내역</h2>     
         </div>
-
-        <div class="order-list"  th:each="orderlist : ${orderlist}">
-            <div class='order-item' >
-              <div style="display: flex; flex-direction: column;">
-                <span th:text="${orderlist.menu_name}"><li>깐풍탕수 소</li></span>
-                  <div>
-                      <span th:each="select_option : ${#strings.listSplit(orderlist.select_option, ',')}">
-
-                        <span th:text="${select_option}" style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
-                      </span>
-                  </div>
+        <div class="order-list" >
+            <div class='order-item' th:each="orderlist : ${orderlist}">
+              <div class="order-menu">
+                  <ul class="ul1"><p th:text="${orderlist.menu_name}" class="m-name-div">깐풍탕수 소</p></ul>
+                  <ul class="ul2">
+                      <li th:each="select_option : ${#strings.listSplit(orderlist.select_option, ',')}">
+                        <span th:text="${select_option}"">맵기 선택 : 1단계 순한맛</span>
+                      </li>
+                  </ul>
               </div>
-
-              <div><span th:text="${orderlist.order_amount}">13,200원</span></div>
-
+              <div class="m-price">
+                <p th:text="${orderlist.order_amount}">13,200원</p>
+              </div>
+            </div>
+            <div class='order-item' th:each="orderlist : ${orderlist}">
+              <div class="order-menu">
+                  <ul class="ul1"><p th:text="${orderlist.menu_name}" class="m-name-div">깐풍탕수 소</p></ul>
+                  <ul class="ul2">
+                      <li th:each="select_option : ${#strings.listSplit(orderlist.select_option, ',')}">
+                        <span th:text="${select_option}"">맵기 선택 : 1단계 순한맛</span>
+                      </li>
+                  </ul>
+              </div>
+              <div class="m-price">
+                <p th:text="${orderlist.order_amount}">13,200원</p>
+              </div>
+            </div>
+            <div class='order-item' th:each="orderlist : ${orderlist}">
+              <div class="order-menu">
+                  <ul class="ul1"><p th:text="${orderlist.menu_name}" class="m-name-div">깐풍탕수 소</p></ul>
+                  <ul class="ul2">
+                      <li th:each="select_option : ${#strings.listSplit(orderlist.select_option, ',')}">
+                        <span th:text="${select_option}"">맵기 선택 : 1단계 순한맛</span>
+                      </li>
+                      <li th:each="select_option : ${#strings.listSplit(orderlist.select_option, ',')}">
+                        <span th:text="${select_option}"">맵기 선택 : 1단계 순한맛</span>
+                      </li>
+                      <li th:each="select_option : ${#strings.listSplit(orderlist.select_option, ',')}">
+                        <span th:text="${select_option}"">맵기 선택 : 1단계 순한맛</span>
+                      </li>
+                  </ul>
+              </div>
+              <div class="m-price">
+                <p th:text="${orderlist.order_amount}">13,200원</p>
+              </div>
             </div>
         </div>
-    </div>
-</section>
+    </div>  
+    </section>
 
-      <section class="align order-container" th:if="${order_id != null}">
+    <section class="order-container" th:if="${order_id != null}">
           <!-- 특정 주문 출력 -->
           <div class="order-details">
               <div class="order-title">
-                  <h2>주문 내역</h2>
-                  <hr class="title-line">
+                  <h2>특정 주문 내역</h2>
               </div>
 
               <div class="order-list">
                   <div class='order-item'>
-                      <!-- 주문 항목 정보 출력 -->
-                      <div style="display: flex; flex-direction: column;">
-                          <span th:text="${orderdto.menu_name}"><li>깐풍탕수 소</li></span>
-                          <div>
-                      <span th:each="select_option : ${#strings.listSplit(orderdto.select_option, ',')}">
-                        <span th:text="${select_option}" style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
-                      </span>
-                          </div>
-                      </div>
-                      <div><span th:text="${orderdto.order_amount}">13,200원</span></div>
-
+                    <div class="order-menu">
+                       <ul class="ul1"><span th:text="${orderdto.menu_name}">깐풍탕수 소</span></ul>
+                       <ul class="ul2">
+                          <li th:each="select_option : ${#strings.listSplit(orderdto.select_option, ',')}">
+                            <span th:text="${select_option}" style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
+                          </li>
+                       </ul>
+                    </div>
+                    <div class="m-price">
+                        <span th:text="${orderdto.order_amount}">13,200원</span>
+                    </div>
                   </div>
               </div>
           </div>
-      </section>
+    </section>
 
-      <section class="align delivery-section" >
+    <section class="delivery-section" >
           <!-- 특정 배송지 정보 출력 -->
           <div class="delivery-container" >
               <div class="delivery-header">
                   <h2 class="delivery-title">배송지 정보</h2>
-                  <hr class="header-line">
               </div>
               <div class="info-container" th:if="${order_id != null}" >
-                  <div>
+                  <div class="delivery-details">
                       <div class="info-item">
-                          <span class="buyer">수령인</span>
-                          <span class="buyer1" th:text="${userdto.nickname}"></span>
+                          <p class="buyer ul1">수령인</p>
+                          <span class="buyer1 ul2" th:text="${userdto.nickname}">박민영</span>
                       </div>
                       <div class="info-item">
-                          <span class="phone">휴대폰</span>
-                          <span class="phone1" th:text="${userdto.phone}"></span>
+                          <p class="phone ul1">휴대폰</p>
+                          <span class="phone1 ul2" th:text="${userdto.phone}">입니다</span>
                       </div>
                       <div class="info-item address-item">
-                          <span class="addr">주소지</span>
-                          <span class="addr1" th:text="${userdto.addr}"></span>
+                          <p class="addr ul1">주소지</p>
+                          <span class="addr1 ul2" th:text="${userdto.addr}">어쩌구</span>
                       </div>
                   </div>
               </div>
           </div>
-      </section>
+    </section>
+        <div class="payBtn">
+          <input class="payOk" type="submit" value="결제승인">
+          <input class="payCancel" type="submit" value="결제취소">
+        </div>
 
-  
-
-<!--    <section class="align delivery-section">-->
-<!--      <div class="delivery-container" >-->
-<!--          <div class="delivery-header">-->
-<!--              <h2 class="delivery-title">배송지 정보</h2>-->
-<!--              <hr class="header-line">-->
-<!--          </div>-->
-<!--          <div class="info-container" >-->
-<!--              <div >-->
-<!--              <div class="info-item">-->
-<!--                  <span >수령인</span>-->
-<!--                  <span th:text="${userdto.nickname}"></span>-->
-<!--              </div>-->
-<!--              <div  class="info-item">-->
-<!--                  <span>휴대폰</span>-->
-<!--                  <span th:text="${userdto.phone}"></span>-->
-<!--              </div>-->
-<!--              <div  class="info-item address-item">-->
-<!--                  <span>주소지</span>-->
-<!--                  <span th:text="${userdto.addr}"></span>-->
-<!--             </div>-->
-<!--          </div>-->
-<!--          </div>-->
-<!--      </div>-->
-<!--  </section>-->
-
-
-    <div class="payBtn">
-    <input class="payOk" type="submit" value="결제승인">
-    <input class="payCancel" type="submit" value="결제취소">
-    </div>
-
-
+  </main>   
 
     <footer>
       <div class="align">
