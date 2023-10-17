@@ -9,10 +9,15 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
 
-    @Select("select * from tbl_order")
+    @Select("select * from tbl_order1")
     public List<OrderDto> selectAll();
+
     @Select("select * from tbl_order where order_id=#{order_id}")
+    public List<OrderDto> selectOne(String order_id);
+
+    @Select("select * from tbl_order1 where order_id=#{order_id}")
     public OrderDto selectOne(String order_id);
+
 
     //myPage.html에서 사용자 주문 기록 조회
     @Select("select * from tbl_order where u_email=#{u_email}")
@@ -22,15 +27,15 @@ public interface OrderMapper {
     @Select("select count(*) from tbl_order where u_email=#{u_email}")
     public int userOrderCount(String u_email);
 
-    @Select("select * from tbl_order where res_id=#{res_id}")
-    public OrderDto resOrder(String res_id);
 
     @Insert("")
     public int insertOrder();
     @Update("")
     public int updateOrder();
-    @Delete("")
-    public int deleteOrder();
+
+    @Delete("DELETE FROM tbl_order WHERE order_id = #{order_id}")
+    int delete(String order_id);
+
 
 
 }

@@ -41,6 +41,9 @@ public class ResController {
         return "selectRest"; // "selectRest"만 반환하도록 수정
     }
 
+    @GetMapping("/resCheck")
+    public void restCheck(){
 
+    }
 
 }

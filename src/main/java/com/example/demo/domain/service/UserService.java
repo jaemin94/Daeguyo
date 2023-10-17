@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class UserService {
@@ -37,6 +39,7 @@ public class UserService {
     }
 
 
+
     // myPage.html
     public UserDto userSearch(String u_email){
         log.info("UserService's user search at u_email: " + u_email);
@@ -57,4 +60,6 @@ public class UserService {
     }
 
 }
+
+
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/resCheck.css">
+      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -31,12 +32,20 @@
       </div>
 
     <header>
-     
+
+        <script th:if="${session.username != null}"  th:inline="javascript">
+
+            var username = [[${session.username}]];
+            console.log(username);
+
+        </script>
+
+
       <div class="align">
         <div class="hamburger_btn">
           <i class="fa-solid fa-bars"></i>
         </div>
-        
+
         <h1 class="logo">
           <a href="javascript:void(0);"><img src="/images/header_logo.png" alt= "로고"/></a>
         </h1>
@@ -58,11 +67,12 @@
             <li><a href="javascript:void(0);">마이페이지</a></li>
           </ul>
         </nav>
-        <div class="quick_menu">
-          <a href="javascript:void(0);">SEIN 님</a>
-          <a href="javascript:void(0);"><img src="/images/storage.png" alt="장바구니"></a>
-          <a href="javascript:void(0);"><img src="/images/login.png" alt="로그아웃"></a>
-        </div>
+          <div class="quick_menu">
+              <a th:href="@{/myPage}">SEIN 님</a>
+              <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
+              <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
+              <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
+          </div>
       </div>
     </header>
         
@@ -79,69 +89,123 @@
                 <label class="cart__title1">주문승인</label>
             </label>
         </div>
+        <div>
+            <input type="text" id="order_id" name="order_id"/>
+            <input type="submit" id="submit_id" value="확인"/>
+        </div>
         <div class="howMOP infoBox">
             <img src="/images/account.png" alt="" class="infoImage">
             <span  class="orderText">우리가게, <span  class="highlightText">50번째</span> 주문한 손님이에요. </span>
          </div>
+        <div th:text="${order_id}" ></div>
      </section>
 </main>
 
-
-  
- 
-  <section class="align order-container">
+  <section class="align order-container" th:if="${order_id == null}">
     <div class="order-details">
         <div class="order-title">
             <h2>주문 내역</h2>
             <hr class="title-line">
         </div>
-        
-        <div class="order-list"> 
-            <div class='order-item'>
-              <div style="display: flex; flex-direction: column;">
-                <span><li>깐풍탕수 소</li></span>
-                <span style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
-              </div>
-                
-                <div><span>13,200원</span></div>
-            </div>
 
-            <div class='order-item'>
+        <div class="order-list"  th:each="orderlist : ${orderlist}">
+            <div class='order-item' >
               <div style="display: flex; flex-direction: column;">
-                <span><li>깐풍탕수 소</li></span>
-                <span style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
-                <span style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
+                <span th:text="${orderlist.menu_name}"><li>깐풍탕수 소</li></span>
+                  <div>
+                      <span th:each="select_option : ${#strings.listSplit(orderlist.select_option, ',')}">
+
+                        <span th:text="${select_option}" style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
+                      </span>
+                  </div>
               </div>
-                
-                <div><span>13,200원</span></div>
+
+              <div><span th:text="${orderlist.order_amount}">13,200원</span></div>
+
             </div>
+        </div>
     </div>
 </section>
 
+      <section class="align order-container" th:if="${order_id != null}">
+          <!-- 특정 주문 출력 -->
+          <div class="order-details">
+              <div class="order-title">
+                  <h2>주문 내역</h2>
+                  <hr class="title-line">
+              </div>
+
+              <div class="order-list">
+                  <div class='order-item'>
+                      <!-- 주문 항목 정보 출력 -->
+                      <div style="display: flex; flex-direction: column;">
+                          <span th:text="${orderdto.menu_name}"><li>깐풍탕수 소</li></span>
+                          <div>
+                      <span th:each="select_option : ${#strings.listSplit(orderdto.select_option, ',')}">
+                        <span th:text="${select_option}" style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
+                      </span>
+                          </div>
+                      </div>
+                      <div><span th:text="${orderdto.order_amount}">13,200원</span></div>
+
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="align delivery-section" >
+          <!-- 특정 배송지 정보 출력 -->
+          <div class="delivery-container" >
+              <div class="delivery-header">
+                  <h2 class="delivery-title">배송지 정보</h2>
+                  <hr class="header-line">
+              </div>
+              <div class="info-container" th:if="${order_id != null}" >
+                  <div>
+                      <div class="info-item">
+                          <span class="buyer">수령인</span>
+                          <span class="buyer1" th:text="${userdto.nickname}"></span>
+                      </div>
+                      <div class="info-item">
+                          <span class="phone">휴대폰</span>
+                          <span class="phone1" th:text="${userdto.phone}"></span>
+                      </div>
+                      <div class="info-item address-item">
+                          <span class="addr">주소지</span>
+                          <span class="addr1" th:text="${userdto.addr}"></span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
   
 
-    <section class="align delivery-section">
-      <div class="delivery-container">
-          <div class="delivery-header">  
-              <h2 class="delivery-title">배송지 정보</h2>
-              <hr class="header-line">
-          </div>
-          <div class="info-container">
-              <div class="info-item">
-                  <span>수령인</span>
-                  <span>김은숙</span> 
-              </div>
-              <div  class="info-item">
-                  <span>휴대폰</span>
-                  <span>010-1111-1111</span>
-              </div>
-              <div  class="info-item address-item">
-                  <span>주소지</span>
-                  <span>[04435]서울 구로구 구일로 4길 22(구로동,구로 주공아파트) 118동 1405호</span>
-             </div>
-          </div>
-      </div>
-  </section>
+<!--    <section class="align delivery-section">-->
+<!--      <div class="delivery-container" >-->
+<!--          <div class="delivery-header">-->
+<!--              <h2 class="delivery-title">배송지 정보</h2>-->
+<!--              <hr class="header-line">-->
+<!--          </div>-->
+<!--          <div class="info-container" >-->
+<!--              <div >-->
+<!--              <div class="info-item">-->
+<!--                  <span >수령인</span>-->
+<!--                  <span th:text="${userdto.nickname}"></span>-->
+<!--              </div>-->
+<!--              <div  class="info-item">-->
+<!--                  <span>휴대폰</span>-->
+<!--                  <span th:text="${userdto.phone}"></span>-->
+<!--              </div>-->
+<!--              <div  class="info-item address-item">-->
+<!--                  <span>주소지</span>-->
+<!--                  <span th:text="${userdto.addr}"></span>-->
+<!--             </div>-->
+<!--          </div>-->
+<!--          </div>-->
+<!--      </div>-->
+<!--  </section>-->
+
 
     <div class="payBtn">
     <input class="payOk" type="submit" value="결제승인">
@@ -193,5 +257,6 @@
   </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="/js/index.js"></script>
+    <script src="/js/resCheck.js"></script>
   </body>
 </html>

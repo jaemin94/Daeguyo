@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
@@ -19,7 +19,7 @@
     <div class="side_menu">
         <div class="ide_login">
             <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
-            <a class="close" href="#">&times;</a>
+            <a href="#" class="close">&times;</a>
         </div>
         <div class="panner">
             <ul>
@@ -35,12 +35,12 @@
     <div class="map_bg">
         <div id="map">
             <div class="map_search">
-                <input value="지번, 도로, 건물명으로 검색"/>
+                <input value="지번, 도로, 건물명으로 검색" />
                 <button>검색</button>
             </div>
 
             <div class="current_location_group">
-                <img alt="" class="gps" src="/images/gps.png">
+                <img src="/images/gps.png" alt="" class="gps">
                 <div class="current_location">현재 위치에서 찾기</div>
             </div>
 
@@ -53,14 +53,21 @@
     </div>
 
     <header>
-
+        <div class="scroll_btn">
+            <ul>
+                <li><a href="javascript:void(0);"><img src="/images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
+                <li><a href="javascript:void(0);"><img src="/images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
+                <li><a href="javascript:void(0);"><img src="/images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
+                <li><a href="javascript:void(0);"><img src="/images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
+            </ul>
+        </div>
         <div class="align">
             <div class="hamburger_btn">
                 <i class="fa-solid fa-bars"></i>
             </div>
 
             <h1 class="logo">
-                <a href="javascript:void(0);"><img alt="로고" src="/images/header_logo.png"/></a>
+                <a th:href="@{/}"><img src="/images/header_logo.png" alt= "로고"/></a>
             </h1>
             <nav>
                 <ul class="mainmenu">
@@ -81,10 +88,11 @@
                 </ul>
             </nav>
             <div class="quick_menu">
-                <a href="javascript:void(0);">SEIN 님</a>
-                <a href="javascript:void(0);"><img alt="장바구니" src="/images/storage.png"></a>
-                <a href="javascript:void(0);"><img alt="로그아웃" src="/images/login.png"></a>
-                <a class="location" href="javascript:void(0);"><img alt="지도찾기" src="/images/location.png"></a>
+                <a th:href="@{/myPage}">SEIN 님</a>
+                <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
+                <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
+                <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
+                <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
             </div>
         </div>
     </header>

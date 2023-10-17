@@ -26,7 +26,7 @@ public class ResService {
         ResDto dto = new ResDto();
         dto.getKeywords();
 
-        return (List<ResDto>) mapper.selectCatagory(food_catagory);
+        return mapper.selectCatagory(food_catagory);
     }
 
     // review_tab 에서 특정 식당 DTO 출력해야
