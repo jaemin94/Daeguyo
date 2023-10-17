@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -70,7 +70,7 @@
 
     <header>
       <div class="align">
-        <a th:href="@{/}"><img src="/images/login_logo.png" alt="로고" /></a>
+        <a th:href="@{/}"><img src="./images/login_logo.png" alt="로고" /></a>
       </div>
     </header>
     <!-- 김승훈 작업 시작 -->
@@ -78,14 +78,14 @@
     <main>
       <section class="section_join_header">
         <div class="info_text">
-          <span><a href="/index copy.html">홈</a></span>
+          <span><a th:href="@{/}">홈</a></span>
           <span>></span>
-          <span><a href="/ceoJoin.html" style="color:#01cafe;">회원가입</a></span>
+          <span><a href="./ceoJoin.html" style="color:#01cafe;">회원가입</a></span>
         </div>
         <div class="join_step">
           <div class="step_box">
             <div class="img_container">
-              <div class="img_box"><img src="/images/account.png" alt=""></div>
+              <div class="img_box"><img src="./images/account.png" alt=""></div>
             </div>
             <div class="step_text">
               <span class="step_head">STEP1</span>
@@ -170,7 +170,7 @@
               <option value="kakao.com">kakao.com</option>
             </select>
             <div id="email_btn"><button onclick="emailCheck()" id="emailbtn">인증</button></div>
-            <div id="popup1" class="hidden1">
+            <div id="popup1" class="hidden ehidden">
               <!-- 팝업 창 내용 -->
               <input type="text" name="checkemail" id="emailcomfirmcheck">
               <input type="submit" id="check1" value="확인">
@@ -197,16 +197,20 @@
         </div>
         <div class="phone_container">
           <div class="phone_box">휴대폰 번호</div>
-          <div class="phone_input">
-            <input type="tel" id="phoneNumber">
-            <button onclick="phoneCheck()" id="phone_btn">인증</button>
-          </div>
+          <!-- div 태그 추가하여 번호 입력 블럭, 인증 번호 입력 블럭 같은 블럭으로 출력되도록 감쌈 -->
+          <div class="pdiv">
+            <div class="phone_input">
+              <input type="tel" id="phoneNumber">
+              <button onclick="phoneCheck()" id="phone_btn">인증</button>
+            </div>
 
-          <div id="popup" class="hidden">
+            <div id="popup" class="hidden phidden">
             <!-- 팝업 창 내용 -->
-            <input type="text" name="checkphone" id="smscomfirmcheck">
-            <input type="submit" id="check" value="확인">
-          </div>
+             <input type="text" name="checkphone" id="smscomfirmcheck">
+             <input type="submit" id="check" value="확인">
+           </div>
+         </div>
+        
 
         </div>
         <div class="addr_container">

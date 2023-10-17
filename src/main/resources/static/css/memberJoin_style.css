@@ -278,7 +278,8 @@ main>.section_join_header {
 
 .email_input>select {
   appearance: none;
-  background: url(../images/drop.png) no-repeat right 70px center;
+  outline: none;
+  background: url(../images/drop.png) no-repeat right 50px center;
   background-size: 20px 20px;
 }
 
@@ -290,8 +291,8 @@ main>.section_join_header {
 }
 
 #email_btn>button {
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 50px;
   text-align: center;
 }
 
@@ -395,6 +396,11 @@ main>.section_join_header {
 /* 휴대폰번호 확인 */
 .big_container>.phone_container {
   height: 150px;
+  width: 1000px;
+}
+.pdiv{
+  display: flex;
+  justify-content: space-between;
 }
 
 .phone_container>.phone_box {
@@ -402,24 +408,25 @@ main>.section_join_header {
 }
 
 .phone_container>.phone_input {
-  width: 1000px;
+  width: 700px;
+  background-color: red;
   border-left: none;
   /* 왼쪽 테두리 제거 */
   border-right: none;
   /* 오른쪽 테두리 제거 */
   border-top: none;
-  border-bottom: #919191 solid;
+  /* border-bottom: #919191 solid; */
   outline: none;
+  display: flex;
 }
 
 .phone_input>#phoneNumber {
-  width: 890px;
+  width: 400px;
   height: 50px;
   font-size: 20px;
-  border: none;
   line-height: 50px;
   padding-left: 10px;
-
+  margin-right: 45px;
 }
 
 .phone_input input {
@@ -650,11 +657,33 @@ main>.section_join_header {
 /* 김승훈 작업 끝 */
 
 /* 핸드폰 인증 팝업창 */
-.hidden{
+
+
+.ehidden>input{
 display:none;
 }
 
-/* 이메일 인증 팝업창 */
-.hidden1{
-display:none;
+.phidden>input{
+  outline: none;
+  display:none;
+}
+
+.phidden>input:hover{
+}
+
+.hidden>input[type=submit]{
+  margin-left: 20px;
+  font-size: 20px;
+  padding: 0px 10px;
+  border: none;
+}
+
+button,input{
+  font-family: "Noto Sans KR";
+}
+.hidden{
+  width: 300px;
+  display: flex;
+  margin-left: 30px;  
+  /* display:none; */
 }
