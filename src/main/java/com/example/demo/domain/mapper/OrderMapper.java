@@ -2,9 +2,12 @@ package com.example.demo.domain.mapper;
 
 
 import com.example.demo.domain.daeguyo.OrderDto;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {

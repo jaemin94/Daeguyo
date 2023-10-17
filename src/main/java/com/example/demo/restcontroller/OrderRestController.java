@@ -36,8 +36,5 @@ public class OrderRestController {
         return ResponseEntity.noContent().build();
     }
 
-
-    @Autowired
-    private UserService userService;
-
 }
+

@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
 
+import lombok.extern.slf4j.Slf4j;
+
+
 
 import com.example.demo.domain.daeguyo.OrderDto;
 import com.example.demo.domain.daeguyo.ResDto;
@@ -12,6 +15,7 @@ import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +29,9 @@ import java.util.Map;
 
 @Controller
 @Slf4j
-@RequestMapping()
+@RequestMapping("")
 public class OrderController {
+
 
     @Autowired
     private OrderService orderService;
@@ -34,7 +39,6 @@ public class OrderController {
     private UserService userService;
 
     @GetMapping("/orderStatus")
-
     public String getOrderStatus(Model model) {
         List<OrderDto> orders = orderService.getAllOrders();
        // UserDto users = userDetails.getUser(); // 로그인한 사용자 정보 가져오기
@@ -66,8 +70,9 @@ public class OrderController {
 
 
         return "resCheck";
-
     }
+
+
     @GetMapping("/orderCheck")
     public String resOrderCheck(Model model,@RequestParam(name = "order_id", required = false) String order_id) {
         log.info("Get/orderCheck called");
@@ -82,3 +87,16 @@ public class OrderController {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
