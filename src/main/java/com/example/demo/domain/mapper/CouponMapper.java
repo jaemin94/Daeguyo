@@ -16,8 +16,8 @@ public interface CouponMapper {
     public CouponDto selectOne(String coupon_id);
 
     //회원이 가지는 모든 쿠폰 검색
-    @Select("select * from tbl_coupons where u_email = #{u_email}")
-    public CouponDto userCoupon(String u_email);
+    @Select("select * from tbl_coupons where u_email = #{u_email} and status = 'n'")
+    public List<CouponDto> userCoupon(String u_email);
 
     //회원이 가지는 모든 쿠폰 개수 검색
     // myPage.html에서 쿠폰 개수 출력해야

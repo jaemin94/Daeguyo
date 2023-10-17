@@ -23,13 +23,20 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			
 			System.out.println(role);
 			String role_str=role.getAuthority();
-			String member_id = authentication.getName();
+
+			PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+			String member_id = principal.getUsername();
+			String nickname = principal.getUserNickname();
+			String phone = principal.getUserPhoneNumber();
 			System.out.println("member_id : " + member_id);
 			System.out.println(role_str);
 			request.getSession().setAttribute("role", role_str);
 			request.getSession().setAttribute("username", member_id);
-			
-			
+			request.getSession().setAttribute("nickname", nickname);
+			request.getSession().setAttribute("phone", phone);
+			System.out.println(nickname);
+
+
 			try {
 			if(role_str.equals("ROLE_User"))
 			{

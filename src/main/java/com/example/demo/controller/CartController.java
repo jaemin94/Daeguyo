@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.daeguyo.CartDto;
 
+import com.example.demo.domain.daeguyo.CouponDto;
 import com.example.demo.domain.daeguyo.PaymentDto;
 import com.example.demo.domain.service.CartService;
 import com.example.demo.domain.service.OrderService;
@@ -26,6 +27,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 @Slf4j
@@ -38,17 +42,32 @@ public class CartController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/cart")
-    public String getCart(Model model){
-        List<CartDto> options = cartService.SearchOption();
 
-        log.info(options.toString());
+    @PostMapping("/cart/coupon")
+    @ResponseBody
+    public void couponupdate(@RequestBody CouponDto Cdto){
+        System.out.println("Payment saved");
+        cartService.couponUpdate(Cdto);
+
+
+    }
+
+
+    @GetMapping("/cart")
+    public String getCart(Model model, HttpServletRequest httpServletRequest){
+        HttpSession session = httpServletRequest.getSession();
+        List<CartDto> options =cartService.SearchOption((String)session.getValue("username"));
+        List<CouponDto> coupon  = cartService.SearchCoupon((String)session.getValue("username"));
+
         int total = 0;
         for (CartDto option : options) {
             total += option.getPrice() * option.getCount();
         }
+
+
         model.addAttribute("total", total);
         model.addAttribute("options",options);
+        model.addAttribute("coupon", coupon);
 
         return "cart";
     }

@@ -2,16 +2,10 @@ package com.example.demo.domain.service;
 
 import com.example.demo.domain.daeguyo.CartDto;
 
+import com.example.demo.domain.daeguyo.CouponDto;
 import com.example.demo.domain.daeguyo.OrderDto;
 import com.example.demo.domain.daeguyo.PaymentDto;
-import com.example.demo.domain.daeguyo.UserDto;
-import com.example.demo.domain.mapper.CartMapper;
-import com.example.demo.domain.mapper.OrderMapper;
-import com.example.demo.domain.mapper.PaymentMapper;
-
-import com.example.demo.domain.daeguyo.MenuDto;
-import com.example.demo.domain.mapper.CartMapper;
-import com.example.demo.domain.mapper.MenuMapper;
+import com.example.demo.domain.mapper.*;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +27,20 @@ public class CartService {
     private MenuMapper menuMapper;
     @Autowired
     private PaymentMapper paymapper;
+    @Autowired
+    private CouponMapper couponMapper;
 
-    public List<CartDto> SearchOption( ){
-        return cartMapper.CartList();
+    public List<CartDto> SearchOption(String id){
+
+        return cartMapper.CartList(id);
+
 
     }
+
+    public List<CouponDto> SearchCoupon(String id){
+        return couponMapper.userCoupon(id);
+    }
+
     public void updateOrderAmount(CartDto dto)  {
 
 
@@ -92,6 +95,12 @@ public class CartService {
 
         return true;
     }
+
+
+    public void couponUpdate(CouponDto cdto) {
+        cartMapper.UpdateCoupon(cdto);
+    }
+
 
 
 }

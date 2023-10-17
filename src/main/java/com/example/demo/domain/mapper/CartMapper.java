@@ -1,26 +1,24 @@
 package com.example.demo.domain.mapper;
 
 import com.example.demo.domain.daeguyo.CartDto;
-import com.example.demo.domain.daeguyo.MenuDto;
+import com.example.demo.domain.daeguyo.CouponDto;
 import com.example.demo.domain.daeguyo.OrderDto;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface CartMapper {
 
 
-    @Select("select * from tbl_cart  ")
-    List<CartDto> CartList( );
+    @Select("select * from tbl_cart  where u_email = #{id} ")
+    List<CartDto> CartList(String id);
 
 
     @Update("UPDATE tbl_cart SET count = #{count} WHERE cart_id = #{cart_id}")
     public void updateOrder(CartDto dto);
 
-    @Insert("INSERT INTO tbl_order VALUES (#{order_id}, #{u_email}, #{menu_id}, #{res_id}, #{select_option}, #{order_amount}, #{total_price})")
-    public int insertOrder(OrderDto orderData);
+
 
 
     @Delete("DELETE FROM tbl_cart WHERE cart_id = #{cart_id}")
@@ -46,4 +44,6 @@ public interface CartMapper {
     @Insert("insert into tbl_cart values (#{cart_id}, #{u_email}, #{menu_id}, #{count}, #{selected_option})")
     public int insertCart(CartDto cartDto);
 
+    @Update("UPDATE tbl_coupons SET status = 'y', expiredDate = NOW() WHERE coupon_id = #{coupon_id} ")
+    void UpdateCoupon(CouponDto cdto);
 }

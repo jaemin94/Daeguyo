@@ -18,7 +18,7 @@ public class CouponDto {
     private LocalDateTime createDate;
     private LocalDateTime expiredDate;
     private String status;
-    private String u_mail;
+    private String u_email;
 
 
 
