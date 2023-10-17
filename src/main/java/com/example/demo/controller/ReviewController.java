@@ -34,6 +34,8 @@ public class ReviewController {
 
     //review_tab page1 에서 쓸 내용들
     @GetMapping("/review_tab")
+//   getMenu 메서드 전체 다 복사 부탁드려욥.!!
+    // import 부분들도 추가 부탁드립니도..!!
     public String getMenu(@RequestParam String res_id, Model model) {
         ResDto res = resService.searchOne(res_id);
         model.addAttribute("res",res);
