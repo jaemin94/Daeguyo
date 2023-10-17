@@ -33,6 +33,14 @@
 
     <header>
 
+        <script th:if="${session.username != null}"  th:inline="javascript">
+
+            var username = [[${session.username}]];
+            console.log(username);
+
+        </script>
+
+
       <div class="align">
         <div class="hamburger_btn">
           <i class="fa-solid fa-bars"></i>
@@ -99,17 +107,21 @@
             <h2>주문 내역</h2>
             <hr class="title-line">
         </div>
+
         <div class="order-list"  th:each="orderlist : ${orderlist}">
             <div class='order-item' >
               <div style="display: flex; flex-direction: column;">
                 <span th:text="${orderlist.menu_name}"><li>깐풍탕수 소</li></span>
                   <div>
                       <span th:each="select_option : ${#strings.listSplit(orderlist.select_option, ',')}">
+
                         <span th:text="${select_option}" style="margin-left: 30px;">맵기 선택 : 1단계 순한맛</span>
                       </span>
                   </div>
               </div>
-l                <div><span th:text="${orderlist.order_amount}">13,200원</span></div>
+
+              <div><span th:text="${orderlist.order_amount}">13,200원</span></div>
+
             </div>
         </div>
     </div>

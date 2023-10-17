@@ -37,12 +37,24 @@ public class PrincipalDetails implements UserDetails{
 		return user.getPassword();
 	}
 
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return user.getU_email();
+		@Override
+		public String getUsername() {
+			// TODO Auto-generated method stub
+			return user.getU_email();
+		}
+
+		public String getUserNickname(){
+		return user.getNickname();
+		}
+
+
+	public String getUserPhoneNumber(){
+		return user.getPhone();
 	}
 
+	public String getUserAddress(){
+		return user.getAddr();
+	}
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub

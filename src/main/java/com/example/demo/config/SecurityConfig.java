@@ -42,16 +42,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 				.antMatchers("/", "/public","/verifyIamport2/getToken","/verifyIamport2/cancel","/verifyIamport2/searchOne","/verifyIamport2/searchAll").permitAll()
 				.antMatchers("/sms/send","/checkPhone","/sendEmail","/checkEmail").permitAll()
+				.antMatchers("/cart","/memberJoin","/menu_catagory","/myPage","/orderStatus","/review_tab","/selectRest","/memberUpdate","/login").permitAll()
+				.antMatchers("/resCheck","/orderCheck","/orderCheck1").permitAll()
 
-				.antMatchers("/cart","/memberJoin","/menu_catagory","/myPage","/orderStatus","/review_tab","/selectRest","/memberUpdate","/resCheck","/orderCheck","/orderCheck1").permitAll()
 
-				.antMatchers("/cart","/memberJoin","/menu_catagory","/myPage","/orderStatus","/review_tab","/selectRest","/memberUpdate","/checkPhone","/login").permitAll()
 
 
 																				// hasRole을 사용시 기본적으로 Role_ 이 제공된다
 				.antMatchers("/user").hasRole("User")                            // Role_User
 				.antMatchers("/member").hasRole("Member")                        // Role_Member
 				.antMatchers("/admin").hasRole("Admin")                            // Role_Admin
+				.antMatchers("/deleteOrder/**").authenticated()
 				.anyRequest().authenticated()									// 나머지 URL은 모두 인증작업이 완료된 이후 접근가능
 
 				.and()

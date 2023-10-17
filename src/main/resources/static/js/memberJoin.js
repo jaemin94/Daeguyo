@@ -223,10 +223,8 @@ btnJoin.onclick = function () {
 
     //이메일합병
     var emailInput = document.getElementById("email_id").value;
-
-        var emailSelect = document.getElementById("email_adr").value;
-        var fullEmail = emailInput + "@" + emailSelect;
-        console.log(fullEmail);
+    var emailSelect = document.getElementById("email_adr").value;
+    var fullEmail = emailInput + "@" + emailSelect;
 
 
     const requestData = {
@@ -248,6 +246,8 @@ btnJoin.onclick = function () {
             console.error("Error sending data: ", error);
         });
 }
+
+
 
 const phoneBtn = document.getElementById("phone_btn");
 const checkBtn = document.getElementById("check");
