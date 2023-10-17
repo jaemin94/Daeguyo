@@ -20,6 +20,7 @@ public class OrderService {
         return mapper.selectAll();
     }
 
+
     public List<OrderDto> getAllOrders() {
         return mapper.selectAll();
     }
@@ -30,4 +31,11 @@ public class OrderService {
         mapper.delete(order_id);
         return "redirect:/orderStatus";
     }
+
+    public OrderDto getSearchOrder(String order_id){
+
+        return mapper.selectOne(order_id);
+    }
+
+
 }

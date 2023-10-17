@@ -24,10 +24,12 @@ public class UserService {
         dto.setPassword(encryptedPassword);
         System.out.println(dto);
         return mapper.insertUser(dto);
-
     }
 
+    public UserDto SearchUser(String u_email) {
+        return mapper.selectOne(u_email);
 
+    }
 }
 
 
