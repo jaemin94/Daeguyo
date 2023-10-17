@@ -13,47 +13,43 @@ function showPage(pageId) {
   document.getElementById(pageId).style.display = "block";
 }
 
-
-// 바스켓 숫자 올리기
-// 바스켓 숫자 올리기
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".addButton").forEach(function (button) {
         button.addEventListener("click", function () {
             var u_email = document.getElementById("u_email").value;
             const menu_id = button.closest("tr.menu-tr").querySelector("[name='menu_id']").value;
             const resId = document.querySelector(".res-main-info-sec").getAttribute("data-res-id");
-            const selected_option =  [];
+            const selected_option = []; // 선택된 옵션 쌍 배열
             button.closest("tr.menu-tr").querySelectorAll(".menu-option").forEach(select => {
-                selected_option.push(select.name + ":" + select.value);
-                });
+                selected_option.push(select.name + ":" + select.value); // 옵션에 {옵션 분류:{옵션:조건}}의 쌍으로 JSON 데이터 입력 했었음
+                // ex)[{"맵기": {"맵게": "엽떡정도", "중간": "불닭정도", "순한맛": "신라면정도"}}, {"조리여부": {"조리": "+500", "비조리": "+0"}}]
+                // 혹시나 조건 부분 필요할까봐 만들어 놓은 건데, 일단 장바구니에는 옵션 분류:옵션 의 문자열 배열로 변환해서 저장
+            });
 
-                const selected_optionStr = selected_option.join(',');
-            // AJAX 요청을 통해 서버에 메뉴 정보 전송
-            fetch('/cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    u_email: u_email,
-                    menu_id: menu_id,
-                    selected_option: selected_optionStr,
-                    count: 1,
-                    res_id: resId
-                })
+            const selected_optionStr = selected_option.join(',');
+
+            // Axios 요청을 통해 서버에 메뉴 정보 전송
+            axios.post('/cart', {
+                u_email: u_email,  // 사용자 인증 정보를 전송
+                menu_id: menu_id,
+                selected_option: selected_optionStr, //선택된 옵션을 문자열로
+                count: 1,
+                res_id: resId
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
+            .then(response => {
+                if (response.data.success) {
                     // 장바구니 카운트 업데이트
                     document.querySelector(".basket_count").textContent = parseInt(document.querySelector(".basket_count").textContent) + 1;
                 } else {
                     alert('장바구니에 추가하는 데 실패했습니다.');
-
                 }
+            })
+            .catch(error => {
+                console.error("Error adding to cart:", error);
+                alert('장바구니에 추가하는 데 실패했습니다.');
             });
         });
-     });
+    });
 });
 
 

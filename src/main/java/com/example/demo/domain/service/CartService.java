@@ -32,13 +32,14 @@ public class CartService {
             mapper.deleteByUEmail(u_email);
         }
 
+        // 기존에 있는 메뉴+옵션 조합인지 검색하고,
         CartDto existingItem = mapper.ExistOrNot(u_email, cartDto.getMenu_id(), cartDto.getSelected_option());
 
         if (existingItem != null) {
-            int newCount = existingItem.getCount() + 1;
+            int newCount = existingItem.getCount() + 1; //그렇다면 -> 수량추가 (update)
             mapper.updateCount(existingItem.getCart_id(), newCount);
         } else {
-            mapper.insertCart(cartDto);
+            mapper.insertCart(cartDto); // 아니라면 -> 데이터 입력 (insert)
         }
 
         return true;
