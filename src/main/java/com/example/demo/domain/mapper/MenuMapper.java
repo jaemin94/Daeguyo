@@ -14,6 +14,14 @@ public interface MenuMapper {
     public List<MenuDto> selectAll();
     @Select("select * from tbl_menu where menu_id =#{menu_id}")
     public MenuDto selectOne(String menu_id);
+
+    // review_tab.html page1에서 필요
+    @Select("select * from tbl_menu where res_id =#{res_id}")
+    public List<MenuDto> ResMenu(String res_id);
+
+    @Select("SELECT res_id FROM tbl_menu WHERE menu_id = #{menu_id}")
+    String findResIdByMenuId(String menu_id);
+
     @Insert("")
     public int insertMenu();
     @Update("")

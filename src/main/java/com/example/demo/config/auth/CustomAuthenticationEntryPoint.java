@@ -21,7 +21,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint{
 		System.out.println("CustomAuthenticationEntryPoint's commence : " + authException.getCause());
 		
 		request.getSession().setAttribute("msg", "[SERVER ERROR]ID/PW가 올바르지 않습니다.");
-		request.getRequestDispatcher("").forward(request, response);
+		request.getRequestDispatcher("/login").forward(request, response);
 		
 	}
 

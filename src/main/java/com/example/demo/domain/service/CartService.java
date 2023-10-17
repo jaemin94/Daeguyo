@@ -1,12 +1,18 @@
 package com.example.demo.domain.service;
 
 import com.example.demo.domain.daeguyo.CartDto;
+
 import com.example.demo.domain.daeguyo.OrderDto;
 import com.example.demo.domain.daeguyo.PaymentDto;
 import com.example.demo.domain.daeguyo.UserDto;
 import com.example.demo.domain.mapper.CartMapper;
 import com.example.demo.domain.mapper.OrderMapper;
 import com.example.demo.domain.mapper.PaymentMapper;
+
+import com.example.demo.domain.daeguyo.MenuDto;
+import com.example.demo.domain.mapper.CartMapper;
+import com.example.demo.domain.mapper.MenuMapper;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,17 +29,12 @@ public class CartService {
     private CartMapper cartMapper;
     @Autowired
     private OrderMapper mapper;
-
+     @Autowired
+    private MenuMapper menuMapper;
     @Autowired
     private PaymentMapper paymapper;
 
     public List<CartDto> SearchOption( ){
-
-//        CartDto cart = new CartDto();
-//        cart.setCart_id(UUID.randomUUID().toString());
-//        cart.setMenu_id(cart.getMenu_id());
-//        cart.setCount(cart.getCount());
-//        cart.setSelected_option(cart.getSelected_option());
         return cartMapper.CartList();
 
     }
@@ -43,56 +44,6 @@ public class CartService {
         cartMapper.updateOrder(dto);
     }
 
-
-    public void addOrder(CartDto cartData) {
-        // 주문 정보 데이터베이스에 저장
-        OrderDto orderData = new OrderDto();
-        orderData.setMenu_id(cartData.getMenu_name());
-        orderData.setU_email(cartData.getU_email());
-        orderData.setOrder_amount(cartData.getCount());
-        orderData.setTotal_price(cartData.getPrice());
-        orderData.setOrder_id(UUID.randomUUID().toString());
-        orderData.setOrder_date(LocalDateTime.now());
-        orderData.setSelected_option(cartData.getSelected_option());
-        orderData.setRes_id(cartData.getRes_name());
-        orderData.setCounpon_id("default_coupon");
-
-
-        cartMapper.insertOrder(orderData);
-
-
-    }
-
-
-
-
-    public Map<String, Object> getUserAndOrderDetails(String cart_id) {
-        Map<String, Object> details = cartMapper.selectUserOrderDetails(cart_id);
-
-        if (details != null && !details.isEmpty()) {
-            CartDto orders = new CartDto();
-            UserDto users = new UserDto();
-
-            // 데이터베이스에서 조회한 결과를 기반으로 DTO 객체의 필드 설정
-            orders.setRes_name((String) details.get("res_id"));
-            users.setNickname((String) details.get("nickname"));
-            users.setPhone((String) details.get("phone"));
-
-            // DTO 객체의 값들을 다시 맵에 넣음
-            details.put("orderName", orders.getRes_name());
-            details.put("customerId", users.getNickname());
-            details.put("phoneNumber", users.getPhone());
-
-            System.out.println(details.size());
-            System.out.println("null?2 ="+details);
-        } else {
-            // 주문 정보가 없는 경우 메시지 설정
-            details = new HashMap<>();
-            details.put("message", "Order not found");
-        }
-
-        return details;
-    }
 
     public List<OrderDto> getCartItems() {
         List<OrderDto> asd = mapper.selectByUserId();
@@ -123,6 +74,35 @@ public class CartService {
 
     public int cartDelete(CartDto dto) {
         return cartMapper.deleteOrder(dto.getCart_id());
+    }
+
+
+    public boolean addToCart(CartDto cartDto) {
+        String u_email = cartDto.getU_email();
+
+        // u_email을 기반으로 기존의 menu_id 검색
+        String existingMenuId = mapper.findMenuIdByUEmail(u_email);
+
+        // menu_id를 기반으로 res_id 검색
+        String currentResId = menuMapper.findResIdByMenuId(cartDto.getMenu_id());
+        String existingResId = existingMenuId != null ? menuMapper.findResIdByMenuId(existingMenuId) : null;
+
+        // 현재 항목의 res_id와 기존 항목의 res_id가 다르면 기존 항목 삭제
+        if (existingResId != null && !existingResId.equals(currentResId)) {
+            mapper.deleteByUEmail(u_email);
+        }
+
+        // 기존에 있는 메뉴+옵션 조합인지 검색하고,
+        CartDto existingItem = mapper.ExistOrNot(u_email, cartDto.getMenu_id(), cartDto.getSelected_option());
+
+        if (existingItem != null) {
+            int newCount = existingItem.getCount() + 1; //그렇다면 -> 수량추가 (update)
+            mapper.updateCount(existingItem.getCart_id(), newCount);
+        } else {
+            mapper.insertCart(cartDto); // 아니라면 -> 데이터 입력 (insert)
+        }
+
+        return true;
     }
 
 

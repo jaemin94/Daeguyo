@@ -20,10 +20,10 @@ restList.addEventListener('scroll', function() {
 
 document.querySelector('.order_list').addEventListener('click', function(e) {
     e.preventDefault();
-    
+
     if (e.target.tagName === 'A') {
       const sortType = e.target.getAttribute('data-sort');
-      
+
       switch(sortType) {
         case 'rating':
           // 별점순 정렬 로직
@@ -38,4 +38,3 @@ document.querySelector('.order_list').addEventListener('click', function(e) {
       }
     }
   });
-  

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8" />
@@ -7,243 +8,244 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>대구요</title>
   <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/mypage.css" />
   <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
   <script type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
-    integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+          integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
-  <div id="warp">
-    <div class="side_menu">
-      <div class="ide_login">
-        <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
-        <a href="#" class="close">&times;</a>
-      </div>
-      <div class="panner">
-        <ul>
-          <li><a href="javascript:void(0);">홈</a></li>
-          <li><a href="javascript:void(0);">주문</a></li>
-          <li><a href="javascript:void(0);">매장찾기</a></li>
-          <li><a href="javascript:void(0);">마이페이지</a></li>
-          <li><a href="javascript:void(0);">로그아웃</a></li>
-        </ul>
-      </div>
+<div id="warp">
+  <div class="side_menu">
+    <div class="ide_login">
+      <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
+      <a href="#" class="close">&times;</a>
     </div>
-
-    <div class="map_bg">
-      <div id="map">
-        <div class="map_search">
-          <input value="지번, 도로, 건물명으로 검색" />
-          <button>검색</button>
-        </div>
-
-        <div class="current_location_group">
-          <img src="/images/gps.png" alt="" class="gps">
-          <div class="current_location">현재 위치에서 찾기</div>
-        </div>
-
-        <div class="location_select">
-          대구 광역시 동구 동촌로55길36
-        </div>
-
-        <div class="location_complete">선택하기</div>
-      </div>
+    <div class="panner">
+      <ul>
+        <li><a href="javascript:void(0);">홈</a></li>
+        <li><a href="javascript:void(0);">주문</a></li>
+        <li><a href="javascript:void(0);">매장찾기</a></li>
+        <li><a href="javascript:void(0);">마이페이지</a></li>
+        <li><a href="javascript:void(0);">로그아웃</a></li>
+      </ul>
     </div>
-
-    <header>
-      <div class="scroll_btn">
-        <ul>
-          <li><a href="javascript:void(0);"><img src="/images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
-          <li><a href="javascript:void(0);"><img src="/images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
-          <li><a href="javascript:void(0);"><img src="/images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
-          <li><a href="javascript:void(0);"><img src="/images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
-        </ul>
-      </div>
-      <div class="align">
-        <div class="hamburger_btn">
-          <i class="fa-solid fa-bars"></i>
-        </div>
-
-        <h1 class="logo">
-          <a href="javascript:void(0);"><img src="/images/header_logo.png" alt="로고" /></a>
-        </h1>
-        <nav>
-          <ul class="mainmenu">
-            <li>
-              <a href="javascript:void(0);">홈</a>
-              <div class="sub_menu">
-                <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
-                <ul class="drop_list">
-                  <li><a href="javascript:void(0);">회사소개</a></li>
-                  <li><a href="javascript:void(0);">회사연혁</a></li>
-                  <li><a href="javascript:void(0);">브랜드소개</a></li>
-                  <li><a href="javascript:void(0);">찾아오시는길</a></li>
-                </ul>
-              </div>
-            </li>
-            <li><a href="javascript:void(0);">주문</a></li>
-            <li><a href="javascript:void(0);">마이페이지</a></li>
-          </ul>
-
-        </nav>
-
-        <div class="quick_menu">
-          <a href="javascript:void(0);">SEIN 님</a>
-          <a href="javascript:void(0);"><img src="/images/storage.png" alt="장바구니"></a>
-          <a href="javascript:void(0);"><img src="/images/login.png" alt="로그아웃"></a>
-          <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
-        </div>
-      </div>
-    </header>
-    <!-------현 페이지 위치 표시 -->
-    <nav aria-label="breadcrumb" class="breadcrumbwrap">
-      <ol class="breadcrumb align">
-        <li class="breadcrumb-item"><a href="/">홈</a></li>
-        <li class="breadcrumb-item active" aria-current="page">마이페이지</li>
-      </ol>
-    </nav>
-
-    <!-- //-----------------------main start---------------------------------------------------------------------------------------------- -->
-    <div class="main">
-      <section class="sec1">
-        <div class="account-info-wrap">
-          <div class="account-info-wrap2">
-            <div class="account-info">
-              <div class="gradeimg">
-                <img src="/images/silver-medal.png" alt="usergrade" id="usergrade">
-              </div>
-
-              <div class="acount-detail">
-                <p class="idinfo"><span th:text="${username}">tpdls*...</span> 님은 </p>
-                <p class="gradeinfo"><span th:text="${usergrade}">일반회원</span> 입니다.</p>
-              </div>
-            </div>
-            <button class="updatebtn">정보수정</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="sec2 align">
-        <div class="mypage-info">
-          <div>
-            <div>
-              <a href="#">
-                <img src="/images/coupon (2).png" alt="checkcoupon">
-              </a>
-            </div>
-            <a href="#">
-              <p>쿠폰확인</p>
-            </a>
-            <a href="#">
-              <p th:text="${couponCount}" id="count">3</p>
-            </a>
-          </div>
-          <div>
-            <a href="#">
-              <div>
-                <a href="#">
-                  <img src="/images/credit-card.png" alt="orderhistory">
-                </a>
-              </div>
-              <a href="#">
-                <p>주문내역</p>
-              </a>
-              <a href="#">
-                <p th:text="${orderHistoryCount}" id="count">56</p>
-              </a>
-            </a>
-          </div>
-          <div>
-            <div>
-              <a href="#">
-                <img src="/images/testimonials.png" alt="myreview">
-              </a>
-            </div>
-            <a href="#">
-              <p>리뷰관리</p>
-            </a>
-            <a href="#">
-              <p th:text="${reviewCount}" id="count">27</p>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="sec3 align">
-
-        <table class="qnatable">
-          <tr>
-            <th>자주 묻는 질문</th>
-            <td>
-              <hr>
-            </td>
-          </tr>
-          <tr id="q">
-            <th><a href="#">배달관련</a></th>
-            <td><a href="#">거리별 배달비 측정은 어떻게 이루어지나요?</a></td>
-          </tr>
-          <tr id="q">
-            <th><a href="#">회원정보관련</a></th>
-            <td><a href="#">주문 오류가 떠요</a></td>
-          </tr>
-          <tr id="q">
-            <th><a href="#">제휴관련</a></th>
-            <td><a href="#">배달완료가 됐는데 배달이 안 됐어요</a></td>
-          </tr>
-        </table>
-      </section>
-    </div>
-
-    <!-- //-----------------------main end------------------------------------------------------------------------------------------------ -->
-    <footer>
-      <div class="align">
-        <div class="sns">
-          <a href="javascript:void(0);"><img src="/images/facebook.png" alt="페이스북"></a>
-          <a href="javascript:void(0);"><img src="/images/instagram.png" alt="인스타그램"></a>
-        </div>
-        <div class="footer_logo">
-          <a href="javascript:void(0);">
-            <img src="/images/footer_logo.png" alt="하단로고">
-          </a>
-          <div>1661 - 5270</div>
-        </div>
-        <div class="footer_nav">
-          <ul>
-            <li><a href="javascript:void(0);">이용약관</a></li>
-            <li><a href="javascript:void(0);">개인정보처리방침</a></li>
-            <li><a href="javascript:void(0);">위치기반서비스</a></li>
-            <li><a href="javascript:void(0);">고객센터</a></li>
-            <li><a href="javascript:void(0);">인재채용</a></li>
-            <li><a href="javascript:void(0);">단체주문</a></li>
-          </ul>
-        </div>
-        <div class="copyright">
-          <div>
-            주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
-            대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
-            상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
-            <p>Copyright DagueYO. All Rights Reserved.</p>
-          </div>
-          <div class="familysite">
-            <select name="" id="" class="select2">
-              <option value="">Global site</option>
-              <option value="">KOREA</option>
-              <option value="">USA</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-  <script src="/js/index.js"></script>
+
+  <div class="map_bg">
+    <div id="map">
+      <div class="map_search">
+        <input value="지번, 도로, 건물명으로 검색" />
+        <button>검색</button>
+      </div>
+
+      <div class="current_location_group">
+        <img src="/images/gps.png" alt="" class="gps">
+        <div class="current_location">현재 위치에서 찾기</div>
+      </div>
+
+      <div class="location_select">
+        대구 광역시 동구 동촌로55길36
+      </div>
+
+      <div class="location_complete">선택하기</div>
+    </div>
+  </div>
+
+  <header>
+    <div class="scroll_btn">
+      <ul>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
+      </ul>
+    </div>
+    <div class="align">
+      <div class="hamburger_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <h1 class="logo">
+        <a th:href="@{/}"><img src="/images/header_logo.png" alt= "로고"/></a>
+      </h1>
+      <nav>
+        <ul class="mainmenu">
+          <li>
+            <a href="javascript:void(0);">홈</a>
+            <div class="sub_menu">
+              <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
+              <ul class="drop_list">
+                <li><a href="javascript:void(0);">회사소개</a></li>
+                <li><a href="javascript:void(0);">회사연혁</a></li>
+                <li><a href="javascript:void(0);">브랜드소개</a></li>
+                <li><a href="javascript:void(0);">찾아오시는길</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="javascript:void(0);">주문</a></li>
+          <li><a href="javascript:void(0);">마이페이지</a></li>
+        </ul>
+      </nav>
+      <div class="quick_menu">
+        <a th:href="@{/myPage}">SEIN 님</a>
+        <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
+        <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
+        <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
+      </div>
+    </div>
+  </header>
+
+  <!-------현 페이지 위치 표시 -->
+  <nav aria-label="breadcrumb" class="breadcrumbwrap">
+    <ol class="breadcrumb align">
+      <li class="breadcrumb-item"><a href="/">홈</a></li>
+      <li class="breadcrumb-item active" aria-current="page">마이페이지</li>
+    </ol>
+  </nav>
+
+  <!-- //-----------------------main start---------------------------------------------------------------------------------------------- -->
+  <div class="main">
+    <section class="sec1">
+      <div class="account-info-wrap">
+        <div class="account-info-wrap2">
+          <div class="account-info">
+            <div class="gradeimg">
+              <img th:src="${user.user_grade.equals('일반회원') ? '/images/bronze-medal.png' :
+              user.user_grade.equals('단골회원') ? '/images/silver-medal.png' :
+              user.user_grade.equals('VIP') ? '/images/vip-gold.png' : '#'}" alt="usergrade" id="usergrade">
+            </div>
+            <div class="acount-detail">
+              <p class="idinfo"><span th:text="${user.nickname}"></span> 님은 </p>
+              <p class="gradeinfo"><span th:text="${user.user_grade}"></span> 입니다.</p>
+            </div>
+          </div>
+          <a href="/memberUpdate"><button class="updatebtn">정보수정</button></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec2 align">
+      <div class="mypage-info">
+        <div>
+          <div>
+            <a href="#">
+              <img src="/images/coupon (2).png" alt="checkcoupon">
+            </a>
+          </div>
+          <a href="#">
+            <p>쿠폰확인</p>
+          </a>
+          <a href="#">
+            <p th:text="${couponCount}" id="count"></p>
+          </a>
+        </div>
+        <div>
+          <a href="#">
+            <div>
+              <a href="/orderStatus">
+                <img src="/images/credit-card.png" alt="orderhistory">
+              </a>
+            </div>
+            <a href="/orderStatus">
+              <p>주문내역</p>
+            </a>
+            <a href="/orderStatus">
+              <p th:text="${orderHistoryCount}" id="count"></p>
+            </a>
+          </a>
+        </div>
+        <div>
+          <div>
+            <a href="#">
+              <img src="/images/testimonials.png" alt="myreview">
+            </a>
+          </div>
+          <a href="#">
+            <p>리뷰관리</p>
+          </a>
+          <a href="#">
+            <p th:text="${reviewCount}" id="count"></p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec3 align">
+
+      <table class="qnatable">
+        <tr>
+          <th>자주 묻는 질문</th>
+          <td>
+            <hr>
+          </td>
+        </tr>
+        <tr id="q">
+          <th><a href="#">배달관련</a></th>
+          <td><a href="#">거리별 배달비 측정은 어떻게 이루어지나요?</a></td>
+        </tr>
+        <tr id="q">
+          <th><a href="#">회원정보관련</a></th>
+          <td><a href="#">주문 오류가 떠요</a></td>
+        </tr>
+        <tr id="q">
+          <th><a href="#">제휴관련</a></th>
+          <td><a href="#">배달완료가 됐는데 배달이 안 됐어요</a></td>
+        </tr>
+      </table>
+    </section>
+  </div>
+
+  <!-- //-----------------------main end------------------------------------------------------------------------------------------------ -->
+  <footer>
+    <div class="align">
+      <div class="sns">
+        <a href="javascript:void(0);"><img src="/images/facebook.png" alt="페이스북"></a>
+        <a href="javascript:void(0);"><img src="/images/instagram.png" alt="인스타그램"></a>
+      </div>
+      <div class="footer_logo">
+        <a href="javascript:void(0);">
+          <img src="/images/footer_logo.png" alt="하단로고">
+        </a>
+        <div>1661 - 5270</div>
+      </div>
+      <div class="footer_nav">
+        <ul>
+          <li><a href="javascript:void(0);">이용약관</a></li>
+          <li><a href="javascript:void(0);">개인정보처리방침</a></li>
+          <li><a href="javascript:void(0);">위치기반서비스</a></li>
+          <li><a href="javascript:void(0);">고객센터</a></li>
+          <li><a href="javascript:void(0);">인재채용</a></li>
+          <li><a href="javascript:void(0);">단체주문</a></li>
+        </ul>
+      </div>
+      <div class="copyright">
+        <div>
+          주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
+          대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
+          상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
+          <p>Copyright DagueYO. All Rights Reserved.</p>
+        </div>
+        <div class="familysite">
+          <select name="" id="" class="select2">
+            <option value="">Global site</option>
+            <option value="">KOREA</option>
+            <option value="">USA</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="/js/index.js"></script>
 </body>
 
 

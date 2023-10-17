@@ -34,18 +34,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/js/**").permitAll()// 인가 처리
 				.antMatchers("/images/**").permitAll()// 인가 처리
 
+
 				.antMatchers("/", "/public","/verifyIamport2/getToken","/verifyIamport2/cancel","/verifyIamport2/searchOne","/index","/verifyIamport2/searchAll").permitAll()
-				.antMatchers("/cart","/memberJoin","/memberUpdate","/menu_catagory","/myPage","/orderStatus","/review_tab","/selectRest","/payorder","/user/details","/payment/save","/selectOptions","/updateOrder","/cart/delete").permitAll()
+				.antMatchers("/payorder","/payment/save","/selectOptions","/updateOrder","/cartdelete").permitAll()
+				.antMatchers("/sms/send","/checkPhone","/sendEmail","/checkEmail").permitAll()
+				.antMatchers("/cart","/memberJoin","/menu_catagory","/myPage","/orderStatus","/review_tab","/selectRest","/memberUpdate","/login").permitAll()
+				.antMatchers("/resCheck","/orderCheck","/orderCheck1").permitAll()
+
+
 																				// hasRole을 사용시 기본적으로 Role_ 이 제공된다
 				.antMatchers("/user").hasRole("User")                            // Role_User
 				.antMatchers("/member").hasRole("Member")                        // Role_Member
 				.antMatchers("/admin").hasRole("Admin")                            // Role_Admin
+				.antMatchers("/deleteOrder/**").authenticated()
 				.anyRequest().authenticated()									// 나머지 URL은 모두 인증작업이 완료된 이후 접근가능
 
 				.and()
 
 				.formLogin()													// 로그인이 되지 않은 상태에서 자동으로 로그인 페이지로 리다이렉팅이 된다
 				.loginPage("/login").permitAll()                        // 커스텀 로그인 페이지 설정
+				.usernameParameter("u_email")
 				.successHandler(new CustomLoginSuccessHandler())				// 로그인시 역활에 따른 페이지 설정
 				.failureHandler(new CustomAuthenticationFailureHandler())		// 로그인 실패 예외처리
 
