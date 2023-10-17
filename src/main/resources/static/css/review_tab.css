@@ -154,19 +154,19 @@ main>.header_img {
     font-size: 38px;
     font-family: yg-jalnan;
   }
-
+/*여기 서부터*/
   .star-ratings {
     font-size: 40px;
     margin-top: 10px;
   }
 
   .star {
-    color:rgb(255, 196, 0);
     color: rgb(255, 196, 0);
     display: flex;
     align-items: center;
     justify-content: center
   }
+/*여기*/
   .rating-info {
     display: flex;
     align-items: center;
