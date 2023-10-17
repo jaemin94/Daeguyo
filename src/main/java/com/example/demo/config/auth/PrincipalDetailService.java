@@ -19,7 +19,7 @@ public class PrincipalDetailService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String u_email) throws UsernameNotFoundException {
 		
 		UserDto dto = mapper.selectOne(u_email);
-		
+
 		if (dto == null) {
             throw new UsernameNotFoundException("User not found with username: " + u_email);
 		}

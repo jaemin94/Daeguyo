@@ -17,3 +17,5 @@ public class UserDto {
     private String nickname;
     private String role;
 }
+
+

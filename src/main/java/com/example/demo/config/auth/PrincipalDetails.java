@@ -1,15 +1,14 @@
 package com.example.demo.config.auth;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import com.example.demo.domain.daeguyo.UserDto;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Data
 @AllArgsConstructor
@@ -43,6 +42,14 @@ public class PrincipalDetails implements UserDetails{
 		return user.getU_email();
 	}
 
+
+	public String getPhone(){
+		return user.getPhone();
+	}
+
+	public String getNickname(){
+		return user.getNickname();
+	}
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PaymentDto {
 
-    private int payment_id;
+    private String payment_id;
     private String order_id;
     private String pay_method;
     private LocalDateTime pay_date;

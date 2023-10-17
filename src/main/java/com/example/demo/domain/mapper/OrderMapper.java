@@ -2,23 +2,30 @@ package com.example.demo.domain.mapper;
 
 
 import com.example.demo.domain.daeguyo.OrderDto;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
-public interface OrderMapper {
+public interface OrderMapper{
 
-    @Select("select * from tbl_order")
-    public List<OrderDto> selectAll();
-    @Select("select * from tbl_order where order_id=#{order_id}")
-    public OrderDto selectOne(String order_id);
-    @Insert("")
-    public int insertOrder();
-    @Update("")
-    public int updateOrder();
-    @Delete("")
-    public int deleteOrder();
+    @Select("select * from tbl_order ")
+    List<OrderDto> selectByUserId();
+
+    @Query("delete from tbl_order where order_id = #{order_id}")
+    int deleteOrder(String order_id);
+
+
+
+
+
+
+
+
+
 
 
 }

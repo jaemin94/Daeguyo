@@ -16,7 +16,7 @@ public class OrderDto {
     private String u_email;
     private String menu_id;
     private String res_id;
-    private String selecte_option;
+    private String selected_option;
     private int order_amount;
     private int total_price;
     private String order_status;
