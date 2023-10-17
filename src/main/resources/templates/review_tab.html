@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -14,20 +15,25 @@
   <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined|Material+Icons+Two+Tone" rel="stylesheet">
-
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined|Material+Icons+Two+Tone" rel="stylesheet">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+          integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
 <div id="warp">
   <div class="side_menu">
     <div class="ide_login">
+
       <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
+
       <a href="#" class="close">&times;</a>
     </div>
     <div class="panner">
       <ul>
+
         <li><a href="javascript:void(0);">홈</a></li>
         <li><a href="javascript:void(0);">주문</a></li>
         <li><a href="javascript:void(0);">매장찾기</a></li>
@@ -104,514 +110,465 @@
   </header>
 
 
-    <main>
-      <div class="main-img">
-        <img src="/images/horangmain.jpeg" alt="menu-main" class="menu-main-img">
+
+      <div class="rating-info">
+        <span th:text="${res.res_rating}" class="rating-number"></span>
+        <button class="favoritebtn">
+          <span class="favorite material-icons-two-tone" >favorite</span>
+        </button>
+        <button class="sharebtn">
+          <span class="sharebtn material-icons-outlined">share</span>
+        </button>
       </div>
-    </main>
+    </div>
+    <div class="buttons align">
+      <input type="button" value="메뉴" class="menubtn" onclick="showPage('page1')">
+      <input type="button" value="매장정보" class="store-info-btn" onclick="showPage('page2')">
+      <input type="button" value="리뷰" class="review-btn" onclick="showPage('page3')">
+    </div>
+  </section>
+  <!-- 탭끝 -->
 
+  <!-- 게시판섹션 -->
+  <section class="section_Board" id="Board">
+    <div id="boardContainer">
+      <!-- 메뉴 페이지 시작-->
+      <div class="wrapper boardPage" id="page1">
+        <input type="hidden" id="u_email" th:value="${#authentication.name}" />
+        <div class="mainwrap align">
+          <section class="main-menu-sec">
+            <div class="menu-category main">
+              <div><hr></div>
+              <span>대표메뉴</span>
+              <div><hr></div>
+            </div>
+            <table class="menu-detail-table main">
+              <tbody>
+              <tr class="menu-tr main" th:each="menu:${menu}" th:if="${menu.menu_catagory == '대표'}">
+                <td>
+                  <img th:src="${menu.img}" alt="Menu Image" class="menu-img main">
+                </td>
+                <td>
+                  <div class="menu-detail main">
+                    <div class="d1">
+                      <p class="menu-lable popular">인기</p>
+                      <p th:text="${menu.menu_name}" id="bigText" class="menu-name main"></p>
+                    </div>
+                    <div class="d2">
+                      <ul class="price-li">
+                        <li th:text="' '+${menu.price}+'  원'" class="menu-price"></li>
+                      </ul>
+                      <ul class="option-li">
+                        <li th:each="optionEntry : ${menu.parsedOptions}">
+                          <label th:each="optionName, optionMap : ${optionEntry}">
+                            <span th:text="${optionName.key}+'  '"> :</span>
+                            <select th:name="${optionName.key}" class="menu-option">
+                              <option th:each="optionValue : ${optionName.value.entrySet()}"
+                                      th:value="${optionValue.key}"
+                                      th:text="${optionValue.key}+' ('+${optionValue.value}+')'">
+                              </option>
+                            </select>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
 
-    <!-- 탭부터 만들기 -->
-    <section class="res-main-info-sec">
-      <div class="res-main-info">
-          <p class="res-name">호랑이 식당</p>
-          <div class="star-ratings">
-            <!-- 별 모양 아이콘 예시 -->
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9734;</span>
-            <!-- <span class="material-symbols-outlined">grade</span> -->
-            <!-- <span class="material-symbols-outlined">star_rate_half</span> -->
-          </div>
-
-          <div class="rating-info">
-            <span class="rating-number">4.5</span>
-            <button class="favoritebtn">
-              <span class="favorite material-icons-two-tone" >favorite</span>
-            </button>
-            <button class="sharebtn">
-              <span class="sharebtn material-icons-outlined">share</span>
-            </button>
-          </div>
-        </div>
-        <div class="buttons align">
-          <input type="button" value="메뉴" class="menubtn" onclick="showPage('page1')">
-          <input type="button" value="매장정보" class="store-info-btn" onclick="showPage('page2')">
-          <input type="button" value="리뷰" class="review-btn" onclick="showPage('page3')">
-        </div>
-      </section>
-    <!-- 탭끝 -->
-
-    <!-- 게시판섹션 -->
-    <section class="section_Board" id="Board">
-      <div id="boardContainer">
-        <!-- 메뉴 페이지 시작-->
-        <div class="wrapper boardPage" id="page1"> 
-          <div class="mainwrap align">
-              <section class="main-menu-sec"> 
-                  <div class="menu-category main">
-                    <div><hr></div>
-                    <span>대표메뉴</span>
-                    <div><hr></div>
+                    <!-- 메뉴 ID를 hidden input으로 추가하여 서버에 전송 -->
+                    <input type="hidden" th:value="${menu.menu_id}" name="menu_id"/>
                   </div>
-                  <table class="menu-detail-table main">
-                    <tbody>
-                        <tr class="menu-tr main">
-                          <td>
-                            <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
-                            <img src="/images/sectionbg_01.jpg" alt="Menu Image" class="menu-img main">
-                          </td>
-                          <td>
-                            <div class="menu-details main">
-                              <div class="d1">
-                                <p class="menu-lable popular">인기</p>
-                                <p  id="bigText" class="menu-name main">마라파스타</p>
-                              </div>
-                              <ul>
-                                <li  class="menu-price main">1인분 : 18,000원 </li>
-                              </ul>
-                            </div>
-                          </td>
-                          <td>
-                              <button class="addButton main material-icons-outlined">add</button>
-                          </td>
-                        </tr>
-                        <tr class="menu-tr main">
-                          <td>
-                            <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
-                            <img src="/images/horangmara.jpeg" alt="Menu Image" class="menu-img main">
-                          </td>
-                          <td>
-                            <div class="menu-details">
-                            <div class="d1">
-                                <p class="menu-lable">추천</p>
-                                <p  id="bigText" class="menu-name main">마라 또 찾지 마라</p>
-                            </div>
-                              <ul>
-                                <li class="menu-price main">1~2인분 : 17,500원 </li>
-                                <li  class="menu-price main">3~4인분 : 28,000원 </li>
-                              </ul>
-                            </div>
-                          </td>
-                          <td>
-                            <button class="addButton main material-icons-outlined">add</button>
-                          </td>
-                        </tr>
-                    </tbody>
-                  </table>
-              </section>
-      
-              <section class="menu-sec">
-                <div class="menu-category">
-                  <div><hr></div>
-                  <span>메뉴</span>
-                  <div><hr></div>
 
-                </div>
-                <table class="menu-detail-table">
-                  <tbody>
-                      <tr class="menu-tr">
-                        <td>
-                          <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
-                          <img src="/images/sectionbg_01.jpg" alt="Menu Image" class="menu-img">
-                        </td>
-                        <td>
-                          <div class="menu-detail">
-                            <div class="d1">
-                              <p id="bigText" class="menu-name">고기짬뽕</p>
-                            </div>
-                            <ul>
-                              <li  class="menu-price">1인분 : 7000원 </li>
-                            </ul>
-                          </div>
-                        </td>
-                        <td>
-                            <button class="addButton material-icons-outlined">add</button>
-                        </td>
-                      </tr>
-                      <tr class="menu-tr">
-                        <td>
-                          <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
-                          <img src="/images/horangmara.jpeg" alt="Menu Image" class="menu-img">
-                        </td>
-                        <td>
-                          <div class="menu-detail">
-                            <div class="d1">
-                              <p  id="bigText" class="menu-name">마라 또 찾지 마라</p>
-                            </div>
-                            <ul>
-                              <li  class="menu-price">1~2인분 : 17,500원 </li>
-                              <li  class="menu-price">3~4인분 : 28,000원 </li>
-                            </ul>
-                          </div>
-                        </td>
-                        <td>
-                          <button class="addButton material-icons-outlined">add</button>
-                        </td>
-                      </tr>
-                      <tr class="menu-tr">
-                        <td>
-                          <!-- <img th:src="${menuUrl}" alt="Menu Image"> -->
-                          <img src="/images/horangmara.jpeg" alt="Menu Image" class="menu-img">
-                        </td>
-                        <td>
-                          <div class="menu-detail">
-                            <div class="d1">
-                              <p  id="bigText" class="menu-name">마라 또 찾지 마라</p>
-                            </div>
-                            <ul>
-                              <li  class="menu-price">1~2인분 : 17,500원 </li>
-                              <li  class="menu-price">3~4인분 : 28,000원 </li>
-                            </ul>
-                          </div>
-                        </td>
-                        <td>
-                          <button class="addButton material-icons-outlined">add</button>
-                        </td>
-                      </tr>
-                  </tbody>
-                </table>
-              </section>
-              <section class="origin-info-sec">
-                <div class="menu-category origin">
-                  <div><hr></div>
-                  <span>원산지</span>
-                  <div><hr></div>
-                </div>
-                <div class="origin-info">
-                  <ul>
-                    <li class="origin-li"><span>국내산 쌀</span></li>
-                    <li class="origin-li"><span>국내산 김치</span></li>
-                    <li class="origin-li"><span>국내산 돼지고기</span></li>
-                    <li class="origin-li"><span>수입산 소고기</span></li>
-                    <li class="origin-li"><span>국내산 고춧가루</span></li>
-                    <li class="origin-li"><span>노르웨이산 고등어</span></li>
-                    <li class="origin-li"><span>중국산 청경채</span></li>
-                  </ul>
-                </div>
-              </section>
-              <div class="cartbtn">
-                <div class="basket_count">0</div>
-                <div class="basket_img">
-                  <img src="/images/basket.png" alt="장바구니버튼">
-                </div>
-                  <!-- <p class="cart-count">5</p> -->
+                </td>
+                <td>
+                  <button type="submit" class="addButton main material-icons-outlined">add</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </section>
 
-              </div> 
+          <section class="menu-sec" >
+            <div class="menu-category">
+              <div><hr></div>
+              <span>메뉴</span>
+              <div><hr></div>
+            </div>
+            <table class="menu-detail-table">
+              <tbody>
+              <tr class="menu-tr" th:each="menu:${menu}" th:if="${menu.menu_catagory == '일반'}">
+                <td>
+                  <img th:src="${menu.img}" alt="Menu Image" class="menu-img">
+                </td>
+                <td>
+                  <div class="menu-detail">
+                    <div class="d1">
+                      <p th:text="${menu.menu_name}" id="bigText" class="menu-name"></p>
+                    </div>
+                    <div class="d2">
+                      <ul class="price-li">
+                        <li th:text="' '+${menu.price}+' 원'" class="menu-price"></li>
+                      </ul>
+                      <ul class="option-li">
+                        <li th:each="optionEntry : ${menu.parsedOptions}">
+                          <label th:each="optionName, optionMap : ${optionEntry}">
+                            <span th:text="${optionName.key}+'   '"></span>
+                            <select th:name="${optionName.key}" class="menu-option">
+                              <option th:each="optionValue : ${optionName.value.entrySet()}"
+                                      th:value="${optionValue.key}"
+                                      th:text="${optionValue.key}+' ('+${optionValue.value}+')'">
+                              </option>
+                            </select>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- 메뉴 ID를 hidden input으로 추가하여 서버에 전송 -->
+                    <input type="hidden" th:value="${menu.menu_id}" name="menu_id"/>
+                  </div>
+                </td>
+                <td>
+                  <button type="submit" class="addButton material-icons-outlined">add</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="origin-info-sec">
+            <div class="menu-category origin">
+              <div><hr></div>
+              <span>원산지</span>
+              <div><hr></div>
+            </div>
+            <div class="origin-info">
+              <ul>
+                <li class="origin-li"><span>국내산 쌀</span></li>
+                <li class="origin-li"><span>국내산 김치</span></li>
+                <li class="origin-li"><span>국내산 돼지고기</span></li>
+                <li class="origin-li"><span>수입산 소고기</span></li>
+                <li class="origin-li"><span>국내산 고춧가루</span></li>
+                <li class="origin-li"><span>노르웨이산 고등어</span></li>
+                <li class="origin-li"><span>중국산 청경채</span></li>
+              </ul>
+            </div>
+          </section>
+          <div class="cartbtn">
+            <a href="/cart">
+              <div class="basket_count">0</div>
+              <div class="basket_img">
+                <img src="/images/basket.png" alt="장바구니버튼">
+              </div>
+            </a>
           </div>
-        <!-- 메뉴 페이지 끝 -->
+        </div>
+      </div>
+      <!-- 메뉴 페이지 끝 -->
 
-        <!-- 가게 페이지 시작 -->
-        <div class="wrapper boardPage" id="page2">
-          <div class="res_container">
-            <div class="res_name">호랑이 식당</div>
-            <div class="res_map">
+      <!-- 가게 페이지 시작 -->
+      <div class="wrapper boardPage" id="page2">
+        <div class="res_container">
+          <div th:text="${res.res_name}" class="res_name"></div>
+          <div class="res_map">
+            <div
+                    style="font:normal normal 400 12px/normal dotum, sans-serif; width:320px; height:232px; color:#333; position:relative">
+              <div style="height: 200px;"><a
+                      href="https://map.kakao.com/?urlX=859928.0&amp;urlY=661115.0&amp;itemId=1785945230&amp;q=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;srcid=1785945230&amp;map_type=TYPE_MAP&amp;from=roughmap"
+                      target="_blank"><img class="map"
+                                           src="http://t1.daumcdn.net/roughmap/imgmap/6a1d0107faad5ddb9342d65badae80ac2e42071a2962c9286de9652e11431129"
+                                           width="318px" height="198px" style="border:1px solid #ccc;"></a></div>
               <div
-                style="font:normal normal 400 12px/normal dotum, sans-serif; width:320px; height:232px; color:#333; position:relative">
-                <div style="height: 200px;"><a
-                    href="https://map.kakao.com/?urlX=859928.0&amp;urlY=661115.0&amp;itemId=1785945230&amp;q=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;srcid=1785945230&amp;map_type=TYPE_MAP&amp;from=roughmap"
-                    target="_blank"><img class="map"
-                      src="http://t1.daumcdn.net/roughmap/imgmap/6a1d0107faad5ddb9342d65badae80ac2e42071a2962c9286de9652e11431129"
-                      width="318px" height="198px" style="border:1px solid #ccc;"></a></div>
-                <div
-                  style="overflow: hidden; padding: 7px 11px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0px 0px 2px 2px; background-color: rgb(249, 249, 249);">
-                  <a href="https://map.kakao.com" target="_blank" style="float: left;"><img
-                      src="//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/logo_kakaomap.png" width="72"
-                      height="16" alt="카카오맵" style="display:block;width:72px;height:16px"></a>
-                  <div style="float: right; position: relative; top: 1px; font-size: 11px;"><a target="_blank"
-                      href="https://map.kakao.com/?from=roughmap&amp;srcid=1785945230&amp;confirmid=1785945230&amp;q=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;rv=on"
-                      style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">로드뷰</a><span
-                      style="width: 1px;padding: 0;margin: 0 8px 0 9px;height: 11px;vertical-align: top;position: relative;top: 2px;border-left: 1px solid #d0d0d0;float: left;"></span><a
-                      target="_blank"
-                      href="https://map.kakao.com/?from=roughmap&amp;eName=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;eX=859928.0&amp;eY=661115.0"
-                      style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">길찾기</a><span
-                      style="width: 1px;padding: 0;margin: 0 8px 0 9px;height: 11px;vertical-align: top;position: relative;top: 2px;border-left: 1px solid #d0d0d0;float: left;"></span><a
-                      target="_blank"
-                      href="https://map.kakao.com?map_type=TYPE_MAP&amp;from=roughmap&amp;srcid=1785945230&amp;itemId=1785945230&amp;q=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;urlX=859928.0&amp;urlY=661115.0"
-                      style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">지도
-                      크게 보기</a></div>
-                </div>
+                      style="overflow: hidden; padding: 7px 11px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0px 0px 2px 2px; background-color: rgb(249, 249, 249);">
+                <a href="https://map.kakao.com" target="_blank" style="float: left;"><img
+                        src="//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/logo_kakaomap.png" width="72"
+                        height="16" alt="카카오맵" style="display:block;width:72px;height:16px"></a>
+                <div style="float: right; position: relative; top: 1px; font-size: 11px;"><a target="_blank"
+                                                                                             href="https://map.kakao.com/?from=roughmap&amp;srcid=1785945230&amp;confirmid=1785945230&amp;q=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;rv=on"
+                                                                                             style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">로드뷰</a><span
+                        style="width: 1px;padding: 0;margin: 0 8px 0 9px;height: 11px;vertical-align: top;position: relative;top: 2px;border-left: 1px solid #d0d0d0;float: left;"></span><a
+                        target="_blank"
+                        href="https://map.kakao.com/?from=roughmap&amp;eName=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;eX=859928.0&amp;eY=661115.0"
+                        style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">길찾기</a><span
+                        style="width: 1px;padding: 0;margin: 0 8px 0 9px;height: 11px;vertical-align: top;position: relative;top: 2px;border-left: 1px solid #d0d0d0;float: left;"></span><a
+                        target="_blank"
+                        href="https://map.kakao.com?map_type=TYPE_MAP&amp;from=roughmap&amp;srcid=1785945230&amp;itemId=1785945230&amp;q=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;urlX=859928.0&amp;urlY=661115.0"
+                        style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">지도
+                  크게 보기</a></div>
               </div>
             </div>
-            <div class="res_introduce">
-              <p>호랑이 기운이 솟아나게 해드리겠습니다.</p>
-              <p>흔한 레시피로 데우기만 하면 되는 프랜차이즈와</p>
-              <p>호랑이 식당만의 레시피와 엄선된 재료는 차별된 맛을 선사합니다. </p>
-            </div>
-            <div class="res_info">
-              <table>
-                <thead>
-                  <tr>
-                    <th>영업정보</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>상호명</td>
-                    <td>호랑이 식당</td>
-                  </tr>
-                  <tr>
-                    <td>운영시간</td>
-                    <td>매일 오전 11:00~밤:12:00</td>
-                  </tr>
-                  <tr>
-                    <td>휴무일</td>
-                    <td>공휴일</td>
-                  </tr>
-                  <tr>
-                    <td>전화번호</td>
-                    <td><a href="https://place.map.kakao.com/1785945230#comment">053-253-3062</a></td>
-                  </tr>
-                  <tr>
-                    <td>배달지역</td>
-                    <td>대구라면 어느곳이든</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
           </div>
-        </div>
-        <!-- 가게 페이지 끝 -->
-
-
-        <!-- 리뷰 페이지 시작 -->
-        <div class="wrapper boardPage" id="page3">
-          <div class="review_header">
-            <img src="/images/dou1.png">
-            <br>
-            <div class="review_text">
-              <p>모든 반찬과 찌개는 매일 좋은 재료로 직접</p>
-              <p>끓이고 판매합니다. 항상 <span>최선</span>을 다하겠습니다!</span></p>
-            </div>
-            <br>
-            <img src="/images/dou2.png">
+          <div class="res_introduce">
+            <p>호랑이 기운이 솟아나게 해드리겠습니다.</p>
+            <p>흔한 레시피로 데우기만 하면 되는 프랜차이즈와</p>
+            <p>호랑이 식당만의 레시피와 엄선된 재료는 차별된 맛을 선사합니다. </p>
           </div>
-          <div class="review_container">
-            <div class="review_event">
-              리뷰이벤트
-            </div>
-            <div class="event_gift">
-              1.식혜 2.공깃밥 3.감자튀김
-            </div>
-            <div class="content_list">
-              <div class="list_container">
-                <select id="list" name="list">
-                  <option value="" disabled selected>선택하기</option>
-                  <option value="1">최근순</option>
-                  <option value="2">별점 높은 순</option>
-                  <option value="3">별점 낮은 순</option>
-                </select>
-                <div class="drop_img"><img src="/images/drop.png" alt=""></div>
-              </div>
-            </div>
-            <div class="scroll_container">
-              <div class="scroll_content">
-                <div class="review">
-                  <div class="reivew_user">
-                    <div class="user_point">
-                      <img src="/images/numung.gif">
-                      <div class="nick_name_container">
-                        <div class="user_star">⭐4.5</div>
-                        <div class="review_day">1일전 작성</div>
-                        <div class="user_profile">
-                          맛도리 탐지기
-                        </div>
-                      </div>
-                      
-                      <div onclick="" class="user_end">⁝</div>
-                    </div>
-                  </div>
-                  <div class="review_img">
-                    <img src="/images/sectionbg_01.jpg">
-                    <img src="/images/sectionbg_02.jpg">
-                  </div>
-                  <div class="user_comment">
-                    <div class="user_menu">
-                      <div class="user_menu_name">
-                        <div class="menusName">
-                          탕수만두
-                        </div>
-                        <div class="menusName">
-                          마라찌개
-                        </div>
-                      </div>
-                    </div>
-                    <div class="user_text">
-                      <p>배달도 빠르고 맛있어요!</p>
-                      <p>처음으로 먹어본 메뉴들인데 다음에 또 먹을게요!</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="review">
-                  <div class="reivew_user">
-                    <div class="user_point">
-                      <img src="/images/numung.gif">
-                      <div class="nick_name_container">
-                        <div class="user_star">⭐3.0</div>
-                        <div class="review_day">2일전 작성</div>
-                        <div class="user_profile">
-                          맛도리 탐지기
-                        </div>
-                      </div>
-                     
-                      <div onclick="" class="user_end">⁝</div>
-                    </div>
-                  </div>
-                  <div class="review_img">
-                    <img src="/images/sectionbg_01.jpg">
-                    <img src="/images/sectionbg_02.jpg">
-                  </div>
-                  <div class="user_comment">
-                    <div class="user_menu">
-                      <div class="user_menu_name">
-                        <div class="menusName">
-                          탕수만두
-                        </div>
-                        <div class="menusName">
-                          마라찌개
-                        </div>
-                      </div>
-                    </div>
-                    <div class="user_text">
-                      <p>배달도 빠르고 맛있어요!</p>
-                      <p>처음으로 먹어본 메뉴들인데 다음에 또 먹을게요!</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="review">
-                  <div class="reivew_user">
-                    <div class="user_point">
-                      <img src="/images/numung.gif">
-                      <div class="nick_name_container">
-                        <div class="user_star">⭐4.0</div>
-                        <div class="review_day">3일전 작성</div>
-                        <div class="user_profile">
-                          맛도리 탐지기
-                        </div>
-                      </div>
-                     
-                      <div onclick="" class="user_end">⁝</div>
-                    </div>
-                  </div>
-                  <div class="review_img">
-                  </div>
-                  <div class="user_comment">
-                    <div class="user_menu">
-                      <div class="user_menu_name">
-                        <div class="menusName">
-                          탕수만두
-                        </div>
-                        <div class="menusName">
-                          마라찌개
-                        </div>
-                      </div>
-                    </div>
-                    <div class="user_text">
-                      <p>배달도 빠르고 맛있어요!</p>
-                      <p>처음으로 먹어본 메뉴들인데 다음에 또 먹을게요!</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="review">
-                  <div class="reivew_user">
-                    <div class="user_point">
-                      <img src="/images/nyam.gif">
-                      <div class="nick_name_container">
-                        <div class="user_star">⭐5.0</div>
-                        <div class="review_day">5일전 작성</div>
-                        <div class="user_profile">
-                          냠순이
-                        </div>
-                      </div>
-                     
-                      <div onclick="" class="user_end">⁝</div>
-                    </div>
-                  </div>
-                  <div class="review_img">
-                    <img src="/sectionbg_01.jpg">
-                    <img src="/images/sectionbg_02.jpg">
-                  </div>
-                  <div class="user_comment">
-                    <div class="user_menu">
-                      <div class="user_menu_name">
-                        <div class="menusName">
-                          탕수만두
-                        </div>
-                        <div class="menusName">
-                          마라찌개
-                        </div>
-                      </div>
-                    </div>
-                    <div class="user_text">
-                      <p>배달도 빠르고 맛있어요!</p>
-                      <p>처음으로 먹어본 메뉴들인데 다음에 또 먹을게요!</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-        <!-- 리뷰 페이지 끝 -->
-      </div>
-
-    </section>
-    <!-- 게시판 끝 -->
-
-
-    <!-- 김승훈 작업 끝 -->
-
-
-
-
-
-    <footer>
-      <div class="align">
-        <div class="sns">
-          <a href="javascript:void(0);"><img src="/images/facebook.png" alt="페이스북"></a>
-          <a href="javascript:void(0);"><img src="/images/instagram.png" alt="인스타그램"></a>
-        </div>
-        <div class="footer_logo">
-          <a href="javascript:void(0);">
-            <img src="/images/footer_logo.png" alt="하단로고">
-          </a>
-          <div>1661 - 5270</div>
-        </div>
-        <div class="footer_nav">
-          <ul>
-            <li><a href="javascript:void(0);">이용약관</a></li>
-            <li><a href="javascript:void(0);">개인정보처리방침</a></li>
-            <li><a href="javascript:void(0);">위치기반서비스</a></li>
-            <li><a href="javascript:void(0);">고객센터</a></li>
-            <li><a href="javascript:void(0);">인재채용</a></li>
-            <li><a href="javascript:void(0);">단체주문</a></li>
-          </ul>
-        </div>
-        <div class="copyright">
-          <div>
-            주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
-            대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
-            상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
-            <p>Copyright DagueYO. All Rights Reserved.</p>
-          </div>
-          <div class="familysite">
-            <select name="" id="" class="select2">
-              <option value="">Global site</option>
-              <option value="">KOREA</option>
-              <option value="">USA</option>
-            </select>
+          <div class="res_info">
+            <table>
+              <thead>
+              <tr>
+                <th>영업정보</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>상호명</td>
+                <td>호랑이 식당</td>
+              </tr>
+              <tr>
+                <td>운영시간</td>
+                <td>매일 오전 11:00~밤:12:00</td>
+              </tr>
+              <tr>
+                <td>휴무일</td>
+                <td>공휴일</td>
+              </tr>
+              <tr>
+                <td>전화번호</td>
+                <td><a href="https://place.map.kakao.com/1785945230#comment">053-253-3062</a></td>
+              </tr>
+              <tr>
+                <td>배달지역</td>
+                <td>대구라면 어느곳이든</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-    </footer>
-  </div>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="./js/index.js"></script>
-    <script src="./js/review_tab.js"></script>
+      <!-- 가게 페이지 끝 -->
+
+
+      <!-- 리뷰 페이지 시작 -->
+      <div class="wrapper boardPage" id="page3">
+        <div class="review_header">
+          <img src="/images/dou1.png">
+          <br>
+          <div class="review_text">
+            <p>모든 반찬과 찌개는 매일 좋은 재료로 직접</p>
+            <p>끓이고 판매합니다. 항상 <span>최선</span>을 다하겠습니다!</p>
+          </div>
+          <br>
+          <img src="/images/dou2.png">
+        </div>
+        <div class="review_container">
+          <div class="review_event">
+            리뷰이벤트
+          </div>
+          <div class="event_gift">
+            1.식혜 2.공깃밥 3.감자튀김
+          </div>
+          <div class="content_list">
+            <div class="list_container">
+              <select id="list" name="list">
+                <option value="" disabled selected>선택하기</option>
+                <option value="1">최근순</option>
+                <option value="2">별점 높은 순</option>
+                <option value="3">별점 낮은 순</option>
+              </select>
+              <div class="drop_img"><img src="/images/drop.png" alt=""></div>
+            </div>
+          </div>
+          <div class="scroll_container">
+            <div class="scroll_content">
+
+              <div class="review">
+                <div class="reivew_user">
+                  <div class="user_point">
+                    <img src="/images/numung.gif">
+                    <div class="nick_name_container">
+                      <div class="user_star">⭐4.5</div>
+                      <div class="review_day">1일전 작성</div>
+                      <div class="user_profile">
+                        맛도리 탐지기
+                      </div>
+                    </div>
+
+                    <div onclick="" class="user_end">⁝</div>
+                  </div>
+                </div>
+                <div class="review_img">
+                  <img src="/images/sectionbg_01.jpg">
+                  <img src="/images/sectionbg_02.jpg">
+                </div>
+                <div class="user_comment">
+                  <div class="user_menu">
+                    <div class="user_menu_name">
+                      <div class="menusName">
+                        탕수만두
+                      </div>
+                      <div class="menusName">
+                        마라찌개
+                      </div>
+                    </div>
+                  </div>
+                  <div class="user_text">
+                    <p>배달도 빠르고 맛있어요!</p>
+                    <p>처음으로 먹어본 메뉴들인데 다음에 또 먹을게요!</p>
+                  </div>
+                </div>
+              </div>
+              <div class="review">
+                <div class="reivew_user">
+                  <div class="user_point">
+                    <img src="/images/numung.gif">
+                    <div class="nick_name_container">
+                      <div class="user_star">⭐3.0</div>
+                      <div class="review_day">2일전 작성</div>
+                      <div class="user_profile">
+                        맛도리 탐지기
+                      </div>
+                    </div>
+
+                    <div onclick="" class="user_end">⁝</div>
+                  </div>
+                </div>
+                <div class="review_img">
+                  <img src="/images/sectionbg_01.jpg">
+                  <img src="/images/sectionbg_02.jpg">
+                </div>
+                <div class="user_comment">
+                  <div class="user_menu">
+                    <div class="user_menu_name">
+                      <div class="menusName">
+                        탕수만두
+                      </div>
+                      <div class="menusName">
+                        마라찌개
+                      </div>
+                    </div>
+                  </div>
+                  <div class="user_text">
+                    <p>배달도 빠르고 맛있어요!</p>
+                    <p>처음으로 먹어본 메뉴들인데 다음에 또 먹을게요!</p>
+                  </div>
+                </div>
+              </div>
+              <div class="review">
+                <div class="reivew_user">
+                  <div class="user_point">
+                    <img src="/images/numung.gif">
+                    <div class="nick_name_container">
+                      <div class="user_star">⭐4.0</div>
+                      <div class="review_day">3일전 작성</div>
+                      <div class="user_profile">
+                        맛도리 탐지기
+                      </div>
+                    </div>
+
+                    <div onclick="" class="user_end">⁝</div>
+                  </div>
+                </div>
+                <div class="review_img">
+                </div>
+                <div class="user_comment">
+                  <div class="user_menu">
+                    <div class="user_menu_name">
+                      <div class="menusName">
+                        탕수만두
+                      </div>
+                      <div class="menusName">
+                        마라찌개
+                      </div>
+                    </div>
+                  </div>
+                  <div class="user_text">
+                    <p>배달도 빠르고 맛있어요!</p>
+                    <p>처음으로 먹어본 메뉴들인데 다음에 또 먹을게요!</p>
+                  </div>
+                </div>
+              </div>
+              <div class="review">
+                <div class="reivew_user">
+                  <div class="user_point">
+                    <img src="/images/nyam.gif">
+                    <div class="nick_name_container">
+                      <div class="user_star">⭐5.0</div>
+                      <div class="review_day">5일전 작성</div>
+                      <div class="user_profile">
+                        냠순이
+                      </div>
+                    </div>
+
+                    <div onclick="" class="user_end">⁝</div>
+                  </div>
+                </div>
+                <div class="review_img">
+                  <img src="/images/sectionbg_01.jpg">
+                  <img src="/images/sectionbg_02.jpg">
+                </div>
+                <div class="user_comment">
+                  <div class="user_menu">
+                    <div class="user_menu_name">
+                      <div class="menusName">
+                        탕수만두
+                      </div>
+                      <div class="menusName">
+                        마라찌개
+                      </div>
+                    </div>
+                  </div>
+                  <div class="user_text">
+                    <p>배달도 빠르고 맛있어요!</p>
+                    <p>처음으로 먹어본 메뉴들인데 다음에 또 먹을게요!</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- 리뷰 페이지 끝 -->
+    </div>
+  </section>
+  <!-- 게시판 끝 -->
+
+
+  <footer>
+    <div class="align">
+      <div class="sns">
+        <a href="javascript:void(0);"><img src="/images/facebook.png" alt="페이스북"></a>
+        <a href="javascript:void(0);"><img src="/images/instagram.png" alt="인스타그램"></a>
+      </div>
+      <div class="footer_logo">
+        <a href="javascript:void(0);">
+          <img src="/images/footer_logo.png" alt="하단로고">
+        </a>
+        <div>1661 - 5270</div>
+      </div>
+      <div class="footer_nav">
+        <ul>
+          <li><a href="javascript:void(0);">이용약관</a></li>
+          <li><a href="javascript:void(0);">개인정보처리방침</a></li>
+          <li><a href="javascript:void(0);">위치기반서비스</a></li>
+          <li><a href="javascript:void(0);">고객센터</a></li>
+          <li><a href="javascript:void(0);">인재채용</a></li>
+          <li><a href="javascript:void(0);">단체주문</a></li>
+        </ul>
+      </div>
+      <div class="copyright">
+        <div>
+          주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
+          대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
+          상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
+          <p>Copyright DagueYO. All Rights Reserved.</p>
+        </div>
+        <div class="familysite">
+          <select name="" id="" class="select2">
+            <option value="">Global site</option>
+            <option value="">KOREA</option>
+            <option value="">USA</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/review_tab.js"></script>
 
 </body>
 

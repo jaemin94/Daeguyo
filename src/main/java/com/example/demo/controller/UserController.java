@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
 @Controller
 @Slf4j
 @RequestMapping()
@@ -28,9 +30,24 @@ public class UserController {
 
 
     @GetMapping("/myPage")
-    public void myPage(){
+    public String getMyPage(Principal principal, Model model) {
+        String u_email = principal.getName();
 
+        UserDto user = userService.userSearch(u_email);
+        int couponCount = userService.userCouponCount(u_email);
+        int reviewCount = userService.userReviewCount(u_email);
+        int orderCount = userService.userOrderCount(u_email);
+
+        model.addAttribute("couponCount", couponCount);
+        model.addAttribute("reviewCount", reviewCount);
+        model.addAttribute("orderHistoryCount", orderCount);
+        model.addAttribute("user", user);
+
+        return "myPage";
     }
+
+
+
 
     @GetMapping("/memberJoin")
     public void memberJoinPage(){

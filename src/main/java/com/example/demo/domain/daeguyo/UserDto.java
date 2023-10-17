@@ -15,5 +15,9 @@ public class UserDto {
     private String password;
     private String phone;
     private String nickname;
+    //myPage 접속 시 뜨는 회원 등급 저장 컬럼 추가
+    // 일반회원, 단골회원, VIP 로 나눔
+    private String user_grade;
     private String role;
+
 }

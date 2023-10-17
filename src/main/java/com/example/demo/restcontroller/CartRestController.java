@@ -1,10 +1,17 @@
 package com.example.demo.restcontroller;
 
+import com.example.demo.domain.daeguyo.CartDto;
+import com.example.demo.domain.daeguyo.MenuDto;
+import com.example.demo.domain.mapper.MenuMapper;
 import com.example.demo.domain.service.CartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -13,4 +20,15 @@ public class CartRestController {
 
     @Autowired
     private CartService cartService;
+
+    @PostMapping("/cart")
+    public ResponseEntity<Map<String, Boolean>> addToCart(@RequestBody CartDto cartDto) {
+        String cart_id = "cart_" + System.currentTimeMillis();
+        cartDto.setCart_id(cart_id);
+        boolean success = cartService.addToCart(cartDto);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("success", success);
+        return ResponseEntity.ok(response);
+    }
+
 }
