@@ -33,10 +33,6 @@ public class OrderController {
     @Autowired
     private UserService userService;
 
-
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/orderStatus")
 
     public String getOrderStatus(Model model) {
@@ -49,16 +45,6 @@ public class OrderController {
         return "orderStatus";
     }
 
-    @GetMapping("/orderCheck")
-    public String resOrderCheck(Model model){
-        List<OrderDto> orderdto = orderService.getOrder();
-        log.info("Get/restList called");
-
-    public void getOrderStatus() {
-
-    }
-
-
     @GetMapping("/orderCheck1")
     public String resOrderCheck1(Model model,@RequestParam(name = "order_id", required = true) String order_id) {
         log.info("Get/orderCheck1 called");
@@ -69,7 +55,7 @@ public class OrderController {
             dto = orderService.getSearchOrder(order_id);
             String u_email = dto.getU_email();
             System.out.println(u_email);
-            userdto = userService.SearchUser(u_email);
+            userdto = userService.userSearch(u_email);
             System.out.println("dto: "+ dto);
             System.out.println("userdto: "+ userdto);
             System.out.println("order_id: "+ order_id);
