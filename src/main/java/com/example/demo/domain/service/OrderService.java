@@ -34,7 +34,7 @@ public class OrderService {
 
     public OrderDto getSearchOrder(String order_id){
 
-        return mapper.selectOne(order_id);
+        return mapper.selectOne1(order_id);
     }
 
 

@@ -26,16 +26,18 @@
 <div id="warp">
   <div class="side_menu">
     <div class="ide_login">
-      <a href="#"> 안녕하세요! <strong >SEIN</strong>님</a>
+      <a href="/myPage"> 안녕하세요! <strong>SEIN</strong>님</a>
       <a href="#" class="close">&times;</a>
     </div>
     <div class="panner">
       <ul>
-        <li><a href="javascript:void(0);">홈</a></li>
-        <li><a href="javascript:void(0);">주문</a></li>
+        <li><a href="/">홈</a></li>
+        <li><a href="/cart">주문</a></li>
         <li><a href="javascript:void(0);">매장찾기</a></li>
-        <li><a href="javascript:void(0);">마이페이지</a></li>
-        <li><a href="javascript:void(0);">로그아웃</a></li>
+        <li><a href="/myPage">마이페이지</a></li>
+
+        <li><a sec:authorize="isAuthenticated()" href="/logout">로그아웃</a></li>
+
       </ul>
     </div>
   </div>
@@ -75,12 +77,12 @@
       </div>
 
       <h1 class="logo">
-        <a href="javascript:void(0);"><img src="/images/header_logo.png" alt= "로고"/></a>
+        <a th:href="@{/}"><img src="/images/header_logo.png" alt= "로고"/></a>
       </h1>
       <nav>
         <ul class="mainmenu">
           <li>
-            <a href="javascript:void(0);">홈</a>
+            <a href="/index copy">홈</a>
             <div class="sub_menu">
               <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
               <ul class="drop_list">
@@ -91,15 +93,16 @@
               </ul>
             </div>
           </li>
-          <li><a href="javascript:void(0);">주문</a></li>
-          <li><a href="javascript:void(0);">마이페이지</a></li>
+          <li><a href="/cart">주문</a></li>
+          <li><a href="/mypage">마이페이지</a></li>
         </ul>
       </nav>
       <div class="quick_menu">
-        <a href="javascript:void(0);">SEIN 님</a>
-        <a href="javascript:void(0);"><img src="/images/storage.png" alt="장바구니"></a>
-        <a href="javascript:void(0);"><img src="/images/login.png" alt="로그아웃"></a>
-        <a href="javascript:void(0);" class="location"><img src="./images/location.png" alt="지도찾기"></a>
+        <a th:href="@{/myPage}">SEIN 님</a>
+        <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
+        <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
+        <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
       </div>
     </div>
   </header>
@@ -150,9 +153,9 @@
               <div class="menu-details">
                 <p>비건 마라, 오늘의 베스트</p>
                 <!--th:text="${Menu-name}-->
-                <ul th:each="select: ${#strings.listSplit(orders.selecte_option,',') }" class="selecte">
-                  <li th:text="${orders.selecte_option}">고기추가 : 1000원</li>
-                  <li th:text="${orders.selecte_option}">맛선택 : 중간맵기</li>
+                <ul th:each="select: ${#strings.listSplit(orders.select_option,',') }" class="select">
+                  <li th:text="${orders.select_option}">고기추가 : 1000원</li>
+                  <li th:text="${orders.select_option}">맛선택 : 중간맵기</li>
                 </ul>
               </div>
             </td>
