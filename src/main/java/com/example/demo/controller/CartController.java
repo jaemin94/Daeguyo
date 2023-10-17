@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.daeguyo.CartDto;
 
+import com.example.demo.domain.daeguyo.PaymentDto;
 import com.example.demo.domain.service.CartService;
 import com.example.demo.domain.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -46,11 +47,6 @@ public class CartController {
         for (CartDto option : options) {
             total += option.getPrice() * option.getCount();
         }
-
-        PrincipalDetails principal = (PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("u_email", principal.getUsername());
-        model.addAttribute("nickname", principal.getNickname());
-        model.addAttribute("phone", principal.getPhone());
         model.addAttribute("total", total);
         model.addAttribute("options",options);
 
@@ -66,15 +62,6 @@ public class CartController {
         return detail; // HTTP 상태 코드 200(OK)을 반환합니다.
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<CartDto> createOrder(@RequestBody CartDto cartDto) {
-        try {
-            cartService.addOrder(cartDto);
-            return new ResponseEntity<>(cartDto, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
     @PostMapping("/cart/delete")
     @ResponseBody

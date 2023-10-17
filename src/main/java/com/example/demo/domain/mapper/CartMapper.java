@@ -43,4 +43,7 @@ public interface CartMapper {
     @Delete("DELETE FROM tbl_cart WHERE u_email = #{u_email}")
     void deleteByUEmail(String u_email);
 
+    @Insert("insert into tbl_cart values (#{cart_id}, #{u_email}, #{menu_id}, #{count}, #{selected_option})")
+    public int insertCart(CartDto cartDto);
+
 }

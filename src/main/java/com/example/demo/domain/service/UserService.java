@@ -59,6 +59,35 @@ public class UserService {
         return orderMapper.userOrderCount(u_email);
     }
 
+
+    public UserDto getUserInfoByEmail(String email) {
+        return mapper.selectOne(email);
+
+    }
+    public int memberUpdate(UserDto dto){
+        System.out.println(dto);
+        if (dto.getPassword() != null&&dto.getAddr()!=null){
+            String encryptedPassword = passwordEncoder.encode(dto.getPassword());
+            dto.setPassword(encryptedPassword);
+            return mapper.updateUserall(dto);
+
+        }
+        else if(dto.getPassword() != null) {
+            String encryptedPassword = passwordEncoder.encode(dto.getPassword());
+            dto.setPassword(encryptedPassword);
+            return mapper.updateUsernoaddr(dto);
+        }
+        else if (dto.getAddr() != null) {
+            return mapper.updateUserwithAddr(dto);
+        }else {
+            return mapper.updateUserSimple(dto);
+        }
+    }
+    public int memberDelete( String u_email){
+        log.info(u_email);
+        return mapper.deleteUser(u_email);
+
+    }
 }
 
 

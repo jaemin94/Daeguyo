@@ -154,7 +154,7 @@ main>.section_join_header {
   outline: none;
 }
 
-.name_input>#name {
+.name_input>#nickname {
   width: 950px;
   height: 50px;
   font-size: 20px;

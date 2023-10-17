@@ -4,6 +4,7 @@ package com.example.demo.domain.mapper;
 import com.example.demo.domain.daeguyo.OrderDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -30,11 +31,6 @@ public interface OrderMapper {
     @Select("select count(*) from tbl_order where u_email=#{u_email}")
     public int userOrderCount(String u_email);
 
-
-    @Insert("")
-    public int insertOrder();
-    @Update("")
-    public int updateOrder();
 
     @Delete("DELETE FROM tbl_order1 WHERE order_id = #{order_id}")
     int delete(String order_id);
