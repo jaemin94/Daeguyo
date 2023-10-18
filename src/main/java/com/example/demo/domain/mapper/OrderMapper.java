@@ -2,10 +2,9 @@ package com.example.demo.domain.mapper;
 
 
 import com.example.demo.domain.daeguyo.OrderDto;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.*;
 import org.springframework.data.jpa.repository.Query;
+import org.testng.annotations.Optional;
 
 import java.util.List;
 import java.util.Map;
@@ -35,6 +34,7 @@ public interface OrderMapper {
     @Delete("DELETE FROM tbl_order1 WHERE order_id = #{order_id}")
     int delete(String order_id);
 
-
+    @Insert("INSERT INTO tbl_order (order_id, u_email, menu_id, res_id, selecte_option, order_amount, total_price, order_status, order_date) VALUES (#{order_id}, #{u_email}, #{menu_id}, #{res_id}, #{selected_option}, #{order_amount}, #{total_price},  #{order_status}, #{order_date})")
+    public int insertOrder(OrderDto orderData);
 
 }

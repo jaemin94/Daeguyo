@@ -3,11 +3,12 @@ package com.example.demo.domain.daeguyo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.criterion.Order;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartDto {
+public class CartDto extends OrderDto {
 
     private String cart_id;
     private String u_email;
@@ -16,5 +17,5 @@ public class CartDto {
     private String selected_option;
     private String res_id;
     private int price;
-    private int total_price;
+
 }

@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderDto {
+public class OrderDto{
 
     private String order_id;
-    private String counpon_id;
+    private String coupon_id;
     private String u_email;
     private String menu_id;
     private String res_id;
-    private String select_option;
+    private String selecte_option;
     private int order_amount;
     private int total_price;
     private String order_status;

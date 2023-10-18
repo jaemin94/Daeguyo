@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/payorder","/payment/save","/selectOptions","/updateOrder","/cartdelete").permitAll()
 				.antMatchers("/sms/send","/checkPhone","/sendEmail","/checkEmail").permitAll()
 				.antMatchers("/cart","/memberJoin","/menu_catagory","/myPage","/orderStatus","/review_tab","/selectRest","/memberUpdate","/login").permitAll()
-				.antMatchers("/resCheck","/orderCheck","/orderCheck1").permitAll()
+				.antMatchers("/resCheck","/orderCheck","/orderCheck1","/create").permitAll()
 
 
 																				// hasRole을 사용시 기본적으로 Role_ 이 제공된다

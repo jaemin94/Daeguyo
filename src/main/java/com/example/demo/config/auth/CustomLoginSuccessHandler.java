@@ -15,44 +15,37 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException, ServletException {
-		
+										Authentication authentication) throws IOException, ServletException {
+
 		System.out.println("CustomLoginSuccessHandler's onAuthenticationSuccess");
 		Collection<? extends GrantedAuthority> collection = authentication.getAuthorities();
 		collection.forEach((role)->{
-			
+
 			System.out.println(role);
 			String role_str=role.getAuthority();
-
-			PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-			String member_id = principal.getUsername();
-			String nickname = principal.getUserNickname();
-			String phone = principal.getUserPhoneNumber();
+			String member_id = authentication.getName();
 			System.out.println("member_id : " + member_id);
 			System.out.println(role_str);
 			request.getSession().setAttribute("role", role_str);
 			request.getSession().setAttribute("username", member_id);
-			request.getSession().setAttribute("nickname", nickname);
-			request.getSession().setAttribute("phone", phone);
-			System.out.println(nickname);
 
 
 			try {
-			if(role_str.equals("ROLE_User"))
-			{
-				System.out.println("USER 페이지로 이동!");
-				
+				if(role_str.equals("ROLE_User"))
+				{
+					System.out.println("USER 페이지로 이동!");
+
 					response.sendRedirect(request.getContextPath()+"/");
-			}else if(role_str.equals("ROLE_Member"))
-			{
-				System.out.println("Member 페이지로 이동!");
-				response.sendRedirect(request.getContextPath()+"/");
-			}else if(role_str.equals("ROLE_Admin"))
-			{
-				System.out.println("Admin 페이지로 이동!");
-				response.sendRedirect(request.getContextPath()+"/");
-			}
-			
+				}else if(role_str.equals("ROLE_Member"))
+				{
+					System.out.println("Member 페이지로 이동!");
+					response.sendRedirect(request.getContextPath()+"/");
+				}else if(role_str.equals("ROLE_Admin"))
+				{
+					System.out.println("Admin 페이지로 이동!");
+					response.sendRedirect(request.getContextPath()+"/");
+				}
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

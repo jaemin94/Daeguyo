@@ -15,6 +15,10 @@ public interface ResMapper {
     public ResDto selectOne(String res_id);
     @Select("select * from tbl_res where food_catagory =#{food_catagory}")
     public List<ResDto> selectCatagory(String food_catagory);
+
+    @Select("SELECT res_name FROM tbl_res where res_id = #{res_id}")
+    ResDto search_res_name(String res_id);
+
     @Insert("")
     public int insertRes();
     @Update("")

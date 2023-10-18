@@ -1,8 +1,6 @@
 package com.example.demo.domain.mapper;
 
-import com.example.demo.domain.daeguyo.CartDto;
-import com.example.demo.domain.daeguyo.CouponDto;
-import com.example.demo.domain.daeguyo.OrderDto;
+import com.example.demo.domain.daeguyo.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -44,6 +42,15 @@ public interface CartMapper {
     @Insert("insert into tbl_cart values (#{cart_id}, #{u_email}, #{menu_id}, #{count}, #{selected_option})")
     public int insertCart(CartDto cartDto);
 
-    @Update("UPDATE tbl_coupons SET status = 'y', expiredDate = NOW() WHERE coupon_id = #{coupon_id} ")
+    @Update("UPDATE tbl_coupons SET status = 'y' WHERE coupon_id = #{coupon_id} ")
     void UpdateCoupon(CouponDto cdto);
+
+
+
+
+
+
+
+
+
 }

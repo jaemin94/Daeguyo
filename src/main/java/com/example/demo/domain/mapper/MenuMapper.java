@@ -22,6 +22,9 @@ public interface MenuMapper {
     @Select("SELECT res_id FROM tbl_menu WHERE menu_id = #{menu_id}")
     String findResIdByMenuId(String menu_id);
 
+    @Select("SELECT menu_name FROM tbl_menu where menu_id = #{menu_id}")
+    MenuDto search_menu_name(String menu_id);
+
     @Insert("")
     public int insertMenu();
     @Update("")
