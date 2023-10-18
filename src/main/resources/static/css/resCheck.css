@@ -1,50 +1,53 @@
-
-/* main css */
-.main-container {
-  height: 400px; 
+.align {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
   position: relative;
+  padding: 0 20px;
 }
-
-.orderSection {
-  display: flex; 
-  justify-content: center; 
-  align-items: center;
-  flex-direction: column; 
-  width: 700px;
-}
-
 .navigationLinks {
-  position: absolute; 
-  right: 0; 
-  top: 0; 
-  margin-top: 30px;
+  height: 80px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-right: 80px;
 }
-
-.infoBox {
- width: 700px;
- height: 90px; 
- background-color: #ffffff;
- display: flex;
- justify-content: center;
- align-items: center;
- margin-top: 60px;
- font-size: 25px;
-}
-
 .cart-link{
   color: #01cafe;
 }
 
+/* main css */
+
+.orderSection {
+  padding-top: 50px;
+   height: fit-content; 
+}
+
+.infoBox {
+ height: 90px; 
+ width: 100%;
+ display: flex;
+ justify-content: start;
+ align-items: center;
+ margin-top: 100px;
+ margin-bottom: 0px;
+ font-size: 25px;
+}
+
+
 .infoImage {
- width :50px;
+ width :50px;;
  height :50px;
- margin-right :20px ;
+ margin :15px ;
 }
 
 
 .highlightText{
-color:#01cafe;
-
+  color:#01cafe;
+  font-weight: 700;
+  font-size: 26px;
 }
 
 .cart__title1 {
@@ -58,7 +61,7 @@ color:#01cafe;
   top: 0;
   color: white;
   text-align: center;
-  font-size: 15px;
+  font-size: 24px;
 }
 
 .cart__title2 {
@@ -71,85 +74,138 @@ color:#01cafe;
   padding-right: 100px;
   border-radius: 50px;
   background: #dfdfdf;
-  font-size: 15px;
+  font-size: 24px;
 }
 
 .howMOP {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top:50px;
 }
 
 .highlightText {
   color:#01cafe;
 }
 
-/* main css */
+.order-id-div{
+  display: flex;
+  height: 40px;
+  justify-content: end;
+  margin-bottom: 30px;
+}
 
+.order-id-div>input{
+  font-size: 20px;
+  font-family: "Noto Sans KR";
+  border: 1px solid rgb(147, 147, 147);
+  border-radius: 5px;
+}
+.order-id-div> #order_id{
+  width: 250px;
+  margin-right: 10px;
+}
+.order-id-div> #submit_id{
+  width: 70px;
+  border: none;
+  background-color: #01cafe;
+  color: white;
+  border-radius: 5px;
+}
+/* main css */
+li{
+  list-style: none;
+}
 
 /* section 1 css */
 .order-container {
-  height: 400px; 
+  height: fit-content; 
   display: flex; 
   justify-content: center; 
   align-items: center;
+  margin: 50px 0px;
+  margin-top: 10px;
 }
 
 .order-details {
- width: 700px;
- height: 350px;
+ width: 100%;
+ padding: 25px 20px;
+ height: fit-content;
  background-color:#ffffff;
  display:flex;
  flex-direction :column; 
  gap: 10px; 
  align-items: center; 
- justify-content: center;
+ justify-content: space-around;
 }
 
 .order-title {
-  margin-top: 30px;
+  padding-bottom: 20px;
+   border-bottom: 5px solid #68e1ff;
+   width: 100%;
+   text-align: center;
 }
 
 .order-title h2 {
    font-size :25px;
-   margin-bottom: 10px;
-}
-
-.title-line{
-   width :650px;margin:auto;
 }
 
 .order-list{
-   display:flex; flex-direction :column; justify-content:center;width:
-   600px;height:
-   100%;gap:
-   40px;
+  height: fit-content;
+  gap:20px;
+  width: 90%;
 
 }
 .order-item{
-    display:flex ;justify-content :space-between
+    display:flex;
+    justify-content :space-between;
+    border-bottom: 1px dashed #000000;
+    margin-bottom: 10px;
 }
-.order-item li{
-    font-size :20px;
-
+.order-menu{
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
 }
-.order-item span:last-child{
-     font-size :15px;
-     color :gray;
-
+.ul1{
+    font-size :23px;
+    color: black;
+    font-weight: 500;
+    margin: 10px;
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px dashed;
+  }
+.ul2{
+  font-size: 18px;
+  width: 75%;
+  padding: 5px;
+  border-right: 1px dashed;
+  margin: 10px;
+}
+.m-price{
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin: 10px;
 }
 /* section 1 css */
 
 
 /* section 2 css */
 .delivery-section{
-  height: 400px; 
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 .delivery-section>.delivery-container{
-  width: 700px; 
-  height: 350px;  
+  height: fit-content;  
+  padding: 25px 20px;
+  width: 100%;
   background-color:#ffffff;
   display:flex;
   flex-direction :column; 
@@ -157,39 +213,36 @@ color:#01cafe;
   align-items: center; 
   justify-content: center; 
 }
-.delivery-section>.delivery-container>.delivery-header{
-  margin-top: 30px;
-  
+.delivery-header{
+  padding-bottom: 20px;
+  border-bottom: 5px solid #dbdedf;
+  width: 100%;
+  text-align: center;
 }
 
-.delivery-section>.delivery-container>.delivery-header>.delivery-title{
+.delivery-title{
   font-size: 25px;
+}
+
+.info-container{
+  height: fit-content;
+  gap:20px;
+  width: 90%;
+  position: relative;
+}
+
+.info-item{
+  display:flex;
+  justify-content :space-between;
+  border-bottom: 1px dashed;
   margin-bottom: 10px;
 }
-.delivery-section>.delivery-container>.delivery-header>.header-line{
-  width: 650px;
-  margin: auto;
-}
-.delivery-section>.delivery-container>.info-container{
-  display:flex; 
-  flex-direction :column; 
-  justify-content:center;  
-  width: 600px; 
-  height: 100%; 
-  gap: 40px;
-}
-.delivery-section>.delivery-container>.info-container>.info-item{
-  display:flex; 
-  gap: 30px;
-}
-.delivery-section>.delivery-container>.info-container>.info-item>.buyer,.phone,.addr{
-  font-size: 20px;
-  color: gray;
-  white-space: nowrap;
-}
 
-.delivery-section>.delivery-container>.info-container>.info-item>.buyer1,.phone1,.addr1{
-  font-size: 20px; 
+.buyer1,.phone1,.addr1{
+  border-right: none;
+  width: 100%;
+  margin: 20px;
+
 }
 
 
@@ -198,26 +251,29 @@ color:#01cafe;
 
 .payBtn{
   display: flex;
-  justify-content: center; 
+  justify-content: space-between; 
   align-items: center; 
-  gap: 10px;  
-  flex-direction: column;
+  gap: 10px;
+  margin: 0 auto;  
+  width: 55%;
 }
 .payCancel {
-    width: 700px;
+  font-family: "Noto Sans KR";
+  width: 300px;
     height: 60px;
     color: #ffffff;
     background-color: #363636;
     border: none;
-    font-size: 17px;
+    font-size: 24px;
 }
 .payOk {
-    width: 700px;
+  width: 300px;
+    font-family: "Noto Sans KR";
     height: 60px;
     color: #ffffff;
     background-color: #01cafe;
     border: none;
-    font-size: 17px;
+    font-size: 24px;
 }
 
 

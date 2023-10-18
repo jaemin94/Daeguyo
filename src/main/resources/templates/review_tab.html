@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/review_tab.css" />
   <!-- 구글아이콘 -->
-
+<!--  !!!!!!!!!!!!!!!!!!!!!이 밑에 fontawesome link 추가 부탁드려욤!!!!!!!!!!!!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -108,6 +109,27 @@
       </div>
     </div>
   </header>
+
+  <main>
+    <div class="main-img">
+      <img th:src="${res.res_main_image}" alt="res-menu-main" class="menu-main-img">
+    </div>
+  </main>
+
+<!-- 여기서부터 -->
+  <section class="res-main-info-sec">
+    <input type="hidden" th:value="${res.res_id}" id="data-res-id">
+    <div class="res-main-info">
+      <p th:text="${res.res_name}" class="res-name"></p>
+
+      <div class="star-ratings star">
+        <!-- controller에서 받아온 List 크기 만큼 별들을 출력-->
+        <i th:each="star : ${fullStarsList}" class="fas fa-star"></i>
+        <i th:each="star : ${halfStarsList}" class="fas fa-star-half-alt"></i>
+        <i th:each="star : ${emptyStarsList}" class="far fa-star"></i>
+      </div>
+      <!-- 여기까지 -->
+
 
 
 
