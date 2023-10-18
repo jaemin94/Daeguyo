@@ -66,6 +66,14 @@ public class UserController {
         }
     }
 
+    @GetMapping("/memberUpdate")
+    public String memberUpdate( Model model, String email) {
+        UserDto userDto = userService.getUserInfoByEmail(email);
+        System.out.println(userDto);
+        model.addAttribute("user", userDto);
 
+        return "memberUpdate";
+
+    }
 
 }

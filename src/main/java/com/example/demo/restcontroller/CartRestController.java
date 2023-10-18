@@ -21,6 +21,15 @@ public class CartRestController {
     @Autowired
     private CartService cartService;
 
+    @PostMapping("/updateOrder")
+    @ResponseBody
+    public void updateOrder(@RequestBody CartDto dto) {
+        System.out.println(dto.getCount());
+        cartService.updateOrderAmount(dto);
+
+
+    }
+  
     @PostMapping("/cart")
     public ResponseEntity<Map<String, Boolean>> addToCart(@RequestBody CartDto cartDto) {
         String cart_id = "cart_" + System.currentTimeMillis();
@@ -30,5 +39,6 @@ public class CartRestController {
         response.put("success", success);
         return ResponseEntity.ok(response);
     }
+
 
 }

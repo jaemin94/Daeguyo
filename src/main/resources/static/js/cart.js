@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
   var swiper1 = new Swiper(".mySwiper", {
     spaceBetween: 30,
@@ -183,3 +181,142 @@ locationElement.addEventListener('click', function() {
 
 
       window.onload = myFunction; // 페이지 로드 시에 지도 초기화
+
+
+ function handlePayment(cart_id){
+
+
+       axios.post('/user/details', { cart_id : cart_id })
+           .then(function (userDetailsResponse) {
+               var data = userDetailsResponse.data;
+               var orderName = data.res_id;
+               var totalAmount = parseInt(document.getElementById('amount_price').innerHTML.split("원")[0]);
+               var customer = {
+                   customerId: data.nickname,
+                   phoneNumber: data.phone
+               };
+               var paymentId = 'paymentId' + new Date().getTime();
+
+               PortOne.requestPayment({
+                   storeId: 'store-e41c5842-2d91-4a60-90bf-3b70da11378f',
+                   paymentId: paymentId,
+                   orderName: orderName,
+                   totalAmount: totalAmount,
+                   customer: customer,
+                   currency: 'CURRENCY_KRW',
+                   channelKey: 'channel-key-d184ee7f-a639-44ef-81b3-d1aeb4eba934',
+                   payMethod: "CARD",
+               }).then(function(response) {
+                      if (response.transactionType === "PAYMENT") {
+
+                         var PaymentData = {
+                              payment_id: paymentId,  // 위에서 생성한 paymentId 사용
+                              order_id: "temp_order_id",  // 실제 주문 ID로 대체해야 함.
+                              pay_method:"CARD",
+                              pay_date:new Date(),
+                              pay_status:"Waiting"
+                          };
+
+                          axios.post('/payment/save', PaymentData)
+                               .then(function(response) {
+                                   console.log('Payment data saved successfully.');
+                               })
+                               .catch(function(error) {
+                                   console.error('Error saving payment data:', error);
+                               });
+                      } else {
+                         console.error('Payment failed:', response);
+                      }
+                  }).catch(function (error) {
+                      console.error('Error:', error);
+                  });
+           }).catch(function (error) {
+              console.error('Error:', error);
+          });
+   });
+
+
+
+     function decreaseAmount(buttonElement) {
+           var amountSpan = buttonElement.nextElementSibling;
+           var currentAmount = parseInt(amountSpan.textContent);
+
+           if (currentAmount > 0) { // Change this condition if you want a minimum limit other than 0
+               amountSpan.textContent = currentAmount - 1;
+           }
+       }
+
+       function increaseAmount(buttonElement) {
+           var amountSpan = buttonElement.previousElementSibling;
+           var currentAmount = parseInt(amountSpan.textContent);
+
+           amountSpan.textContent = currentAmount + 1;
+       }
+
+
+
+
+
+       function changeAmount(buttonElement, delta, cart_id, price) {
+               var amountSpan = buttonElement.className === 'minus' ? buttonElement.nextElementSibling : buttonElement.previousElementSibling;
+               var currentAmount = parseInt(amountSpan.textContent);
+
+               if (currentAmount + delta >= 0) { // Change this condition if you want a minimum limit other than 0
+                   amountSpan.textContent = currentAmount + delta;
+
+                    axios.post('/updateOrder', { cart_id : cart_id , count : currentAmount + delta})
+                   .then(function (response) {
+
+                     var all_price = parseInt(document.getElementById('amount_price').innerHTML.split("원")[0]);
+
+                   if(delta < 0){
+                     document.getElementById('amount_price').innerText = (all_price  - price) +  "원";
+                   }else{
+                     document.getElementById('amount_price').innerText = (all_price + price) +  "원";
+                   }
+                   $(".total_price span:last-child").text( (document.getElementById('amount_price').innerHTML.split("원")[0]) + "원");
+
+
+                   })
+
+                   .catch(function (error) {
+                       // Handle error here
+                       console.error(error);
+                   });
+           }
+
+
+           }
+
+
+            $(document).ready(function() {
+                   var total = 0;
+
+                   // 모든 .price 요소를 순회하면서 가격을 합산
+                   $(".price").each(function() {
+                       var price = $(this).text();
+                       // price 문자열에서 콤마와 원 단위 제거 후 숫자로 변환
+                       price = parseInt(price.replace(/,/g, "").replace("원", ""));
+
+                       if (!isNaN(price)) { // 숫자인 경우만 합산
+                           total += price;
+                       }
+                   });
+
+                   // 총 상품금액 표시 업데이트 (콤마와 원 단위 추가)
+           <!--        $(".total_price span:last-child").text(total.toLocaleString() + "원");-->
+               });
+
+
+
+                function orderdelete(cartId){
+                       axios.post('/cart/delete', { cart_id : cartId })
+                           .then(function (response) {
+                               // Handle successful response here
+                               console.log(response);
+                           })
+                           .catch(function (error) {
+                               // Handle error here
+                               console.error(error);
+                           });
+                   }

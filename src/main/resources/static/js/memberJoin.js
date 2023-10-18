@@ -254,7 +254,7 @@ const checkBtn = document.getElementById("check");
 
 // 휴대폰 인증번호 확인
 phoneBtn.addEventListener("click",function(){
-document.getElementById('popup').classList.remove('hidden');
+document.getElementById('popup').classList.remove('phidden');
 
 checkBtn.addEventListener("click",function(){
 var phoneNum = document.getElementById("phoneNumber").value;
@@ -269,7 +269,7 @@ axios.get("/checkPhone?phoneNum=" + phoneNum)
         if (userInput === String(serverVerificationCode)) {
             // 인증이 성공한 경우
             alert('인증이 성공했습니다.');
-            document.getElementById('popup').classList.add('hidden');
+            document.getElementById('popup').classList.add('phidden');
         } else {
             // 인증이 실패한 경우
             alert('인증이 실패했습니다.');
@@ -325,7 +325,7 @@ const checkBtn1 = document.getElementById("check1");
 
 // 이메일 인증번호 확인
 emailBtn.addEventListener("click",function(){
-document.getElementById('popup1').classList.remove('hidden1');
+document.getElementById('popup1').classList.remove('ehidden');
 
 checkBtn1.addEventListener("click",function(){
     var emailInput1 = document.getElementById("email_id").value;
@@ -343,7 +343,7 @@ axios.get("/checkEmail?email=" + fullEmail1)
         if (userInput1 === String(serverVerificationCode1)) {
             // 인증이 성공한 경우
             alert('인증이 성공했습니다.');
-            document.getElementById('popup1').classList.add('hidden1');
+            document.getElementById('popup1').classList.add('ehidden');
         } else {
             // 인증이 실패한 경우
             alert('인증이 실패했습니다.');

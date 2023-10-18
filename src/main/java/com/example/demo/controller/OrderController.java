@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
 
+import lombok.extern.slf4j.Slf4j;
+
+
 
 import com.example.demo.domain.daeguyo.OrderDto;
 import com.example.demo.domain.daeguyo.ResDto;
@@ -12,6 +15,7 @@ import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,20 +29,16 @@ import java.util.Map;
 
 @Controller
 @Slf4j
-@RequestMapping()
+@RequestMapping("")
 public class OrderController {
+
 
     @Autowired
     private OrderService orderService;
     @Autowired
     private UserService userService;
 
-
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/orderStatus")
-
     public String getOrderStatus(Model model) {
         List<OrderDto> orders = orderService.getAllOrders();
        // UserDto users = userDetails.getUser(); // 로그인한 사용자 정보 가져오기
@@ -48,16 +48,6 @@ public class OrderController {
         //log.info("사용자 목록을 모델에 추가: " + users);
         return "orderStatus";
     }
-
-    @GetMapping("/orderCheck")
-    public String resOrderCheck(Model model){
-        List<OrderDto> orderdto = orderService.getOrder();
-        log.info("Get/restList called");
-
-    public void getOrderStatus() {
-
-    }
-
 
     @GetMapping("/orderCheck1")
     public String resOrderCheck1(Model model,@RequestParam(name = "order_id", required = true) String order_id) {
@@ -69,7 +59,7 @@ public class OrderController {
             dto = orderService.getSearchOrder(order_id);
             String u_email = dto.getU_email();
             System.out.println(u_email);
-            userdto = userService.SearchUser(u_email);
+            userdto = userService.userSearch(u_email);
             System.out.println("dto: "+ dto);
             System.out.println("userdto: "+ userdto);
             System.out.println("order_id: "+ order_id);
@@ -80,8 +70,9 @@ public class OrderController {
 
 
         return "resCheck";
-
     }
+
+
     @GetMapping("/orderCheck")
     public String resOrderCheck(Model model,@RequestParam(name = "order_id", required = false) String order_id) {
         log.info("Get/orderCheck called");
@@ -96,3 +87,16 @@ public class OrderController {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

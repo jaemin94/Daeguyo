@@ -14,5 +14,6 @@ public class CartDto {
     private String menu_id;
     private int count;
     private String selected_option;
-
+    private String res_name;
+    private int price;
 }

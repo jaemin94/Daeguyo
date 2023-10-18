@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,8 +15,9 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    
-    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
   </head>
   <body>
   <div id="warp">
@@ -40,6 +43,7 @@
           <input value="지번, 도로, 건물명으로 검색" />
           <button>검색</button>
         </div>
+
 
         <div class="current_location_group">
           <img src="/images/gps.png" alt="" class="gps">
@@ -98,93 +102,65 @@
         </div>
       </div>
     </header>
-    <div class="main_board">
+
+    <div  class="main_board">
       <div class ="order">
         <span>주문/결제</span>
-       
+
         <span>주문완료</span>
-     
-        
+
+
       </div>
-      <div class="menu_container">
-          
-          <div class="main_name">
-              하와이안 이탈리아
+      <div  class="menu_container">
+
+          <div th:text="${options[0].res_name}"  class="main_name" id="res-id">
+
           </div>
-          <div class="main_menu">
-              <div class="menu_image">
+        <div  th:each="option : ${options}"  class="main_menu">
+              <div class="menu_image" id="${option.cart_id}">
                   <img src="/images/sectionbg_02.jpg">
               </div>
               <div class="menu_name">
                 <div class="menu_name_box">
-                  <span>깐풍탕수 少</span>
+                  <span id="" th:text="${option.menu_name}"></span>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
                     <label class="form-check-label" for="flexCheckChecked">
-                     
+
                     </label>
                   </div>
-                  <button id = "delete">X</button> 
+                  <button id="delete"  th:onclick="orderdelete([[${option.cart_id}]]);">X</button>
+
                 </div>
-                
-                 
-                  
+
+
+
                   <div class="name_price">
                       <ul>
                           <li>
-                            <span>맵기선택 : 1단계 순한맛</span>
-                            <div class="price">10,000원</div>
+                            <span th:text="${#strings.replace(option.selected_option, ',', ' ')}"></span>
+                            <div th:text="${option.price}"class="price"></div>
                             <button class="option">옵션변경</button>
                             <div class="quantity">
-                              <button class="minus">ㅡ</button>
-                              <span>1</span>
-                              <button class="plus">+</button>
-                              </div>
+                              <button class="minus" th:onclick="changeAmount(this, -1, ([[${option.cart_id}]]),([[${option.price}]]))">ㅡ</button>
+                              <span class="amount" th:text="${option.count}" data-cart-id ="${option.cart_id}"></span>
+                              <button class="plus" th:onclick="changeAmount(this, 1, ([[${option.cart_id}]]),([[${option.price}]]))" >+</button>
+                            </div>
                           </li>
                       </ul>
                   </div>
-                 
+
 
               </div>
 
           </div>
-               
-              <div class="main_menu">
-                <div class="menu_image"><img src="/images/sectionbg_01.jpg"></div>
-                <div class="menu_name">
-                  <div class="menu_name_box">
-                    <span>샐러드파스타</span>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                      <label class="form-check-label" for="flexCheckChecked">
-                       
-                      </label>
-                    </div>
-                    <button id = "delete">X</button> 
-                  </div>
-                  
-                  <div class="name_price">
-                    <ul>
-                      <li>
-                        <span>맵기선택 : 1단계 순한맛</span>
-                        <span>추가 : 곱배기</span>
-                        <div class="price">12,000원</div>
-                        <button class="option">옵션변경</button>
-                        <div class="quantity">
-                          <button class="minus">ㅡ</button>
-                          <span>1</span>
-                          <button class="plus">+</button>
-                          </div>
-                      </li>
-                  </ul>
-                  </div>
-                </div>
-              </div>
+
+
               <div class="menu_add">
                 <img src="/images/storage.png" alt=""> &nbsp;
                 <span>더 담으러 가기</span>
               </div>
-            </div>   
+            </div>
                 <div class="menu_container2">
                     <div class="main_menu_container2">
                       <div class="cart_main">장바구니상품</div>
@@ -192,7 +168,8 @@
                         <ul>
                           <li>
                             <span>상품금액</span>
-                            <span>22,000원</span>
+                            <span id ="amount_price" th:text="${total}+'원'"></span>
+
                           </li>
                           <li>
                             <span>배달팁</span>
@@ -208,23 +185,222 @@
                        <ul>
                         <li>
                             <span>총 상품금액</span>
-                            <span>24,000원</span>
+                          <span id ="amount_price" th:text="${total}+'원'"></span>
                         </li>
                        </ul>
                       </div>
                     </div>
                   </div>
-                  
-                    <button class = "pay">결제하기</button>
-                 
-              
-             
+
+      <span id="u_email" style="display: none;" data-u-email="${u_email}"></span>
+      <span id="nickname" style="display: none;" data-nickname="${nickname}"></span>
+      <span id="phone" style="display: none;" data-phone="${phone}"></span>
+
+      <button class="pay" th:onclick="handlePayment([[${options[0].cart_id}]])">결제하기</button>
+
+
+
 
     </div>
   </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="/js/index.js"></script>
-    
   </body>
+  <script>
+    function handlePayment(cart_id) {
+     let uEmail = document.getElementById('u_email').dataset.uEmail;
+     let nickname = document.getElementById('nickname').dataset.nickname;
+     let phone = document.getElementById('phone').dataset.phone;
+     let resId = document.getElementById('res_name').innerText;
+
+     var orderName = resId;
+     var totalAmount = parseInt(document.getElementById('amount_price').innerHTML.split("원")[0].replace(/,/g, ''));
+
+     var customer = {
+         customerId: nickname,
+         phoneNumber: phone
+     };
+
+     var paymentId = 'paymentId' + new Date().getTime();
+
+                 PortOne.requestPayment({
+                     storeId: 'store-e41c5842-2d91-4a60-90bf-3b70da11378f',
+                     paymentId: paymentId,
+                     orderName: orderName,
+                     totalAmount: totalAmount,
+                     customer: customer,
+                     currency: 'CURRENCY_KRW',
+                     channelKey: 'channel-key-d184ee7f-a639-44ef-81b3-d1aeb4eba934',
+                     payMethod: "CARD",
+                 }).then(function (response) {
+                         if (response.transactionType === "PAYMENT") {
+
+                             var PaymentData = {
+                                 payment_id: paymentId,  // 위에서 생성한 paymentId 사용
+                                 order_id: " ",  // 실제 주문 ID로 대체해야 함.
+                                 pay_method:"CARD",
+                                 pay_date:new Date(),
+                                 pay_status:"Waiting"
+                             };
+
+                             axios.post('/payment/save', PaymentData)
+                     .then(function(response) {
+                         console.log('Payment data saved successfully.');
+
+                         // UUID for the orderId
+              let orderId = 'orderId-' + new Date().getTime();
+
+              // Get menu items from the page
+              let menuItems = document.querySelectorAll('.main_menu');
+
+              menuItems.forEach(function(menuItem) {
+                  // Read necessary information from the menuItem element
+                  let menuNameElement = menuItem.querySelector('.menu_name_box span');
+                  let selectedOptionElement = menuItem.querySelector('.name_price ul li span:first-child');
+                  let countElement = menuItem.querySelector('.quantity .amount');
+
+                  if (menuNameElement && selectedOptionElement && countElement) {
+                      // Create a cartDto object for this menu item and send it to server
+
+                      var cartDto ={
+                         order_id : orderId,
+                         u_email : uEmail,
+                         menu_name : menuNameElement.innerText,
+                         res_name : resId,
+                         selected_option : selectedOptionElement.innerText,
+                         count : countElement.innerText,
+                         total_price : totalAmount,  // This should be changed to the price of this particular item if available
+                         coupon_id :"1",
+                         order_status : PaymentData.pay_status,
+                         order_date : PaymentData.pay_date
+                       }
+
+                       axios.post('/create', cartDto)
+                            .then(function(response) {
+                                console.log('Order created successfully.');
+                            })
+                                          .catch(function(error) {
+                                              console.error('Error creating order:', error);
+                                          });
+                                  })
+                                  .catch(function(error) {
+                                      console.error('Error saving payment data:', error);
+                                  });
+                         } else {
+                             console.error('Payment failed:', response);
+                         }
+                   }).catch(function (error) {
+                       console.error('Error:', error);
+                   });
+             }).catch(function (error) {
+                console.error('Error:', error);
+            });
+     }
+
+  </script>
+
+  <script>
+    function decreaseAmount(buttonElement) {
+        var amountSpan = buttonElement.nextElementSibling;
+        var currentAmount = parseInt(amountSpan.textContent);
+
+        if (currentAmount > 0) { // Change this condition if you want a minimum limit other than 0
+            amountSpan.textContent = currentAmount - 1;
+        }
+    }
+
+    function increaseAmount(buttonElement) {
+        var amountSpan = buttonElement.previousElementSibling;
+        var currentAmount = parseInt(amountSpan.textContent);
+
+        amountSpan.textContent = currentAmount + 1;
+    }
+  </script>
+  <script>
+    function changeAmount(buttonElement, delta, cart_id, price) {
+    var amountSpan = buttonElement.className === 'minus' ? buttonElement.nextElementSibling : buttonElement.previousElementSibling;
+    var currentAmount = parseInt(amountSpan.textContent.replace(/,/g,''));
+
+    if (currentAmount + delta >= 0) {
+        amountSpan.textContent = (currentAmount + delta).toLocaleString('ko-KR');
+
+        axios.post('/updateOrder', { cart_id : cart_id , count : currentAmount + delta})
+        .then(function (response) {
+
+            var all_price = parseInt(document.getElementById('amount_price').innerText.replace(/,/g,''));
+
+            if(delta < 0){
+                var newPrice = all_price - price;
+                document.getElementById('amount_price').innerText = newPrice.toLocaleString('ko-KR') + "원";
+            }else{
+                var newPrice = all_price + price;
+                document.getElementById('amount_price').innerText = newPrice.toLocaleString('ko-KR') + "원";
+            }
+
+            $(".total_price span:last-child").text(parseInt(document.getElementById('amount_price').innerText.split("원")[0].replace(/,/g,'')).toLocaleString() + "원");
+
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+    }
+}
+
+  </script>
+  <script>
+    $(document).ready(function() {
+        var total = 0;
+
+        // 모든 .price 요소를 순회하면서 가격을 합산
+        $(".price").each(function() {
+            var price = $(this).text();
+            // price 문자열에서 콤마와 원 단위 제거 후 숫자로 변환
+            price = parseInt(price.replace(/,/g, "").replace("원", ""));
+
+            if (!isNaN(price)) { // 숫자인 경우만 합산
+                total += price;
+            }
+        });
+
+        // 총 상품금액 표시 업데이트 (콤마와 원 단위 추가)
+<!--        $(".total_price span:last-child").text(total.toLocaleString() + "원");-->
+    });
+  </script>
+  <script>
+
+
+    function requestPayment() {
+        PortOne.requestPayment({
+            storeId: 'store-e41c5842-2d91-4a60-90bf-3b70da11378f',
+            paymentId: 'paymentId' + new Date().getTime(), // 고유한 결제 ID 생성
+            orderName: orderName,
+            totalAmount: totalAmount,
+            customer: customer,
+            currency: 'CURRENCY_KRW',
+            channelKey: 'channel-key-d184ee7f-a639-44ef-81b3-d1aeb4eba934',
+            payMethod: "CARD",
+        });
+    }
+
+  </script>
+  <script>
+    function orderdelete(cartId){
+        axios.post('/cart/delete', { cart_id : cartId })
+            .then(function (response) {
+                // Handle successful response here
+                console.log(response);
+            })
+            .catch(function (error) {
+                // Handle error here
+                console.error(error);
+            });
+    }
+
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script src="/js/index.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </html>

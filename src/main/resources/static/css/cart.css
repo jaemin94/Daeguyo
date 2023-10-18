@@ -612,10 +612,12 @@ li:after {
     
     font-size: 20px;
     color: black;
-    width: 850px;
-    height: 50px;
+    width: 10px;
+    height: 30px;
     justify-content: flex-end;
     position: absolute;
+    left : 840px;
+    bottom : 35px;
     
     
   }

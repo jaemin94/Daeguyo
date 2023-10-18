@@ -22,11 +22,20 @@ public interface UserMapper {
     public int insertUser(UserDto dto);
 
     // 회원수정
-    @Update("update tbl_user set addr = =#{addr}, password =#{password} , nickname =#{nickname}, phone =#{phone} where u_email=#{u_email}")
-    public int updateUser();
+    @Update("update tbl_user set nickname = #{nickname}, addr = #{addr}, phone =#{phone}, password =#{password} where u_email=#{u_email}")
+    public int updateUserall(UserDto dto);
+
+    @Update("update tbl_user set password =#{password} , nickname =#{nickname}, phone =#{phone} where u_email=#{u_email}")
+    public int updateUsernoaddr(UserDto dto);
+
+    @Update("update tbl_user set nickname =#{nickname}, phone =#{phone} where u_email=#{u_email}")
+    public int updateUserSimple(UserDto dto);
+
+    @Update("update tbl_user set nickname = #{nickname}, addr = #{addr}, phone =#{phone}, where u_email=#{u_email}")
+    public int updateUserwithAddr(UserDto dto);
 
     // 회원삭제
     @Delete("delete from tbl_user where u_email=#{u_email}")
-    public int deleteUser();
+    public int deleteUser(String u_email);
 
 }
