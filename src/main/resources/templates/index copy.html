@@ -90,7 +90,7 @@
           </ul>
         </nav>
         <div class="quick_menu">
-          <a th:href="@{/myPage}">SEIN 님</a>
+          <a th:href="@{/myPage}" id="mypage">SEIN 님</a>
           <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
           <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
           <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>

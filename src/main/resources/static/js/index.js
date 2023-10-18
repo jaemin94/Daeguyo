@@ -183,3 +183,19 @@ locationElement.addEventListener('click', function() {
 
 
       window.onload = myFunction; // 페이지 로드 시에 지도 초기화
+
+//      const mypage = document.getElementById("mypage");
+//      mypage.addEventListener("click",function(){
+//      var u_email = document.getElementById("u_email").value;
+//
+//      axios.get("/myPage?u_email=" + u_email)
+//      .then(response =>{
+//        console.log(response.data);
+//      })
+//      .catch(error=>{
+//
+//      console.error(error);
+//      })
+//
+//      })
+

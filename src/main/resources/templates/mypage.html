@@ -118,13 +118,13 @@
         <div class="account-info-wrap2">
           <div class="account-info">
             <div class="gradeimg">
-              <img th:src="${user.user_grade.equals('일반회원') ? '/images/bronze-medal.png' :
-              user.user_grade.equals('단골회원') ? '/images/silver-medal.png' :
-              user.user_grade.equals('VIP') ? '/images/vip-gold.png' : '#'}" alt="usergrade" id="usergrade">
+              <img th:src="${#authentication.getPrincipal().getGrade().equals('일반회원') ? '/images/bronze-medal.png' :
+              #authentication.getPrincipal().getGrade().equals('단골회원') ? '/images/silver-medal.png' :
+              #authentication.getPrincipal().getGrade().equals('VIP') ? '/images/vip-gold.png' : '#'}" alt="usergrade" id="usergrade">
             </div>
             <div class="acount-detail">
-              <p class="idinfo"><span th:text="${user.nickname}"></span> 님은 </p>
-              <p class="gradeinfo"><span th:text="${user.user_grade}"></span> 입니다.</p>
+              <p class="idinfo"><span th:text="${#authentication.getPrincipal().getUserNickname()}"></span> 님은 </p>
+              <p class="gradeinfo"><span th:text="${#authentication.getPrincipal().getGrade()}"></span> 입니다.</p>
             </div>
           </div>
           <a href="/memberUpdate"><button class="updatebtn">정보수정</button></a>

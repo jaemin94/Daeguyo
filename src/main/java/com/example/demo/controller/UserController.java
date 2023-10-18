@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
@@ -29,11 +33,26 @@ public class UserController {
     }
 
 
-    @GetMapping("/myPage")
-    public String getMyPage(Principal principal, Model model) {
-        String u_email = principal.getName();
+//    @GetMapping("/myPage")
+//    public String getMyPage(Principal principal, Model model) {
+//        String u_email = principal.getName();
+//
+//        int couponCount = userService.userCouponCount(u_email);
+//        int reviewCount = userService.userReviewCount(u_email);
+//        int orderCount = userService.userOrderCount(u_email);
+//
+//        model.addAttribute("couponCount", couponCount);
+//        model.addAttribute("reviewCount", reviewCount);
+//        model.addAttribute("orderHistoryCount", orderCount);
+//
+//
+//        return "myPage";
+//    }
 
-        UserDto user = userService.userSearch(u_email);
+    @GetMapping("/myPage")
+    public String getMyPage(Model model, HttpSession session) {
+        String u_email = (String) session.getAttribute("username");
+        log.info("u_email: " + u_email);
         int couponCount = userService.userCouponCount(u_email);
         int reviewCount = userService.userReviewCount(u_email);
         int orderCount = userService.userOrderCount(u_email);
@@ -41,7 +60,7 @@ public class UserController {
         model.addAttribute("couponCount", couponCount);
         model.addAttribute("reviewCount", reviewCount);
         model.addAttribute("orderHistoryCount", orderCount);
-        model.addAttribute("user", user);
+
 
         return "myPage";
     }
