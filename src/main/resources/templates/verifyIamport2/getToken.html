@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <title>아임포트 토큰 발급</title>
+</head>
+<body>
+<h1>아임포트 토큰 발급</h1>
+
+<!-- 에러 메시지 출력 -->
+<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+<!-- 결과 메시지 출력 -->
+<div th:if="${result}" class="alert alert-success">
+    <pre th:text="${result}"></pre>
+</div>
+
+<!-- 토큰 발급 폼 -->
+<form th:action="@{/verifyIamport2/getToken}" method="post">
+    <button type="submit" class="btn btn-primary">토큰 발급 요청</button>
+</form>
+
+<h1>아임포트 경제창 예제</h1>
+
+<!-- 결제 버튼 클릭 시 경제창 호출 -->
+<button onclick="requestPayment()">결제하기</button>
+
+
+
+<script>
+    function requestPayment() {
+        PortOne.requestPayment({
+            storeId: 'store-e41c5842-2d91-4a60-90bf-3b70da11378f',
+            paymentId: 'paymentId' + new Date().getTime(), // 고유한 결제 ID 생성
+            orderName: '나이키 와플 트레이너 2 SD',
+            totalAmount: 100,
+            currency: 'CURRENCY_KRW',
+            channelKey: 'channel-key-d184ee7f-a639-44ef-81b3-d1aeb4eba934',
+            payMethod: "CARD",
+            customer:{customerId:"홍길동",
+            phoneNumber:"01011111111"}
+        });
+    }
+
+</script>
+</script>
+
+
+</body>
+</html>

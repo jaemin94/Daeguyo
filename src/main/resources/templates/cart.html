@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>대구요</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/cart.css" />
+  <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c96667de1e2a83fda759d9e99f6fa0f6&libraries=services,clusterer"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+</head>
+<body>
+<div id="warp">
+  <div class="side_menu">
+    <div class="ide_login">
+      <a href="#"> 안녕하세요! <strong>SEIN</strong>님</a>
+      <a href="#" class="close">&times;</a>
+    </div>
+    <div class="panner">
+      <ul>
+        <li><a href="javascript:void(0);">홈</a></li>
+        <li><a href="javascript:void(0);">주문</a></li>
+        <li><a href="javascript:void(0);">매장찾기</a></li>
+        <li><a href="javascript:void(0);">마이페이지</a></li>
+        <li><a href="javascript:void(0);">로그아웃</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="map_bg">
+    <div id="map">
+      <div class="map_search">
+        <input value="지번, 도로, 건물명으로 검색" />
+        <button>검색</button>
+      </div>
+
+
+      <div class="current_location_group">
+        <img src="/images/gps.png" alt="" class="gps">
+        <div class="current_location">현재 위치에서 찾기</div>
+      </div>
+
+      <div class="location_select">
+        대구 광역시 동구 동촌로55길36
+      </div>
+
+      <div class="location_complete">선택하기</div>
+    </div>
+  </div>
+
+  <header>
+    <div class="scroll_btn">
+      <ul>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_01.png" alt="슬라이드버튼1"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_02.png" alt="슬라이드버튼2"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_03.png" alt="슬라이드버튼3"></a></li>
+        <li><a href="javascript:void(0);"><img src="/images/slidebutton_07.png" alt="슬라이드버튼4"></a></li>
+      </ul>
+    </div>
+    <div class="align">
+      <div class="hamburger_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <h1 class="logo">
+        <a th:href="@{/}"><img src="/images/header_logo.png" alt= "로고"/></a>
+      </h1>
+      <nav>
+        <ul class="mainmenu">
+          <li>
+            <a href="javascript:void(0);">홈</a>
+            <div class="sub_menu">
+              <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
+              <ul class="drop_list">
+                <li><a href="javascript:void(0);">회사소개</a></li>
+                <li><a href="javascript:void(0);">회사연혁</a></li>
+                <li><a href="javascript:void(0);">브랜드소개</a></li>
+                <li><a href="javascript:void(0);">찾아오시는길</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="javascript:void(0);">주문</a></li>
+          <li><a href="javascript:void(0);">마이페이지</a></li>
+        </ul>
+      </nav>
+      <div class="quick_menu">
+        <a th:href="@{/myPage}">SEIN 님</a>
+        <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
+        <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
+        <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
+      </div>
+    </div>
+  </header>
+
+  <div  class="main_board">
+    <div class ="order">
+      <span>주문/결제</span>
+
+      <span>주문완료</span>
+
+
+    </div>
+    <div  class="menu_container">
+
+      <div th:text="${options[0].res_id}"  class="main_name" id="res-id">
+
+      </div>
+      <div  th:each="option : ${options}"  class="main_menu">
+        <div class="menu_image" id="${option.cart_id}">
+          <img src="/images/sectionbg_02.jpg">
+        </div>
+        <div class="menu_name">
+          <div class="menu_name_box">
+            <span id="" th:text="${option.menu_id}"></span>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+              <label class="form-check-label" for="flexCheckChecked">
+
+              </label>
+            </div>
+            <button id="delete"  th:onclick="orderdelete([[${option.cart_id}]]);">X</button>
+
+          </div>
+
+
+
+          <div class="name_price">
+            <ul>
+              <li>
+                <span th:text="${#strings.replace(option.selected_option, ',', ' ')}"></span>
+                <div th:text="${option.price}"class="price"></div>
+                <button class="option">옵션변경</button>
+                <div class="quantity">
+                  <button class="minus" th:onclick="changeAmount(this, -1, ([[${option.cart_id}]]),([[${option.price}]]))">ㅡ</button>
+                  <span class="amount" th:text="${option.count}" data-cart-id ="${option.cart_id}"></span>
+                  <button class="plus" th:onclick="changeAmount(this, 1, ([[${option.cart_id}]]),([[${option.price}]]))" >+</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="menu_add">
+        <img src="/images/storage.png" alt=""> &nbsp;
+        <span>더 담으러 가기</span>
+      </div>
+    </div>
+    <div class="menu_container2">
+      <div class="main_menu_container2">
+        <div class="cart_main" >
+          장바구니상품
+
+          <div class="modal-container" >
+            <input id="modal-toggle" type="checkbox">
+            <label class="modal-btn" for="modal-toggle">쿠폰</label>
+            <label class="modal-backdrop" for="modal-toggle"></label>
+            <div class="modal-content">
+              <label class="modal-close" for="modal-toggle">&#x2715;</label>
+              <h2>쿠폰함</h2>
+              <hr />
+              <div th:each="coupons : ${coupon}" th:data-coupon-id="${coupons.coupon_id}" id="coupon">
+                <p th:text ="${coupons.name}" ></p>
+                <button th:onclick="select_coupon(([[${coupons.coupon_id}]]),([[${coupons.deductedPrice}]]))" >선택</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="price_info" id = "authentication.Principal().get">
+          <ul>
+            <li>
+              <span>상품금액</span>
+              <span id ="pap" th:text="${total}+'원'"></span>
+
+            </li>
+            <li>
+              <span>배달팁</span>
+              <span>+2,000원</span>
+            </li>
+            <li>
+              <span >할인금액</span>
+              <span id ="deducted">-0원</span>
+            </li>
+          </ul>
+        </div>
+        <div class="total_price">
+          <ul>
+            <li>
+              <span>총 상품금액</span>
+              <span id ="amount_price" th:text="${total}+'원'"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <button class="pay" th:onclick="handlePayment(([[${options[0].res_id}]]))">결제하기</button>
+
+
+
+
+  </div>
+</div>
+</body>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script src="/js/cart.js"></script> <!-- handlePayment 함수를 포함하는 외부 js 파일 -->
+<script src="/js/index.js"></script>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+   var u_Email = /*[[${#authentication.principal.username}]]*/;
+   var nickname = /*[[${#authentication.principal.userNickname}]]*/;
+   var phone = /*[[${#authentication.principal.userPhoneNumber}]]*/;
+  /*]]*/
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</html>

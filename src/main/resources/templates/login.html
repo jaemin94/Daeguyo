@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대구요</title>
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/login.css"/>
+    <script src="https://kit.fontawesome.com/c53a5f44b2.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+</head>
+<body>
+    <header>
+          <div class="align">
+
+              <a th:href="@{/}"><img src="./images/login_logo.png" alt= "로고"/></a>
+
+          </div>
+        </header>
+  
+        <main class="align">
+        <form class="login-form" id="form" action="/login" method="post">
+            <h2 class="title">로그인</h2>
+            <label class="_object-label">
+                <input autofocus class="_object-input" maxlength="50" name="u_email"  type="email">
+            </label>
+            <h2 class="title">비밀번호</h2>
+            <label class="_object-label">
+                <input class="_object-input" maxlength="50" name="password" type="password">
+            </label>            
+            
+            <input class="login-button" type="submit" value="로그인">
+            
+          </form>
+          <div class="regi-btn">
+             <a class="register-button" href="/memberJoin">회원가입</a>
+           </div>
+           <div class="res-regi-btn">
+             <a class="res-register-button" href="/resJoin.html" >매장 회원가입</a>
+           </div>
+           <div>
+           <div class="menu">
+                   <a class="link" href="#">아이디/비밀번호 찾기</a>
+           </div>
+         </div>
+    </main>
+      
+        <footer>
+            <div class="align">
+              <div class="sns">
+                <a href="javascript:void(0);"><img src="/images/facebook.png" alt="페이스북"></a>
+                <a href="javascript:void(0);"><img src="/images/instagram.png" alt="인스타그램"></a>
+              </div>
+              <div class="footer_logo">
+                <a href="javascript:void(0);">
+                  <img src="/images/footer_logo.png" alt="하단로고">
+                </a>
+                <div>1661 - 5270</div>
+              </div>
+              <div class="footer_nav">
+                <ul>
+                  <li><a href="javascript:void(0);">이용약관</a></li>
+                  <li><a href="javascript:void(0);">개인정보처리방침</a></li>
+                  <li><a href="javascript:void(0);">위치기반서비스</a></li>
+                  <li><a href="javascript:void(0);">고객센터</a></li>
+                  <li><a href="javascript:void(0);">인재채용</a></li>
+                  <li><a href="javascript:void(0);">단체주문</a></li>
+                </ul>
+              </div>
+              <div class="copyright">
+                <div>
+                  주식회사 대구요는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 <br>
+                대구요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 대구요는 책임을 지지 않습니다.<br>
+                상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다.
+                <p>Copyright DagueYO. All Rights Reserved.</p>
+                </div>
+                <div class="familysite">
+                  <select name="" id="" class="select2">
+                    <option value="">Global site</option>
+                    <option value="">KOREA</option>
+                    <option value="">USA</option>
+                </div>
+              </div>
+            </div>
+    </div>
+          </footer>
+          <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+          <script src="/js/index.js"></script>
+      
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>INDEX PAGE</h1>
+
+<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+<!-- 결과 메시지 출력 -->
+<div th:if="${result}" class="alert alert-success">
+    <pre th:text="${result}"></pre>
+</div>
+
+</body>
+</html>

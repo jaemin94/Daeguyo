@@ -1,0 +1,959 @@
+/* 김승훈 작업시작부분 */
+header>.scroll_btn {
+    display: none;
+}
+
+/* 메인-조인헤더(사진+식당명) */
+.main-img{
+    height: 400px;
+}
+
+.menu-main-img{
+  height: 400px;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+/*  */
+main>.header_img {
+    width: 700px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+}
+
+.header_img>img {
+    width: 100%;
+    height: 100%;
+}
+
+/* 메인 끝 */
+
+/* 탭 시작 */
+.section_Tab {
+    width: 1000px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
+    font-family: 'yg-jalnan';
+    gap: 80px;
+}
+
+.section_Tab>.tab_header {
+    width: 1000px;
+    height: 150px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab_header>.tab_header_res {
+    width: 1000px;
+    height: 50px;
+    font-size: 40px;
+    color: #474747;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab_header>.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    justify-content: space-around;
+    padding: 0 0.2em;
+    text-align: center;
+    width: 7em;
+    margin-top: 5px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #2b2a29b0;
+    cursor: pointer;
+
+}
+
+.star-rating :checked~label {
+    -webkit-text-fill-color: gold;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label {
+    -webkit-text-fill-color: #fff58c;
+}
+
+
+.tab_header>.point_zone {
+    margin-top: 5px;
+    font-size: 16px;
+    font-family: "Noto Sans KR", sans-serif;
+
+}
+
+.point_zone>.love {
+    font-size: 20px;
+    font-weight: 900;
+    font-family: "Noto Sans KR", sans-serif;
+    
+}
+
+.point_zone>.share_res {}
+
+
+
+
+.section_Tab>.button_container {
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button_container>button {
+    font-size: 20px;
+    font-family: 'yg-jalnan';
+    margin: 0 auto;
+    width: 150px;
+    height: 50px;
+    background: #f1f1f1;
+
+}
+/* 메뉴 페이지 시작 */
+
+.res-main-info-sec{
+    height: fit-content;
+    background-color: white;
+    padding-top: 70px;
+  }
+
+  .res-main-info{
+    height:fit-content;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+.res-name{
+    font-size: 38px;
+    font-family: yg-jalnan;
+  }
+
+  .star-ratings {
+    font-size: 40px;
+    margin-top: 5px;
+  }
+
+  .star {
+    color:rgb(255, 196, 0);
+    text-shadow: 0px 0px 1px rgb(255, 174, 0);
+  }
+
+  .rating-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rating-info>*{
+    margin: 10px;
+  }
+  .favorite.material-icons-two-tone{
+    font-size: 30px;
+  }
+  .sharebtn.material-icons-outlined{
+    font-size: 30px;
+  }
+  .rating-number {
+    display: block;
+    font-size: 26px;
+    height: 35px;
+    line-height: 27px;
+    font-weight: 500;
+  }
+
+  .buttons {
+    margin-top: 30px;
+    text-align: center;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+  }
+
+  input[type="button"] {
+    background-color: #ededed;
+    color: black;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "Noto Sans KR", sans-serif;
+    margin:0px 5px;
+    width:200px;
+    font-weight: 600;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+
+  input[type="button"]:hover {
+    background-color: #01cafe;
+    color:white;
+  }
+
+
+  .mainwrap{
+    margin-top: 50px;
+    margin-bottom: 70px;
+    width: 100%;
+    border-radius: 50px;
+    padding: 50px;
+    background-color: #fff;
+  }
+
+
+  .menu-tr>td{
+    padding: 20px 30px;
+  }
+
+  .main .menu-name{
+    line-height: 30px;
+  }
+
+
+  .addButton.material-icons-outlined {
+    background-attachment: fixed;
+    border: 1px solid #a1b0b3;
+    color: grey;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 5px;
+    font-size: 50px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .addButton.main.material-icons-outlined{
+    color:#01cafe;
+    border-radius: 25px;
+    width: 100px;
+    height: 100px;
+  }
+  .addButton:hover,.addButton.main.material-icons-outlined:hover {
+    background-color:#01cafe;
+    border: none;
+    color: white;
+  }
+
+.menu-detail-table{
+  font-size: 20px;
+  width: 90%;
+  margin: 0 auto;
+  height: fit-content;
+}
+
+.menu-category{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 35px;
+  font-family: yg-jalnan;
+  color: #4f4f4f;
+  margin-bottom: 30px;
+
+}
+
+.wrapper.boardPage section{
+  height: fit-content;
+  margin-top: 30px;
+}
+
+.menu-category.main{
+  color: #01cafe;
+}
+
+.menu-category.main>div{
+  width: 41%;
+}
+.menu-category>div{
+  width: 35%;
+}
+.menu-category.main>div>hr{
+  border-style:none;
+  border-top: 10px solid #c7f4ff;
+  border-radius: 5px;
+}
+
+.menu-category>div>hr{
+  border-style:none;
+  border-top: 3.5px dotted #bababa;
+  margin: 0px 20px;
+}
+
+
+#bigText{
+  font-size: 26px;
+  color:rgb(64, 64, 64);
+  margin: 10px;
+  margin-bottom: 0px;
+}
+.main #bigText{
+  font-size: 28px;
+  color: #000000;
+}
+
+.menu-detail-table>tbody>tr>td:last-child{
+  text-align: end;
+  width: 20%;
+}
+
+.menu-tr{
+  border-bottom: 4px solid rgb(241, 241, 241);
+  height: 150px;
+}
+
+.menu-tr.main{
+  border-bottom: 4px solid rgb(241, 241, 241);
+  height: 210px;
+}
+
+
+.menu-tr>td:first-child{
+  width: 30%;
+}
+
+
+.menu-img{
+  object-fit: cover;
+  width: 230px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+.menu-img.main{
+  object-fit: cover;
+  width: 230px;
+  height: 180px;
+}
+
+
+
+.menu-tr>td:nth-child(2){
+  padding: 20px 0px;
+  display: flex;
+  align-items: start;
+}
+.menu-tr.main> td:nth-child(2){
+  padding: 30px 10px;
+}
+.main .d1{
+  display: flex;
+  height: 50px;
+}
+
+.menu-lable{
+  font-size: 16px;
+  font-family: "yg-jalnan";
+  border-radius: 100%;
+  height: 45px;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #01cafe;
+}
+
+.menu-lable.popular{
+  background-color: orange;
+}
+td{
+
+}
+.d2{
+  width: 450px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.menu-detail>.d2>ul{
+  margin-top: 10px;
+  margin-left:0px;
+  margin-left:0px;
+  font-family: "Noto Sans KR";
+  font-weight: 700;
+  width: 100%;
+  font-size: 20px;
+}
+.price-li *{
+    font-size:28px;
+    text-align: right;
+   /* color:#01cafe;*/
+   color:black;
+}
+.option-li{
+}
+
+.option-li>li{
+  align-items: center;
+  position: relative;
+  margin-bottom: 5px;
+  height: 30px;
+}
+
+.option-li>li>label>span{
+  font-size: 20px;
+  display: inline-block;
+  font-weight: 500;
+}
+.option-li>li>label>select{
+  position: absolute;
+  font-size: 18px;
+  height: 100%;
+  right: 0%;
+  width: 70%;
+}
+.option-li>li>label>select>option{
+    margin:10px;
+}
+.origin-info-sec{
+  margin-top: 150px;
+  height: fit-content;
+}
+
+.origin-info{
+  margin: 50px auto;
+  list-style: none;
+  display: flex;
+  font-size: 20px;
+   font-weight: 500;
+}
+
+.origin-info>ul{
+  margin: 0 auto;
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.origin-li{
+  margin: 10px 0px;
+}
+
+.origin-li>span::after{
+  content: "|";
+  font-weight: 900;
+  margin:0px 10px;
+}
+
+.origin-li:last-child>span::after{
+  content: " ";
+}
+
+/* 게시판 시작 */
+.section_Board {
+  /* height: 1900px; */
+  height: fit-content;
+  /* margin: 0 auto; */
+  /* background: #f1f1f1; */
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'yg-jalnan';
+  margin-bottom: 100px;
+
+}
+
+.section_Board>#boardContainer {
+  /* width: 1200px; */
+  /* height: 1600px; */
+  /* background-color: pink; */
+
+}
+
+#boardContainer>.boardPage {
+  /* width: 1100px; */
+  /* height: 1600px; */
+  /* background-color: black */
+}
+
+/* **************************************** */
+#warp{
+  background-color: #ededed;
+
+}
+.mainwrap{
+  /* background-color: red;   */
+  /* position: relative; */
+  /* border: 10px solid purple; */
+  /* height: fit-content; */
+  /* margin-bottom: 0px; */
+}
+/* .wrapper{
+
+} */
+
+.cartbtn, .cartbtn>a{
+  width: 90px;
+  bottom: 80%;
+  left: 90%;
+  z-index: 1;
+  position: sticky;
+  display: flex;
+  align-items: top;
+  justify-content: end;
+  transition: scale 0.2s, opacity 0.2s;
+}
+
+
+.cartbtn>.basket_count{
+  display: block;
+  position: absolute;
+  font-size: 23px;
+  font-weight: 900;
+  text-align: center;
+  line-height: 27px;
+  color: rgb(255, 149, 36);
+  background-color: white;
+  width: 35px;
+  height: 35px;
+  z-index: 5;
+  border: 4px solid orange;
+  border-radius: 50%;
+
+}
+
+
+ /* .cartbtn>a{
+  width: 90px;
+  bottom: 80%;
+  left: 90%;
+  z-index: 1;
+  position: sticky;
+  display: flex;
+  align-items: top;
+  justify-content: end;
+  transition: scale 0.2s, opacity 0.2s;
+} */
+
+.cartbtn .basket_count{
+  display: block;
+  position: absolute;
+  font-size: 23px;
+  font-weight: 900;
+  text-align: center;
+  line-height: 27px;
+  color: rgb(255, 149, 36);
+  background-color: white;
+  width: 35px;
+  height: 35px;
+  z-index: 5;
+  border: 4px solid orange;
+  border-radius: 50%;
+
+}
+
+.cartbtn:hover{
+  scale: 1.07;
+  opacity: 0.8;
+}
+/* 바스켓 아이콘 스타일 */
+.basket_img {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.cartbtn {
+    width: 62px;
+    position: absolute;
+    bottom: 15px;
+    right: -25px;
+    padding-bottom: 50px;
+}
+
+/* 탭 끝 */
+
+/*
+/* 바스켓 컨테이너 스타일 */
+.basket-container {
+    width: 62px;
+    position: absolute;
+    bottom: 15px;
+    right: -25px;
+    padding-bottom: 50px;
+}
+
+/* 바스켓 아이콘 스타일 */
+.basket_img {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* 바스켓 카운트 스타일 */
+.basket_count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    /* 동그라미 너비 조절 */
+    height: 20px;
+    /* 동그라미 높이 조절 */
+    background-color: white;
+    /* 배경색 설정 */
+    color: #fff;
+    /* 글자색 설정 */
+    border-radius: 50%;
+    /* 동그라미 모양으로 만들기 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    /* 글자 크기 설정 */
+    color: #FE9900;
+    z-index: 999;
+    border: #FE9900 solid 1px;
+} */
+
+
+
+/* 메뉴 페이지 끝 */
+
+/* 가게 페이지 시작 */
+.res_container {
+    background: #f1f1f1;
+    width: 1100px;
+    height: 500px;
+    border-radius: 50px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'yg-jalnan';
+    align-items: center;
+    padding-bottom: 500px;
+}
+
+.res_container>.res_name {
+    width: 1000px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 24px;
+}
+
+.res_container>.res_map {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.res_container>.res_introduce {
+    height: 300px;
+    font-size: 18px;
+    color: #919191;
+    font-family: "Noto Sans KR";
+    text-align: center;
+}
+
+.res_container>.res_info {
+    font-size: 18px;
+    color: #919191;
+    font-family: "Noto Sans KR";
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+/* 가게 페이지 끝 */
+
+/* 리뷰 시작 */
+.review_header {
+    margin: 30px;
+    display: flex;
+    margin-bottom: 100px;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.review_header>img {
+    width: 50px;
+    height: 50px;
+}
+
+.review_header>.review_text {
+    width: 1000px;
+    height: 100px;
+    font-family: 'yg-jalnan';
+    color: #535353;
+    font-weight: bolder;
+    font-size: 25px;
+    text-align: center;
+
+}
+
+.review_text>p>span {
+    color: rgb(221, 0, 11);
+}
+
+
+.review_container {
+    background-color: #fff;
+    width: 1100px;
+    height: 1350px;
+    border-radius: 50px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review_container>.review_event {
+    width: 250px;
+    height: 100px;
+    font-family: 'yg-jalnan';
+    background-color: #01cafe;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 32px;
+    text-align: center;
+    border-radius: 20px;
+    position: relative;
+    top: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review_container>.event_gift {
+    width: 1000px;
+    height: 40px;
+    color: #01cafe;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.review_container>.scroll_container {
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50px;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #fff;
+}
+
+.scroll_container>.scroll_content {
+    height: 1400px;
+    /* 내용물의 높이를 1400px로 설정 */
+    overflow-y: scroll;
+    /* 세로 스크롤을 활성화하기 위해 overflow-y 속성을 scroll로 설정 */
+    font-family: 'yg-jalnan';
+}
+
+/* 스크롤바를 스타일링할 수 있는 선택자를 추가하려면 다음과 같이 추가할 수 있습니다. */
+.scrollable-content::-webkit-scrollbar {
+    width: 20px;
+    /* 스크롤바 너비 설정 */
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background-color: #01cafe;
+    /* 스크롤바 색상 설정 */
+}
+
+.list_container{
+display: flex;
+justify-content: flex-end;
+
+
+}
+
+.list_container>#list {
+text-align: center;
+height: 30px;
+    font-size: 18px;
+    color: #505050;
+    border: none;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: bold;
+    outline:none;
+
+}
+.drop_img{
+    width: 10px;
+}
+/* .list_container::after{
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    right: 0;
+    content: "";
+    display: block;
+    background: url(../images/drop.png) no-repeat center;
+    background-size: 10px 10px;
+   width: 20px;
+   height: 20px;
+} */
+.list_container>select {
+    appearance: none;
+
+}
+.content_list{width: 1000px;}
+select{
+
+width: 100px;
+height: 30px;
+}
+
+/* 리뷰상자 */
+.scroll_content>.review {
+    width: 950px;
+    height: 550px;
+    margin-left: 50px;
+}
+
+/* 사용자 정보 */
+.review_user {
+    width: 1000px;
+    height: 200px;
+}
+
+.user_point {
+  margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+}
+
+
+.user_point img {
+    width: 75px;
+    height: 75px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+
+.nick_name_container{
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-left: 10px;
+
+}
+.user_star {
+   
+    font-size: 18px;
+}
+
+.review_day {
+
+    color: #919191;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 12px;
+
+}
+
+.user_profile {
+    font-size: 15px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: bold;
+ 
+  
+
+}
+
+.user_end {
+   
+    font-size: 36px;
+    color: #919191;
+}
+
+.user_end:hover{
+    cursor: pointer;
+}
+
+/* 리뷰 이미지 */
+.review_img {
+    margin-bottom: 20px;
+}
+
+.review_img img {
+    width: 250px;
+  
+}
+
+/* 사용자 코멘트 */
+.user_comment {
+    width: 900px;
+    height: 150px;
+    background: #f1f1f1;
+    border-radius: 20px;
+    font-family: "Noto Sans KR";
+}
+
+.user_menu {}
+
+.user_menu_name {
+    height: 50px;
+    display: flex;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.menusName {
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    background-color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    margin-top: 15px;
+    line-height: 40px;
+}
+.menusName +.menusName {margin-left: 10px;}
+.user_text {
+    width: 870px;
+    height: 50px;
+    font-size: 16px;
+    margin-left: 30px;
+}
+
+/* 리뷰상자 끝 */
+/* 리뷰정보 입력 끝 */
+/* 게시판 끝 */
+/* 김승훈 작업 끝 */

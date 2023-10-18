@@ -1,0 +1,149 @@
+#warp{
+  background-color: #F2F2F2;
+  padding-bottom: 50px;
+
+}
+footer{
+  background-color: rgb(211, 211, 211);
+}
+  .SRBannerSec{
+    height: 400px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .selectRestBanner{
+    width:auto;
+    object-fit: cover;
+  }
+
+  .order_list{    
+    margin-top:100px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-bottom: 70px;
+    font-family: "yg-jalnan";
+    font-size: 24px;
+  }
+
+  .order_list>li{
+    display: flex;
+    background-color: rgb(211, 211, 211);
+    color:#2b2b2b;
+    border-radius: 40px;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    margin-left: 15px;
+    height: 60px;
+    letter-spacing: 1px;
+  }
+  .order_list:first-child li{
+    margin-left: 0px;
+  }
+  .order_list>li>a{
+    height: 50px;
+    line-height: 50px;
+  }
+  .rest_list{
+      height: 1150px;
+      overflow: scroll;
+      padding-bottom: 100px;
+  }
+
+  .rest_list::-webkit-scrollbar {
+    display: none;
+}
+
+  .Rest{
+    background-color: white;
+    width: 90%;
+    height: 250px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    align-items:center;
+    box-shadow: 10px 10px 15px rgba(152, 152, 152, 0.407);
+    transition: transform 0.3s ease-in-out, 
+    margin-top 0.3s ease-in-out, 
+    margin-bottom 0.3s ease-in-out, 
+    box-shadow 0.3s ease-in-out;
+  }
+
+
+.Rest:hover{
+  transform: scale(1.05);
+  transition-duration: 0.2s;
+  transform-origin:bottom;
+  box-shadow: 0px 0px 10px #2ec0e5;
+  margin-top: 50px;
+  margin-bottom: 10px;  
+  transition-timing-function:ease-in-out;
+
+}
+  .res-logo {
+    width: 200px;
+    height: 200px;
+    margin-left: 45px;
+    margin-right: 45px;
+    box-shadow: 0px 0px 15px rgba(110, 110, 110, 0.723)
+  }
+  
+  .res-info {
+    padding: 10px 0px;
+    height: 200px;
+    width: 500px;
+  }
+
+  .name-category{
+    /* border: 1px solid; */
+  }
+
+  .name-category>.resName {
+    font-size: 30px;
+    color: #4a4a4a;
+    font-family: "yg-jalnan";
+  }
+
+  .name-category>.food_category {
+    font-size: 20px;
+    color: #757575;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  
+  .star p{
+    font-size: 27px;
+  }
+  .star-score{
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .order-delivery-info {
+    font-size: 16px;
+    color: #555;
+    margin: 10px;
+    margin-left: 0px;
+    font-weight: 500;
+  }
+  .min-price::after{
+    content: "|";
+  }
+  .keywords {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .keywords>.keyword {
+    background-color: #01cafe;
+    color: white;
+    padding: 7px 18px;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: 500;
+  }
