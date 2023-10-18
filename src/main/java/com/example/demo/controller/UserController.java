@@ -33,22 +33,6 @@ public class UserController {
     }
 
 
-//    @GetMapping("/myPage")
-//    public String getMyPage(Principal principal, Model model) {
-//        String u_email = principal.getName();
-//
-//        int couponCount = userService.userCouponCount(u_email);
-//        int reviewCount = userService.userReviewCount(u_email);
-//        int orderCount = userService.userOrderCount(u_email);
-//
-//        model.addAttribute("couponCount", couponCount);
-//        model.addAttribute("reviewCount", reviewCount);
-//        model.addAttribute("orderHistoryCount", orderCount);
-//
-//
-//        return "myPage";
-//    }
-
     @GetMapping("/myPage")
     public String getMyPage(Model model, HttpSession session) {
         String u_email = (String) session.getAttribute("username");
