@@ -72,7 +72,7 @@
             <nav>
                 <ul class="mainmenu">
                     <li>
-                        <a href="javascript:void(0);">홈</a>
+                        <a th:href="@{/}">홈</a>
                         <div class="sub_menu">
                             <p><strong>대구요</strong>가 <br> 궁금하신가요?</p>
                             <ul class="drop_list">
@@ -83,12 +83,12 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="javascript:void(0);">주문</a></li>
-                    <li><a href="javascript:void(0);">마이페이지</a></li>
+                    <li><a th:href="@{/selectRest}">주문</a></li>
+                    <li><a th:href="@{/myPage}">마이페이지</a></li>
                 </ul>
             </nav>
             <div class="quick_menu">
-                <a th:href="@{/myPage}">SEIN 님</a>
+                <a th:href="@{/myPage}"><span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUserNickname()}"></span>님</a>
                 <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
                 <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
                 <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
