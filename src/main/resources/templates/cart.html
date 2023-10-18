@@ -122,7 +122,7 @@
               </div>
               <div class="menu_name">
                 <div class="menu_name_box">
-                  <span id="" th:text="${option.menu_name}"></span>
+                  <span id="" th:text="${option.menu_id}"></span>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
                     <label class="form-check-label" for="flexCheckChecked">
@@ -139,7 +139,7 @@
                       <ul>
                           <li>
                             <span th:text="${#strings.replace(option.selected_option, ',', ' ')}"></span>
-                            <div th:text="${option.price}"class="price"></div>
+                            <div th:text="${option.price}+' 원'"class="price"></div>
                             <button class="option">옵션변경</button>
                             <div class="quantity">
                               <button class="minus" th:onclick="changeAmount(this, -1, ([[${option.cart_id}]]),([[${option.price}]]))">ㅡ</button>
@@ -169,7 +169,6 @@
                           <li>
                             <span>상품금액</span>
                             <span id ="amount_price" th:text="${total}+'원'"></span>
-
                           </li>
                           <li>
                             <span>배달팁</span>
