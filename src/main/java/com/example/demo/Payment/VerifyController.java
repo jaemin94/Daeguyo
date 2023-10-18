@@ -26,6 +26,7 @@ public class VerifyController {
     @Value("${iamport.api.key}")
     // REST API 키
     private  String imp_key;
+    //
 
     @Value("${iamport.api.secret}")
     // REST API SECRET 키
