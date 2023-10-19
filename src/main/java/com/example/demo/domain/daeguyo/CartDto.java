@@ -8,7 +8,7 @@ import org.hibernate.criterion.Order;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartDto extends OrderDto {
+public class CartDto {
 
     private String cart_id;
     private String u_email;

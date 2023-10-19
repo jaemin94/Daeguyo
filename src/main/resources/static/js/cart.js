@@ -43,7 +43,7 @@
                            console.log('Payment data saved successfully.');
                             // 메뉴이름 저장하는 배열
                            let menuNames = [];
-                           let menuIds = [];
+
                            // 옵션 저장하는 배열
                            let selectedOptions = [];
                            let menuItems = document.querySelectorAll('.main_menu');
@@ -52,14 +52,12 @@
                            // 각 메뉴 아이템에 대해 반복문을 실행
                            menuItems.forEach(function(menuItem) {
 
-                               let menuId = menuItem.querySelector('.menu_name_box span').dataset.menuId;
+
                                let menuNameElements = menuItem.querySelector('.menu_name_box span'); //menuId
 
                                let selectedOptionElements =  menuItem.querySelector('.name_price ul li span:first-child'); //selectoption
                                countElement = countElement + parseInt(menuItem.querySelector('.quantity .amount').innerHTML); //amount
-                                  if (menuId) { // 해당 메뉴 아이템에 data-menu-id 값이 존재하면
-                                          menuIds.push(menuId); // menuIds 배열에 추가
-                                      }
+
                                    // 텍스트 내용을 menuNames 배열에 추가
                                    if (menuNameElements) {
                                        menuNames.push(menuNameElements.textContent.trim());
@@ -76,10 +74,10 @@
                             // 모든 옵션들을 ,로 연결한 문자열로 변환하여 저장합니다.
                                let selectedOptionElement  = selectedOptions.join(',');
 
-                               let menu_Id = menuIds.join(',');
+
                             axios.post('/create',{ order_id : PaymentData.order_id,
                                                   u_email : u_Email,
-                                                  menu_id : menu_Id,
+                                                  menu_name : menuNameElement,
                                                   res_id : orderName,
                                                   selected_option : selectedOptionElement,
                                                   order_amount : countElement,

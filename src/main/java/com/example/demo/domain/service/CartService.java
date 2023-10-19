@@ -1,5 +1,6 @@
 package com.example.demo.domain.service;
 
+import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.domain.daeguyo.*;
 
 import com.example.demo.domain.mapper.*;
@@ -36,8 +37,9 @@ public class CartService {
 
     }
     // 사용자 쿠폰 찾기
-    public List<CouponDto> SearchCoupon(String id){
-        return couponMapper.userCoupon(id);
+    public List<CouponDto> SearchCoupon(String u_email){
+
+        return couponMapper.userCoupon(u_email);
     }
     // 수량 조절 서비스
     public void updateOrderAmount(CartDto dto)  {
@@ -102,7 +104,7 @@ public class CartService {
     }
 
     //tbl_order로 값 넘기기
-    public int createOrder(CartDto dtos) {
+    public int createOrder(OrderDto dtos) {
 
         return mapper.insertOrder(dtos);
     }

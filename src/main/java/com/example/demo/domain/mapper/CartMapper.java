@@ -1,5 +1,6 @@
 package com.example.demo.domain.mapper;
 
+import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.domain.daeguyo.*;
 import org.apache.ibatis.annotations.*;
 

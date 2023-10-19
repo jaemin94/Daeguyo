@@ -1,5 +1,6 @@
 package com.example.demo.domain.mapper;
 
+import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.domain.daeguyo.CouponDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.*;

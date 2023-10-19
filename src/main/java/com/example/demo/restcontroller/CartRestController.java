@@ -1,9 +1,9 @@
 package com.example.demo.restcontroller;
 
-import com.example.demo.domain.daeguyo.CartDto;
-import com.example.demo.domain.daeguyo.MenuDto;
+import com.example.demo.domain.daeguyo.*;
 import com.example.demo.domain.mapper.MenuMapper;
 import com.example.demo.domain.service.CartService;
+import com.example.demo.domain.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +21,10 @@ public class CartRestController {
     @Autowired
     private CartService cartService;
 
+    @Autowired
+    private OrderService orderService;
+
     @PostMapping("/updateOrder")
-    @ResponseBody
     public void updateOrder(@RequestBody CartDto dto) {
         System.out.println(dto.getCount());
         cartService.updateOrderAmount(dto);
@@ -40,5 +42,40 @@ public class CartRestController {
         return ResponseEntity.ok(response);
     }
 
+    //쿠폰 사용 update
+    @PostMapping("/cart/coupon")
+    public void couponupdate(@RequestBody CouponDto Cdto){
+
+        cartService.couponUpdate(Cdto);
+
+
+    }
+
+    //결제정보 저장
+    @PostMapping("/payment/save")
+    public Map<String,Object> paymentsave(@RequestBody PaymentDto payment){
+
+
+        Map<String,Object> detail = cartService.paymentInsert(payment);
+
+        return detail;
+    }
+
+    //장바구니 삭제
+    @PostMapping("/cart/delete")
+    public int paymentsave(@RequestBody CartDto dto){
+
+
+        int detail = cartService.cartDelete(dto);
+
+        return detail;
+    }
+
+    //tbl_order에 값 전달
+    @PostMapping("/create")
+    public int create(@RequestBody OrderDto dtos) {
+
+        return cartService.createOrder(dtos);
+    }
 
 }

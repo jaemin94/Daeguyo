@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     @GetMapping("/")
-    public String main(HttpServletRequest httpServletRequest, Model model){
+    public String main(){
         log.info("Get/index");
         return "index copy";
 
