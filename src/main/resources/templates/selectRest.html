@@ -61,10 +61,8 @@
       </ul>
     </div>
 
-      <div class="align">
-        <div class="hamburger_btn">
-          <i class="fa-solid fa-bars"></i>
-        </div>
+
+      <div class="align header_rest">
 
         <h1 class="logo">
           <a th:href="@{/}"><img src="/images/header_logo.png" alt= "로고"/></a>
@@ -83,12 +81,12 @@
                 </ul>
               </div>
             </li>
-            <li><a th:href="@{/selectRest}">주문</a></li>
+            <li><a th:href="@{/menu_catagory}">주문</a></li>
             <li><a th:href="@{/myPage}">마이페이지</a></li>
           </ul>
         </nav>
         <div class="quick_menu">
-          <a th:href="@{/myPage}"><span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUserNickname()}"></span>님</a>
+          <a th:href="@{/myPage}"><span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUserNickname()} + 님"></span></a>
           <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
           <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
           <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>

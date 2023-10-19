@@ -24,7 +24,8 @@ footer{
     font-family: "yg-jalnan";
     font-size: 24px;
   }
-
+.header_rest{
+display:flex;}
   .order_list>li{
     display: flex;
     background-color: rgb(211, 211, 211);

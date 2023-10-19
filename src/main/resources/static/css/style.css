@@ -352,19 +352,19 @@ li:after {
   height: 400px;
   cursor: pointer;
 }
-.swiper .swiper-slide:nth-child(1) {
+.slideFirtst {
   background: url(../images/main.jpg) no-repeat center;
   background-size: cover;
 }
-.swiper .swiper-slide:nth-child(2) {
+.slideSecond {
   background: url(../images/banner01.jpg) no-repeat center;
   background-size: cover;
 }
-.swiper .swiper-slide:nth-child(3) {
+.slideThird {
   background: url(../images/banner03.jpg) no-repeat center;
   background-size: cover;
 }
-.swiper .swiper-slide:nth-child(4) {
+.slideFourth {
   background: url(../images/banner02.jpg) no-repeat center;
   background-size: cover;
 }

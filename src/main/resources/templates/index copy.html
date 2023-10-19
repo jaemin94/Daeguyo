@@ -85,12 +85,12 @@
                 </ul>
               </div>
             </li>
-            <li><a th:href="@{/selectRest}">주문</a></li>
+            <li><a th:href="@{/menu_catagory}">주문</a></li>
             <li><a th:href="@{/myPage}">마이페이지</a></li>
           </ul>
         </nav>
         <div class="quick_menu">
-          <a th:href="@{/myPage}" id="mypage"><span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUserNickname()}"></span>님</a>
+          <a th:href="@{/myPage}" id="mypage"><span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUserNickname()} + 님"></span></a>
           <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
           <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
           <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
@@ -104,10 +104,10 @@
       <main>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
+            <div class="swiper-slide slideFirtst"></div>
+            <div class="swiper-slide slideSecond"></div>
+            <div class="swiper-slide slideThird"></div>
+            <div class="swiper-slide slideFourth"></div>
           </div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
