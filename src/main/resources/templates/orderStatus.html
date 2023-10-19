@@ -153,9 +153,9 @@
               <div class="menu-details">
                 <p>비건 마라, 오늘의 베스트</p>
                 <!--th:text="${Menu-name}-->
-                <ul th:each="select: ${#strings.listSplit(orders.select_option,',') }" class="select">
-                  <li th:text="${orders.select_option}">고기추가 : 1000원</li>
-                  <li th:text="${orders.select_option}">맛선택 : 중간맵기</li>
+                <!--옵션출력 중복 수정 / 스플릿 될 때 마다 하나의 list로 출력되도록-->
+                <ul th:each="select: ${#strings.listSplit(orders.select_option,',')}" class="select">
+                  <li th:text="${select}">고기추가 : 1000원</li>
                 </ul>
               </div>
             </td>
