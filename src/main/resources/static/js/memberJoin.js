@@ -262,6 +262,7 @@ function startSpinner() {
   document.getElementById('spinner').style.display = 'block';
 }
 
+
 function stopSpinner() {
   document.getElementById('spinner').style.display = 'none';
 } // 스티너 생성 및 숨김 함수

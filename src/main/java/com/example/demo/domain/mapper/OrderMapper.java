@@ -13,13 +13,13 @@ import java.util.Map;
 @Mapper
 public interface OrderMapper {
 
-    @Select("select * from tbl_order1")
+    @Select("select * from tbl_order")
     public List<OrderDto> selectAll();
 
-    @Select("select * from tbl_order1 where order_id=#{order_id}")
+    @Select("select * from tbl_order where order_id=#{order_id}")
     public List<OrderDto> selectOne(String order_id);
 
-    @Select("select * from tbl_order1 where order_id=#{order_id}")
+    @Select("select * from tbl_order where order_id=#{order_id}")
     public OrderDto selectOne1(String order_id);
 
 
@@ -32,7 +32,7 @@ public interface OrderMapper {
     public int userOrderCount(String u_email);
 
 
-    @Delete("DELETE FROM tbl_order1 WHERE order_id = #{order_id}")
+    @Delete("DELETE FROM tbl_order WHERE order_id = #{order_id}")
     int delete(String order_id);
 
 
