@@ -24,11 +24,11 @@ public interface OrderMapper {
 
 
     //myPage.html에서 사용자 주문 기록 조회
-    @Select("select * from tbl_order where u_email=#{u_email}")
+    @Select("select * from tbl_order1 where u_email=#{u_email}")
     public OrderDto userOrder(String u_email);
 
     //myPage.html에서 사용자 주문 횟수 출력
-    @Select("select count(*) from tbl_order where u_email=#{u_email}")
+    @Select("select count(*) from tbl_order1 where u_email=#{u_email}")
     public int userOrderCount(String u_email);
 
 
