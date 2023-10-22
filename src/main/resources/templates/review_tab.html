@@ -285,38 +285,19 @@
         </div>
       </div>
       <!-- 메뉴 페이지 끝 -->
-
       <!-- 가게 페이지 시작 -->
+<!-- 카카오맵 api 변경 파트 시작 -->
       <div class="wrapper boardPage" id="page2">
         <div class="res_container">
-          <div th:text="${res.res_name}" class="res_name"></div>
           <div class="res_map">
-            <div
-                    style="font:normal normal 400 12px/normal dotum, sans-serif; width:320px; height:232px; color:#333; position:relative">
-              <div style="height: 200px;"><a
-                      href="https://map.kakao.com/?urlX=859928.0&amp;urlY=661115.0&amp;itemId=1785945230&amp;q=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;srcid=1785945230&amp;map_type=TYPE_MAP&amp;from=roughmap"
-                      target="_blank"><img class="map"
-                                           src="http://t1.daumcdn.net/roughmap/imgmap/6a1d0107faad5ddb9342d65badae80ac2e42071a2962c9286de9652e11431129"
-                                           width="318px" height="198px" style="border:1px solid #ccc;"></a></div>
-              <div
-                      style="overflow: hidden; padding: 7px 11px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0px 0px 2px 2px; background-color: rgb(249, 249, 249);">
-                <a href="https://map.kakao.com" target="_blank" style="float: left;"><img
-                        src="//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/logo_kakaomap.png" width="72"
-                        height="16" alt="카카오맵" style="display:block;width:72px;height:16px"></a>
-                <div style="float: right; position: relative; top: 1px; font-size: 11px;"><a target="_blank"
-                                                                                             href="https://map.kakao.com/?from=roughmap&amp;srcid=1785945230&amp;confirmid=1785945230&amp;q=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;rv=on"
-                                                                                             style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">로드뷰</a><span
-                        style="width: 1px;padding: 0;margin: 0 8px 0 9px;height: 11px;vertical-align: top;position: relative;top: 2px;border-left: 1px solid #d0d0d0;float: left;"></span><a
-                        target="_blank"
-                        href="https://map.kakao.com/?from=roughmap&amp;eName=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;eX=859928.0&amp;eY=661115.0"
-                        style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">길찾기</a><span
-                        style="width: 1px;padding: 0;margin: 0 8px 0 9px;height: 11px;vertical-align: top;position: relative;top: 2px;border-left: 1px solid #d0d0d0;float: left;"></span><a
-                        target="_blank"
-                        href="https://map.kakao.com?map_type=TYPE_MAP&amp;from=roughmap&amp;srcid=1785945230&amp;itemId=1785945230&amp;q=%EB%8F%84%EB%A6%AC%EC%A7%91%20%EB%8F%99%EC%84%B1%EB%A1%9C%EA%B4%91%EC%9E%A5%EC%A0%90&amp;urlX=859928.0&amp;urlY=661115.0"
-                        style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">지도
-                  크게 보기</a></div>
-              </div>
-            </div>
+            <p>
+              <em class="link">
+                <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+                </a>
+              </em>
+            </p>
+            <div id="restAddrmap"></div>
+            <input type="hidden" th:value="${res.addr}" id="resAddr">
           </div>
           <div class="res_introduce">
             <p>호랑이 기운이 솟아나게 해드리겠습니다.</p>
@@ -357,6 +338,7 @@
         </div>
       </div>
       <!-- 가게 페이지 끝 -->
+      <!-- 카카오맵 api 변경 파트 끝 -->
 
 
       <!-- 리뷰 페이지 시작 -->
@@ -588,6 +570,39 @@
     </div>
   </footer>
 </div>
+//카카오 맵 api 스크립트
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var resName = /*[[${res.res_name}]]*/ 'defaultName';
+  /*]]>*/
+
+  var mapContainer = document.getElementById('restAddrmap'),
+      mapOption = {
+          center: new kakao.maps.LatLng(34.57952, 126.98832),
+          level: 2,
+      };
+
+  var map = new kakao.maps.Map(mapContainer, mapOption);
+  var geocoder = new kakao.maps.services.Geocoder();
+
+// 디비에 적힌 주소를 좌표 값으로 바꾸고, 지도에 그 좌표값 기준으로 핀 찍고 중심으로 표시
+   geocoder.addressSearch(document.getElementById('resAddr').value, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+            //식당 이름 표기하는 박스
+            var infowindow = new kakao.maps.InfoWindow({
+              content: '<div style="width:150px; height:35px;line-height:35px;">'+resName+'</div>'
+            });
+            infowindow.open(map, marker);
+            map.setCenter(coords);
+        }
+    });
+</script>
+//카카오 맵 api 스크립트 끝!
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="/js/index.js"></script>
 <script src="/js/review_tab.js"></script>

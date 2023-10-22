@@ -141,3 +141,27 @@ document.addEventListener("DOMContentLoaded", function () {
     return 0;
   }
 });
+
+// Kakao map api 요소 css 강제 적용
+
+kakao.maps.event.addListener(map, 'idle', function() {
+    var targetElement = document.querySelector('#restAddrmap > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(2) ');
+    if (targetElement) {
+        targetElement.style.height = '35px';
+        targetElement.style.border = 'transparent';
+        targetElement.style.borderRadius= '10px';
+        targetElement.style.background = 'rgba(1, 202, 254)';
+        targetElement.style.boxShadow = '1px 2px 2px gray';
+    }
+    var targetElement2 = document.querySelector('#restAddrmap > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(2) > div:nth-child(1) ');
+        if (targetElement2) {
+            targetElement2.style.top = '40px';
+            targetElement2.style.opacity='0';
+    }
+
+    var targetElement3 = document.querySelector('#restAddrmap > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) ');
+        if (targetElement3) {
+        targetElement3.style.margin = '-27px 0px 0px -14px';
+    }
+
+});

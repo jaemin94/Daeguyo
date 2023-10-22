@@ -644,35 +644,30 @@ td{
 /* 메뉴 페이지 끝 */
 
 /* 가게 페이지 시작 */
+
+/*css 변경은 여기서부터 */
 .res_container {
     background: #f1f1f1;
     width: 1100px;
-    height: 500px;
+    height: fit-content;
     border-radius: 50px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    margin: 100px auto;
     font-family: 'yg-jalnan';
-    align-items: center;
-    padding-bottom: 500px;
 }
 
-.res_container>.res_name {
-    width: 1000px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 24px;
+.res_map>#restAddrmap{
+    width:700px;
+    height:400px;
+    margin:100px auto;
+    text-align:center;
 }
-
-.res_container>.res_map {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+#restAddrmap>div>*{
+    font-family: "Noto Sans KR";
+    font-size:20px;
+    font-weight:700;
+    color:white;
 }
+/*여기까지 입니다!!! */
 
 .res_container>.res_introduce {
     height: 300px;
@@ -694,6 +689,7 @@ td{
 }
 
 /* 가게 페이지 끝 */
+
 
 /* 리뷰 시작 */
 .review_header {
