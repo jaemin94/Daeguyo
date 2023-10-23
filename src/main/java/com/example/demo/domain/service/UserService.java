@@ -33,6 +33,7 @@ public class UserService {
     public int memberJoin(UserDto dto) {
         String encryptedPassword = passwordEncoder.encode(dto.getPassword());
         dto.setRole("ROLE_User");
+        dto.setUser_grade("VIP");
         dto.setPassword(encryptedPassword);
         System.out.println(dto);
         return mapper.insertUser(dto);

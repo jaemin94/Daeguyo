@@ -247,18 +247,26 @@ btnJoin.onclick = function () {
         });
 }
 
-
+// 휴대폰 인증번호 확인
 
 const phoneBtn = document.getElementById("phone_btn");
 const checkBtn = document.getElementById("check");
 
-// 휴대폰 인증번호 확인
 phoneBtn.addEventListener("click",function(){
-document.getElementById('popup').classList.remove('phidden');
-
+document.getElementById('popup').classList.add('phidden'); // 팝업창이 생기는 것
 checkBtn.addEventListener("click",function(){
 var phoneNum = document.getElementById("phoneNumber").value;
 console.log(phoneNum);
+
+function startSpinner() {
+  document.getElementById('spinner').style.display = 'block';
+}
+
+
+function stopSpinner() {
+  document.getElementById('spinner').style.display = 'none';
+} // 스티너 생성 및 숨김 함수
+
 axios.get("/checkPhone?phoneNum=" + phoneNum)
 .then(response=>{
         var userInput = document.getElementById('smscomfirmcheck').value;
@@ -290,11 +298,14 @@ console.log("phoneCheck clicked")
 
 var phonenum = document.getElementById("phoneNumber").value;
  var data = {to:phonenum};
+ startSpinner();
     axios.post("/sms/send",data)
     .then(response=> {
-
+        stopSpinner();
         console.log(response.data);
         alert("인증번호가 전송되었습니다");
+         document.getElementById('popup').classList.remove('phidden');
+
     })
     .catch(error=>{
     console.error("Error sending data: ", error);
@@ -303,16 +314,28 @@ var phonenum = document.getElementById("phoneNumber").value;
 }
 
 // 이메일 인증
+
+function startSpinner() {
+  document.getElementById('spinner').style.display = 'block';
+}
+
+function stopSpinner() {
+  document.getElementById('spinner').style.display = 'none';
+} // 스티너 생성 및 숨김 함수
+
 function emailCheck(){
 console.log("emailCheck clicked")
-
+startSpinner(); //실행되기전 함수 실행
 var emailadr = document.getElementById("email_id").value;
 var emailSelection = document.getElementById("email_adr").value;
 var FullEmail = emailadr+"@"+emailSelection;
     axios.post("/sendEmail",{ FullEmail: FullEmail })
     .then(response=> {
-        console.log(response.data1);
-        alert("인증번호가 전송되었습니다");
+
+    stopSpinner(); //실행되고 나서 함수 없애기
+    document.getElementById('popup1').classList.remove('ehidden');
+    console.log(response.data); //인증번호확인
+    alert("인증번호가 전송되었습니다");
     })
     .catch(error=>{
     console.error("Error sending data: ", error);
@@ -325,7 +348,7 @@ const checkBtn1 = document.getElementById("check1");
 
 // 이메일 인증번호 확인
 emailBtn.addEventListener("click",function(){
-document.getElementById('popup1').classList.remove('ehidden');
+
 
 checkBtn1.addEventListener("click",function(){
     var emailInput1 = document.getElementById("email_id").value;

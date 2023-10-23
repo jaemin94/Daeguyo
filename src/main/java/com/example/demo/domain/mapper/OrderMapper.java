@@ -35,7 +35,7 @@ public interface OrderMapper {
     @Insert("insert into tbl_order values(#{order_id},null,#{u_email},#{menu_name},#{res_id},#{select_option},#{order_amount},#{total_price},#{order_status},now())")
     public int addOrder(OrderDto dto);
 
-    @Delete("DELETE FROM tbl_order1 WHERE order_id = #{order_id}")
+    @Delete("DELETE FROM tbl_order WHERE order_id = #{order_id}")
     int delete(String order_id);
 
 
