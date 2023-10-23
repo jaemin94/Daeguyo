@@ -34,7 +34,7 @@ public class OrderRestController {
     public void orderSuccess(@RequestBody OrderDto dto){
         log.info("dto : " + dto);
         List<String> menuNames = Arrays.asList(dto.getMenu_name().split(","));
-        List<String> selectedOptions = Arrays.asList(dto.getSelect_option().split(",",2));
+        List<String> selectedOptions = Arrays.asList(dto.getSelect_option().split(","));
 
         for(int i =0; i<menuNames.size(); i++){
             for (String menuName : menuNames) {

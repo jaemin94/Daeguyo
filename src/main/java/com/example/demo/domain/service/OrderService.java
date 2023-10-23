@@ -21,8 +21,8 @@ public class OrderService {
     }
 
 
-    public List<OrderDto> getAllOrders() {
-        return mapper.selectAll();
+    public List<OrderDto> getAllOrders(String u_email) {
+        return mapper.userOrder(u_email);
     }
 
 
