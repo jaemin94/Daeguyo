@@ -40,5 +40,12 @@ public class CartRestController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/deleteMenu")
+    public int deleteMenu(@RequestParam("cart_id") String cart_id){
+        log.info("cart_id: " +cart_id);
+        return cartService.deleteFromCart(cart_id);
+
+    }
+
 
 }

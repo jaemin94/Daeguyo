@@ -13,6 +13,7 @@ public interface ResMapper {
     public List<ResDto> selectAll();
     @Select("select * from tbl_res where res_id =#{res_id}")
     public ResDto selectOne(String res_id);
+
     @Select("select * from tbl_res where food_catagory =#{food_catagory}")
     public List<ResDto> selectCatagory(String food_catagory);
     @Insert("")

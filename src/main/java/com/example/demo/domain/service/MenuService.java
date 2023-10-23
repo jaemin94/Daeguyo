@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -41,4 +42,20 @@ public class MenuService {
             return Collections.emptyList();
         }
     }
+
+    public List<MenuDto> getRes_id1(String menu_id){
+
+       return mapper.findResIdByMenuId1(menu_id);
+    }
+
+    public String getRes_id(String menu_id){
+
+        return mapper.findResIdByMenuId(menu_id);
+    }
+
+    public List<MenuDto> getAllMenuFromCart(String menu_id){
+
+        return mapper.selectOne(menu_id);
+    }
+
 }

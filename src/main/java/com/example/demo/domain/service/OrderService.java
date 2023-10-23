@@ -37,5 +37,9 @@ public class OrderService {
         return mapper.selectOne1(order_id);
     }
 
+    public int addOrder(OrderDto dto){
+        log.info("addOrder Called: " + dto);
+        return mapper.addOrder(dto);
+    }
 
 }

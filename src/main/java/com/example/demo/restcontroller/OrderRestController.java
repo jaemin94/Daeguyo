@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -28,6 +29,25 @@ public class OrderRestController {
 
     @Autowired
     private OrderService orderService;
+
+    @PostMapping("/orderSuccess")
+    public void orderSuccess(@RequestBody OrderDto dto){
+        log.info("dto : " + dto);
+        List<String> menuNames = Arrays.asList(dto.getMenu_name().split(","));
+        List<String> selectedOptions = Arrays.asList(dto.getSelect_option().split(",",2));
+
+        for(int i =0; i<menuNames.size(); i++){
+            for (String menuName : menuNames) {
+                for (String selectedOption : selectedOptions) {
+                    dto.setSelect_option(selectedOption);
+                }
+                dto.setOrder_id(dto.getOrder_id() + i);
+                dto.setMenu_name(menuName);
+                orderService.addOrder(dto);
+            }
+            i++;
+        }
+    }
 
 
     @DeleteMapping("/deleteOrder/{order_id}")

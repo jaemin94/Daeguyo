@@ -19,6 +19,8 @@
 
   </head>
   <body>
+  <span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUsername()}" id="email" class="hidden"></span>
+  <span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUserPhoneNumber()}" id="phone" class="hidden"></span>
   <div id="warp">
     <div class="side_menu">
       <div class="ide_login">
@@ -88,12 +90,12 @@
                 </ul>
               </div>
             </li>
-            <li><a href="javascript:void(0);">주문</a></li>
-            <li><a href="javascript:void(0);">마이페이지</a></li>
+            <li><a th:href="@{/menu_catagory}">주문</a></li>
+            <li><a th:href="@{/myPage}">마이페이지</a></li>
           </ul>
         </nav>
         <div class="quick_menu">
-          <a th:href="@{/myPage}">SEIN 님</a>
+          <a th:href="@{/myPage}" id="mypage"><span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUserNickname()} + 님" id="nickname"></span></a>
           <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
           <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
           <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
@@ -112,42 +114,47 @@
       </div>
       <div  class="menu_container">
 
-          <div th:text="${options[0].res_name}"  class="main_name" id="res-id">
-
+          <div  class="main_name" id="res-id" th:if="${resDto != null}">
+            <span id="res_id" class="hidden" th:text="${resDto.res_id}"></span>
+            <span id="res_name" th:text="${resDto.res_name}"></span>
           </div>
-        <div  th:each="option : ${options}"  class="main_menu">
-              <div class="menu_image" id="${option.cart_id}">
+        <div  class="main_menu"  th:if="${menuDto != null}" th:each="menuDto : ${menuDto}">
+              <div class="menu_image">
                   <img src="/images/sectionbg_02.jpg">
               </div>
               <div class="menu_name">
                 <div class="menu_name_box">
-                  <span id="" th:text="${option.menu_name}"></span>
-                  <div class="form-check">
+                  <span id="menuName" th:text="${menuDto.menu_name}"></span>
+                  <div class="form-check" th:if="${cartDto != null}" th:each="cartDto : ${cartDto}">
+                    <th:block th:if="${menuDto.menu_id == cartDto.menu_id}">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-
-                    </label>
+                    <label class="form-check-label" for="flexCheckChecked"></label>
+                    <span class="cart-id" th:text="${cartDto.cart_id}"></span>
+                    </th:block>
                   </div>
-                  <button id="delete"  th:onclick="orderdelete([[${option.cart_id}]]);">X</button>
-
+                  <button id="delete" onclick="deleteMenuItem(this)">X</button>
                 </div>
 
 
 
-                  <div class="name_price">
-                      <ul>
-                          <li>
-                            <span th:text="${#strings.replace(option.selected_option, ',', ' ')}"></span>
-                            <div th:text="${option.price}"class="price"></div>
-                            <button class="option">옵션변경</button>
-                            <div class="quantity">
-                              <button class="minus" th:onclick="changeAmount(this, -1, ([[${option.cart_id}]]),([[${option.price}]]))">ㅡ</button>
-                              <span class="amount" th:text="${option.count}" data-cart-id ="${option.cart_id}"></span>
-                              <button class="plus" th:onclick="changeAmount(this, 1, ([[${option.cart_id}]]),([[${option.price}]]))" >+</button>
-                            </div>
-                          </li>
-                      </ul>
+                <div class="name_price">
+                  <ul>
+                    <li th:if="${cartDto != null}" th:each="cartDto : ${cartDto}">
+                      <th:block th:if="${menuDto.menu_id == cartDto.menu_id}">
+                        <div th:each="selected_option : ${#strings.listSplit(cartDto.selected_option, ',')}">
+                          <span id="selectOption" th:text="${selected_option}"></span>
+                        </div>
+                      </th:block>
+                    </li>
+                  </ul>
+                  <button class="option">옵션변경</button>
+                  <div class="quantity">
+                    <button class="minus">ㅡ</button>
+                    <span id="amount" class="amount"></span>
+                    <button class="plus">+</button>
                   </div>
+                </div>
+
 
 
               </div>
@@ -160,15 +167,14 @@
                 <span>더 담으러 가기</span>
               </div>
             </div>
-                <div class="menu_container2">
+                <div class="menu_container2" th:if="${menuDto != null and not #lists.isEmpty(menuDto)}">
                     <div class="main_menu_container2">
                       <div class="cart_main">장바구니상품</div>
                       <div class="price_info">
                         <ul>
                           <li>
-                            <span>상품금액</span>
-                            <span id ="amount_price" th:text="${total}+'원'"></span>
-
+                            <span >상품금액</span>
+                            <span id ="order_amount" th:text="${totalPrice}">2</span>
                           </li>
                           <li>
                             <span>배달팁</span>
@@ -184,217 +190,127 @@
                        <ul>
                         <li>
                             <span>총 상품금액</span>
-                          <span id ="amount_price" th:text="${total}+'원'"></span>
+                          <span id ="total_price" th:text="${totalPrice+2000}"></span>
                         </li>
                        </ul>
                       </div>
                     </div>
                   </div>
 
-      <span id="u_email" style="display: none;" data-u-email="${u_email}"></span>
-      <span id="nickname" style="display: none;" data-nickname="${nickname}"></span>
-      <span id="phone" style="display: none;" data-phone="${phone}"></span>
-
-      <button class="pay" th:onclick="handlePayment([[${options[0].cart_id}]])">결제하기</button>
-
-
+<!--      <button class="pay" onclick="requestPayment()">결제하기</button>-->
 
 
     </div>
   </div>
+  <button class="pay" onclick="requestPayment()">결제하기</button>
+
+
   </body>
   <script>
-    function handlePayment(cart_id) {
-     let uEmail = document.getElementById('u_email').dataset.uEmail;
-     let nickname = document.getElementById('nickname').dataset.nickname;
-     let phone = document.getElementById('phone').dataset.phone;
-     let resId = document.getElementById('res_name').innerText;
+    var u_email = document.getElementById("email").textContent;
+    var phoneNumber = document.getElementById("phone").textContent;
+    var elements = document.querySelectorAll(".main_name");
 
-     var orderName = resId;
-     var totalAmount = parseInt(document.getElementById('amount_price').innerHTML.split("원")[0].replace(/,/g, ''));
+for (var i = 0; i < elements.length; i++) {
+    var resId = elements[i].querySelector("#res_id").textContent;
+    var resName = elements[i].querySelector("#res_name").textContent;
 
-     var customer = {
-         customerId: nickname,
-         phoneNumber: phone
-     };
+    console.log("resId :" , resId);
+    // 이제 resId와 resName을 사용하여 필요한 작업을 수행할 수 있습니다.
+}
+    var total_price_str = document.getElementById("total_price").textContent;
+    var total_price_int = parseInt(total_price_str, 10);
+    console.log(total_price_int);
 
-     var paymentId = 'paymentId' + new Date().getTime();
+function requestPayment() {
+PortOne.requestPayment({
+    storeId: 'store-e41c5842-2d91-4a60-90bf-3b70da11378f',
+    paymentId: 'paymentId' + new Date().getTime(), // 고유한 결제 ID 생성
+    orderName: '나이키 와플 트레이너 2 SD',
+    totalAmount: total_price_int,
+    currency: 'CURRENCY_KRW',
+    channelKey: 'channel-key-d184ee7f-a639-44ef-81b3-d1aeb4eba934',
+    payMethod: "CARD",
+    customer:{customerId:u_email,
+    phoneNumber:phoneNumber}
+}).then(function (response) {
 
-                 PortOne.requestPayment({
-                     storeId: 'store-e41c5842-2d91-4a60-90bf-3b70da11378f',
-                     paymentId: paymentId,
-                     orderName: orderName,
-                     totalAmount: totalAmount,
-                     customer: customer,
-                     currency: 'CURRENCY_KRW',
-                     channelKey: 'channel-key-d184ee7f-a639-44ef-81b3-d1aeb4eba934',
-                     payMethod: "CARD",
-                 }).then(function (response) {
-                         if (response.transactionType === "PAYMENT") {
+        const selectOptionElements = document.querySelectorAll('#selectOption');
+        const selectOptions = [];
 
-                             var PaymentData = {
-                                 payment_id: paymentId,  // 위에서 생성한 paymentId 사용
-                                 order_id: " ",  // 실제 주문 ID로 대체해야 함.
-                                 pay_method:"CARD",
-                                 pay_date:new Date(),
-                                 pay_status:"Waiting"
-                             };
-
-                             axios.post('/payment/save', PaymentData)
-                     .then(function(response) {
-                         console.log('Payment data saved successfully.');
-
-                         // UUID for the orderId
-              let orderId = 'orderId-' + new Date().getTime();
-
-              // Get menu items from the page
-              let menuItems = document.querySelectorAll('.main_menu');
-
-              menuItems.forEach(function(menuItem) {
-                  // Read necessary information from the menuItem element
-                  let menuNameElement = menuItem.querySelector('.menu_name_box span');
-                  let selectedOptionElement = menuItem.querySelector('.name_price ul li span:first-child');
-                  let countElement = menuItem.querySelector('.quantity .amount');
-
-                  if (menuNameElement && selectedOptionElement && countElement) {
-                      // Create a cartDto object for this menu item and send it to server
-
-                      var cartDto ={
-                         order_id : orderId,
-                         u_email : uEmail,
-                         menu_name : menuNameElement.innerText,
-                         res_name : resId,
-                         selected_option : selectedOptionElement.innerText,
-                         count : countElement.innerText,
-                         total_price : totalAmount,  // This should be changed to the price of this particular item if available
-                         coupon_id :"1",
-                         order_status : PaymentData.pay_status,
-                         order_date : PaymentData.pay_date
-                       }
-
-                       axios.post('/create', cartDto)
-                            .then(function(response) {
-                                console.log('Order created successfully.');
-                            })
-                                          .catch(function(error) {
-                                              console.error('Error creating order:', error);
-                                          });
-                                  })
-                                  .catch(function(error) {
-                                      console.error('Error saving payment data:', error);
-                                  });
-                         } else {
-                             console.error('Payment failed:', response);
-                         }
-                   }).catch(function (error) {
-                       console.error('Error:', error);
-                   });
-             }).catch(function (error) {
-                console.error('Error:', error);
-            });
-     }
-
-  </script>
-
-  <script>
-    function decreaseAmount(buttonElement) {
-        var amountSpan = buttonElement.nextElementSibling;
-        var currentAmount = parseInt(amountSpan.textContent);
-
-        if (currentAmount > 0) { // Change this condition if you want a minimum limit other than 0
-            amountSpan.textContent = currentAmount - 1;
-        }
-    }
-
-    function increaseAmount(buttonElement) {
-        var amountSpan = buttonElement.previousElementSibling;
-        var currentAmount = parseInt(amountSpan.textContent);
-
-        amountSpan.textContent = currentAmount + 1;
-    }
-  </script>
-  <script>
-    function changeAmount(buttonElement, delta, cart_id, price) {
-    var amountSpan = buttonElement.className === 'minus' ? buttonElement.nextElementSibling : buttonElement.previousElementSibling;
-    var currentAmount = parseInt(amountSpan.textContent.replace(/,/g,''));
-
-    if (currentAmount + delta >= 0) {
-        amountSpan.textContent = (currentAmount + delta).toLocaleString('ko-KR');
-
-        axios.post('/updateOrder', { cart_id : cart_id , count : currentAmount + delta})
-        .then(function (response) {
-
-            var all_price = parseInt(document.getElementById('amount_price').innerText.replace(/,/g,''));
-
-            if(delta < 0){
-                var newPrice = all_price - price;
-                document.getElementById('amount_price').innerText = newPrice.toLocaleString('ko-KR') + "원";
-            }else{
-                var newPrice = all_price + price;
-                document.getElementById('amount_price').innerText = newPrice.toLocaleString('ko-KR') + "원";
-            }
-
-            $(".total_price span:last-child").text(parseInt(document.getElementById('amount_price').innerText.split("원")[0].replace(/,/g,'')).toLocaleString() + "원");
-
-        })
-        .catch(function (error) {
-            console.error(error);
+        selectOptionElements.forEach((element) => {
+        selectOptions.push(element.textContent);
         });
-    }
+
+        const menuNameElements = document.querySelectorAll('#menuName');
+        const menuNames = [];
+
+        menuNameElements.forEach((element) => {
+        menuNames.push(element.textContent);
+        });
+
+        const amount = document.getElementById("order_amount").textContent;
+        var amount_int = parseInt(amount, 10);
+
+
+        const selectOptionString = selectOptions.join(',');
+        const menuNameString = menuNames.join(',');
+
+    const requestData = {
+     order_id : 'orderid' + new Date().getTime(),
+     coupon_id : '123',
+     u_email : u_email,
+     menu_name : menuNameString,
+     res_id : resId,
+     select_option : selectOptionString,
+     order_amount : amount_int,
+     total_price : total_price_int,
+     order_status : "waiting"
+    };
+
+    axios.post("/orderSuccess",requestData)
+    .then(function (serverResponse) {
+      // 서버 응답을 처리하는 코드
+      console.log('서버 응답:', serverResponse);
+      // 여기에서 서버 응답에 따른 추가 작업 수행
+    })
+    .catch(function (error) {
+      // 오류 처리 코드
+      console.error('Axios 요청 오류:', error);
+    });
+  })
+  .catch(function (error) {
+    // 결제 오류 처리 코드
+    console.error('결제 오류:', error);
+  });
 }
 
-  </script>
-  <script>
-    $(document).ready(function() {
-        var total = 0;
+function deleteMenuItem(button) {
+  var menuNameBox = button.parentElement;
+  var cartIdElement = menuNameBox.querySelector(".cart-id");
+  console.log("cartIdElement : " + cartIdElement);
+  if (cartIdElement) {
+    var cart_id = cartIdElement.textContent;
+    console.log("cart_id: " + cart_id);
 
-        // 모든 .price 요소를 순회하면서 가격을 합산
-        $(".price").each(function() {
-            var price = $(this).text();
-            // price 문자열에서 콤마와 원 단위 제거 후 숫자로 변환
-            price = parseInt(price.replace(/,/g, "").replace("원", ""));
+    axios.delete("/deleteMenu?cart_id=" + cart_id)
+      .then(function (response) {
+        if (response.status === 200) {
+          // 삭제 요청이 성공적으로 완료된 경우
+          menuNameBox.remove(); // HTML에서 해당 메뉴 아이템 제거
+          location.reload();
+        } else {
+          console.error('메뉴 삭제 요청에 실패했습니다.');
+        }
+      })
+      .catch(function (error) {
+        console.error('메뉴 삭제 요청 오류:', error);
+      });
+  }
+}
 
-            if (!isNaN(price)) { // 숫자인 경우만 합산
-                total += price;
-            }
-        });
-
-        // 총 상품금액 표시 업데이트 (콤마와 원 단위 추가)
-<!--        $(".total_price span:last-child").text(total.toLocaleString() + "원");-->
-    });
-  </script>
-  <script>
-
-
-    function requestPayment() {
-        PortOne.requestPayment({
-            storeId: 'store-e41c5842-2d91-4a60-90bf-3b70da11378f',
-            paymentId: 'paymentId' + new Date().getTime(), // 고유한 결제 ID 생성
-            orderName: orderName,
-            totalAmount: totalAmount,
-            customer: customer,
-            currency: 'CURRENCY_KRW',
-            channelKey: 'channel-key-d184ee7f-a639-44ef-81b3-d1aeb4eba934',
-            payMethod: "CARD",
-        });
-    }
 
   </script>
-  <script>
-    function orderdelete(cartId){
-        axios.post('/cart/delete', { cart_id : cartId })
-            .then(function (response) {
-                // Handle successful response here
-                console.log(response);
-            })
-            .catch(function (error) {
-                // Handle error here
-                console.error(error);
-            });
-    }
-
-  </script>
-
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
