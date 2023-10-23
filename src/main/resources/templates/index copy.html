@@ -18,7 +18,7 @@
     <div id="warp">
       <div class="side_menu">
         <div class="ide_login">
-          <a href="/myPage"> 안녕하세요! <strong>SEIN</strong>님</a>
+          <a href="/myPage" > 안녕하세요! <strong>SEIN</strong>님</a>
           <a href="#" class="close">&times;</a>
         </div>
         <div class="panner">
@@ -28,7 +28,7 @@
             <li><a href="javascript:void(0);">매장찾기</a></li>
             <li><a href="/myPage">마이페이지</a></li>
 
-            <li><a sec:authorize="isAuthenticated()" href="/logout">로그아웃</a></li>
+            <li><a sec:authorize="isAuthenticated()" href="/logout" >로그아웃</a></li>
 
           </ul>
         </div>
@@ -92,8 +92,8 @@
         <div class="quick_menu">
           <a th:href="@{/myPage}" id="mypage"><span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUserNickname()} + 님"></span></a>
           <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
-          <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
-          <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
+          <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/logout.png" alt="로그아웃"></a>
+          <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/loginbtn.png" alt="로그인"></a>
           <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
         </div>
       </div>
