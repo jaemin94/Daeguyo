@@ -15,7 +15,6 @@ public interface CartMapper {
     @Select("select * from tbl_cart  ")
     List<CartDto> CartList( );
 
-
     @Update("UPDATE tbl_cart SET count = #{count} WHERE cart_id = #{cart_id}")
     public void updateOrder(CartDto dto);
 
