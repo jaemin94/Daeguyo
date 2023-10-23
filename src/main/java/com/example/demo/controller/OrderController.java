@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,8 +40,9 @@ public class OrderController {
     private UserService userService;
 
     @GetMapping("/orderStatus")
-    public String getOrderStatus(Model model) {
-        List<OrderDto> orders = orderService.getAllOrders();
+    public String getOrderStatus(Model model, HttpSession session) {
+        String u_email = (String)session.getAttribute("username");
+        List<OrderDto> orders = orderService.getAllOrders(u_email);
        // UserDto users = userDetails.getUser(); // 로그인한 사용자 정보 가져오기
         model.addAttribute("orders", orders);
         //model.addAttribute("users", users); // 화면에 전달
@@ -82,6 +84,7 @@ public class OrderController {
             model.addAttribute("orderlist", orderdto);
         return "resCheck";
     }
+
 
 
 

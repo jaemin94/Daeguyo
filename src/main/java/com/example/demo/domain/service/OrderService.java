@@ -21,8 +21,8 @@ public class OrderService {
     }
 
 
-    public List<OrderDto> getAllOrders() {
-        return mapper.selectAll();
+    public List<OrderDto> getAllOrders(String u_email) {
+        return mapper.userOrder(u_email);
     }
 
 
@@ -37,5 +37,9 @@ public class OrderService {
         return mapper.selectOne1(order_id);
     }
 
+    public int addOrder(OrderDto dto){
+        log.info("addOrder Called: " + dto);
+        return mapper.addOrder(dto);
+    }
 
 }

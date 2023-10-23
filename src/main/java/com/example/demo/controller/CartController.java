@@ -3,9 +3,13 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.daeguyo.CartDto;
 
+import com.example.demo.domain.daeguyo.MenuDto;
 import com.example.demo.domain.daeguyo.PaymentDto;
+import com.example.demo.domain.daeguyo.ResDto;
 import com.example.demo.domain.service.CartService;
+import com.example.demo.domain.service.MenuService;
 import com.example.demo.domain.service.OrderService;
+import com.example.demo.domain.service.ResService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +30,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -36,43 +43,38 @@ public class CartController {
     private CartService cartService;
 
     @Autowired
-    private OrderService orderService;
+    private ResService resService;
+    @Autowired
+    private MenuService menuService;
 
     @GetMapping("/cart")
-    public String getCart(Model model){
-        List<CartDto> options = cartService.SearchOption();
+    public String getCart(Model model, HttpSession session){
+        String u_email = (String) session.getAttribute("username");
+        String menu_id = null;
+        List<CartDto> cartDto = cartService.selectAllByEmail(u_email);
+        List<MenuDto> menuDtoList = new ArrayList<>();
+        List<CartDto> cartDtoList = new ArrayList<>();
+        int totalPrice = 0;
 
-        log.info(options.toString());
-        int total = 0;
-        for (CartDto option : options) {
-            total += option.getPrice() * option.getCount();
+        for (CartDto item : cartDto) {
+            menu_id = item.getMenu_id();
+            List<MenuDto> menuDto = menuService.getAllMenuFromCart(menu_id);
+            String res_id = menuService.getRes_id(menu_id);
+            ResDto resDto = resService.searchOne(res_id);
+            model.addAttribute("resDto",resDto);
+            menuDtoList.addAll(menuDto);
+            for (MenuDto menu : menuDto) {
+                totalPrice += menu.getPrice();
+            }
         }
-        model.addAttribute("total", total);
-        model.addAttribute("options",options);
 
+
+        List<MenuDto> menuDto = menuService.getAllMenuFromCart(menu_id);
+        model.addAttribute("cartDto",cartDto);
+        model.addAttribute("menuDto",menuDtoList);
+        model.addAttribute("totalPrice",totalPrice);
         return "cart";
     }
-
-    @PostMapping("/payment/save")
-    @ResponseBody
-    public Map<String,Object> paymentsave(@RequestBody PaymentDto payment){
-        System.out.println("Payment saved");
-        Map<String,Object> detail = cartService.paymentInsert(payment);
-        System.out.println(payment);
-        return detail; // HTTP 상태 코드 200(OK)을 반환합니다.
-    }
-
-
-    @PostMapping("/cart/delete")
-    @ResponseBody
-    public int paymentsave(@RequestBody CartDto dto){
-        System.out.println(dto.getCart_id());
-        System.out.println("Payment saved");
-        int detail = cartService.cartDelete(dto);
-
-        return detail; // HTTP 상태 코드 200(OK)을 반환합니다.
-    }
-
 
 
 }

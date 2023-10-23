@@ -34,34 +34,16 @@ public class CartService {
     @Autowired
     private PaymentMapper paymapper;
 
-    public List<CartDto> SearchOption( ){
-        return cartMapper.CartList();
+    public List<CartDto> selectAllByEmail(String u_email){
 
+        return cartMapper.selectAll(u_email);
     }
+
+
     public void updateOrderAmount(CartDto dto)  {
 
 
         cartMapper.updateOrder(dto);
-    }
-
-
-
-
-    public Map<String, Object> paymentInsert(PaymentDto paymentData){
-        System.out.println("pay? ="+paymentData);
-
-        int result = paymapper.insertPayment(paymentData);
-        System.out.println("pay2? ="+paymentData);
-
-        // 결과 값을 포함하는 Map 객체 생성
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result", result);
-
-        return resultMap;
-    }
-
-    public int cartDelete(CartDto dto) {
-        return cartMapper.deleteOrder(dto.getCart_id());
     }
 
 
@@ -91,6 +73,10 @@ public class CartService {
         }
 
         return true;
+    }
+
+    public int deleteFromCart(String cart_id){
+        return cartMapper.deleteOrder(cart_id);
     }
 
 
