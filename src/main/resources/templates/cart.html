@@ -119,20 +119,22 @@
             <span id="res_name" th:text="${resDto.res_name}"></span>
           </div>
         <div  class="main_menu"  th:if="${menuDto != null}" th:each="menuDto : ${menuDto}">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+
               <div class="menu_image">
                   <img src="/images/sectionbg_02.jpg">
               </div>
               <div class="menu_name">
                 <div class="menu_name_box">
                   <span id="menuName" th:text="${menuDto.menu_name}"></span>
-                  <div class="form-check" th:if="${cartDto != null}" th:each="cartDto : ${cartDto}">
+                  <div class="form-check" th:if="${cartDto != null}" th:each="cartDto : ${cartDto}" hidden>
                     <th:block th:if="${menuDto.menu_id == cartDto.menu_id}">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+
                     <label class="form-check-label" for="flexCheckChecked"></label>
-                    <span class="cart-id" th:text="${cartDto.cart_id}"></span>
+                    <span class="cart-id" th:text="${cartDto.cart_id}" hidden> </span>
                     </th:block>
                   </div>
-                  <button id="delete" onclick="deleteMenuItem(this)">X</button>
+
                 </div>
 
 
@@ -153,11 +155,14 @@
                     <span id="amount" class="amount"></span>
                     <button class="plus">+</button>
                   </div>
+
                 </div>
 
 
 
               </div>
+
+          <button id="delete" onclick="deleteMenuItem(this)">✖️️</button>
 
           </div>
 
@@ -195,14 +200,16 @@
                        </ul>
                       </div>
                     </div>
+                  <button class="pay" onclick="requestPayment()">결제하기</button>
                   </div>
 
 <!--      <button class="pay" onclick="requestPayment()">결제하기</button>-->
 
 
     </div>
+
   </div>
-  <button class="pay" onclick="requestPayment()">결제하기</button>
+
 
 
   </body>

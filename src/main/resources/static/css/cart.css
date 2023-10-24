@@ -13,6 +13,11 @@
   width: 100%;
   display: none;
 }
+#delete{
+font-size:24px;
+font-weight:bold
+font-weight:bold;
+}
 #map {
   height: 700px;
   width: 1300px;
@@ -380,33 +385,18 @@ li:after {
   color: #eee;
 }
 
-
-
-
-
-
-
-
-
-
-
   .main_board {
-  
-    height: 1300px;
-    margin: 0 auto;
     background: #f1f1f1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    
+    padding-top:100px;
+    padding-bottom:30px;
   }
   
 
   .main_board > .order {
-    top: 100px;
-    position: relative;
+  margin: 0 auto;
+  justify-content: center;
     display: flex;
+    margin-bottom:50px;
   }
   
   .order span:nth-child(1) {
@@ -447,22 +437,19 @@ li:after {
  
  }
   .main_board > .menu_container {
+  padding-top:20px;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
     width: 1200px;
-    height: 500px;
-    
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     background-color: white;
-    justify-content: center;
-    margin-top: 150px;
+    margin:0 auto;
+    margin-bottom:50px;
   }
   .menu_container2 {
     width: 1200px;
-    height: 350px;
     margin-top: 50px;
-    position: relative;
+    margin:0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -524,13 +511,14 @@ li:after {
     font-weight: bold; /* "총 상품금액" 텍스트에 굵은 글꼴 적용 */
   }
   .main_board > .main_menu_container2 {
+
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 1000px;
     height: 500px;
     padding: 50px;
-  }
+    }
 
 
   
@@ -549,22 +537,14 @@ li:after {
   }
   
    .main_menu {
-    width: 1200px;
+    width: 1000px;
     height: 120px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    padding: 50px;
+    justify-content: space-between;
     margin-bottom: 20px;
   }
-  .main_menu2 {
-    width: 1200px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
+
 
 .menu_container2  > .cart_main{
   padding: 20px;
@@ -573,59 +553,28 @@ li:after {
 
   .main_menu > .menu_image {
     width: 150px;
-    height: 100px;
-    margin-right: 10px;
-    margin-left: 50px;
   }
   
   .main_menu > .menu_name {
     width: 600px;
-    height: 100px;
-  
   }
-  .menu_name > .menu_name_box {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.menu_name_box input[type="checkbox"] {
-  position: absolute;
-  left: -185px;
-  bottom: 30px;
+/*.menu_name_box input[type="checkbox"] {
   transform: scale(2.2);
-}
-
+}*/
+.form-check-input{
+width:30px;
+height:30px;}
   .menu_name > .menu_name_box > span {
     display: flex;
     margin-left: 10px;
     align-items: flex-start;
-    height: 50px;
     font-size: 20px;
     color: black;
     font-weight: bold;
   }
-  .menu_name > .menu_name_box > #delete {
-    display: flex;
-    margin-left: 10px;
-    align-items: flex-start;
-    
-    font-size: 20px;
-    color: black;
-    width: 10px;
-    height: 30px;
-    justify-content: flex-end;
-    position: absolute;
-    left : 840px;
-    bottom : 35px;
-    
-    
-  }
-  
   .menu_name > .name_price {
     display: flex;
-    align-items: center;
-    height: 50px;
+    justify-content: space-between;
     font-size: 18px;
     color: #919191;
     font-family: "Noto Sans KR";
@@ -641,31 +590,23 @@ li:after {
     font-size: 12px; /* 원하는 글자 크기로 변경하세요 */
     color: #919191; /* 글자 색상 설정 */
     margin-left: 12px;
-    margin-bottom: 80px;
     display: flex;
     flex-direction: column; /* 요소들을 세로로 정렬하도록 수정 */
     position: relative;
   }
 
   .option {
-    position: absolute;
-    left: 650px;
     width: 80px;
-    height: 35px;
-    top: 45px;
     border: 1px solid;
     font-weight: bold;
     border-radius: 10px;
     
 }
   .quantity{
-    position: absolute;
-    margin-top: 40px;
     width: 100px;
     height: 40px;
     display: flex;
     justify-content: flex-end;
-    left: 750px;
     font-weight: bold;
   }
   .quantity > span {
@@ -738,13 +679,11 @@ li:after {
   }
 
   .pay{
-  width: 1200px; /* 부모 요소의 너비에 맞게 설정 */
+  width:1200px;
+  display:block;
   height: 70px; /* 원하는 높이로 설정 */
   font-size: 20px;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 50px;
   background-color: #01cafe; /* 배경색을 원하는 색으로 설정 */
   
   color:white; /* 텍스트 색상을 원하는 색으로 설정 */
