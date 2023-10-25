@@ -103,13 +103,13 @@
     </section>
 
     <div class="align">
-
+      <div class="choice-img"><img src="/images/choice.gif"></div>
       <ul class="order_list">
         <li><a href="#" data-sort="default">기본순</a></li>
         <li><a href="#" data-sort="rating">별점순</a></li>
         <li><a href="#" data-sort="delivery">배달팁</a></li>
         <li><a href="#" data-sort="price">주문금액</a></li>
-        <li><a href="#" data-sort="etc">기타</a></li>
+        <li><a href="#" data-sort="etc" class="random-item">랜덤<img src="/images/dice.png" class="random-dice"></a></li>
       </ul>
     </div>
 
@@ -136,10 +136,10 @@
 
             <div class="order-delivery-info">
               <span class="min-price">
-                <span th:text="'최소주문 ₩' + ${restaurant.min_order_price}"></span>
+                <span th:text="'최소주문 ₩' + ${restaurant.min_order_price}" class="pay-list"></span>
               </span>
               <span class="delivery-fee">
-                <span th:text="'배달팁 ₩' + ${restaurant.order_tax}"></span>
+                <span th:text="'배달팁 ₩' + ${restaurant.order_tax}" class="fee-list"></span>
               </span>
             </div>
             <div class="keywords">
