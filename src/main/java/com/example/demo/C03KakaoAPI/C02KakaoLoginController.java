@@ -29,7 +29,6 @@ public class C02KakaoLoginController {
     private final String logoutRedirect_uri = "http://localhost:8080/th/kakao/login";
 
 
-
     private KakaoTokenResponse kakaoTokenResponse;
 
     private KakaoProfile kakaoProfile;
