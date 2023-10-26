@@ -64,9 +64,9 @@ public class UserController {
         System.out.println(dto);
         int result = userService.memberJoin(dto); // service를 사용하여 memberJoin 메서드 호출
         if (result > 0) {
-            return "/login";
+            return "login";
         } else {
-            return "/memberJoin";
+            return "memberJoin";
         }
     }
 
