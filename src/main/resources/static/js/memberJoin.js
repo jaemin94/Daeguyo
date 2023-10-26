@@ -53,44 +53,74 @@ toggleButton2.addEventListener("click", function () {
   }
 });
 
+//비밀번호 일치 유효성체크
+ var passwordInput1 = document.getElementById("password1");
+            var passwordInput2 = document.getElementById("password2");
+            var passwordMatchMessage = document.getElementById("passwordMatchMessage");
+
+            // 비밀번호 입력란 값이 변경될 때 비밀번호 일치 여부를 확인
+            passwordInput1.addEventListener("input", checkPasswordMatch);
+            passwordInput2.addEventListener("input", checkPasswordMatch);
+
+            function checkPasswordMatch() {
+                var password1 = passwordInput1.value;
+                var password2 = passwordInput2.value;
+
+                if (password1 === "" && password2 === "") {
+                                    passwordMatchMessage.textContent = ""; // 빈 문자열로 메시지 제거
+                                    passwordInput2.classList.remove("match-animation");
+                                } else if (password1 === password2) {
+                                    passwordMatchMessage.textContent = "비밀번호 일치";
+                                    passwordMatchMessage.classList.remove("password_mismatch_message");
+                                    passwordMatchMessage.classList.add("password_match_message");
+                                     passwordInput2.classList.add("match-animation");
+                                     passwordInput1.classList.add("match-animation");
+                                } else {
+                                    passwordMatchMessage.textContent = "비밀번호 불일치";
+                                    passwordMatchMessage.classList.remove("password_match_message");
+                                    passwordMatchMessage.classList.add("password_mismatch_message");
+                                      passwordInput2.classList.remove("match-animation");
+                                      passwordInput1.classList.remove("match-animation");
+                                }
+                            }
+
 
 // 입력창
 function Postcode() {
   new daum.Postcode({
     oncomplete: function (data) {
-      var addr = '';
-      var extraAddr = '';
+      var addr = "";
+      var extraAddr = "";
 
-      if (data.userSelectedType === 'R') {
+      if (data.userSelectedType === "R") {
         addr = data.roadAddress;
       } else {
         addr = data.jibunAddress;
       }
 
-      if (data.userSelectedType === 'R') {
-        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+      if (data.userSelectedType === "R") {
+        if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
           extraAddr += data.bname;
         }
-        if (data.buildingName !== '' && data.apartment === 'Y') {
-          extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+        if (data.buildingName !== "" && data.apartment === "Y") {
+          extraAddr +=
+            extraAddr !== "" ? ", " + data.buildingName : data.buildingName;
         }
-        if (extraAddr !== '') {
-          extraAddr = ' (' + extraAddr + ')';
+        if (extraAddr !== "") {
+          extraAddr = " (" + extraAddr + ")";
         }
         document.getElementById("extraAddress").value = extraAddr;
       } else {
-        document.getElementById("extraAddress").value = '';
+        document.getElementById("extraAddress").value = "";
       }
 
       // 수정된 부분: 주소 정보를 각각의 입력란에 설정
       document.getElementById("addr_number").value = data.zonecode;
       document.getElementById("address").value = addr;
-      document.getElementById("detailAddress").value = ''; // 상세주소 초기화
-    }
+      document.getElementById("detailAddress").value = ""; // 상세주소 초기화
+    },
   }).open();
 }
-
-
 
 // 동의버튼들
 
@@ -107,9 +137,9 @@ function Postcode() {
 //       isButtonClicked = !isButtonClicked;
 
 //       if (isButtonClicked) {
-//         allAgreeImage.src = "./images/check.png"; 
+//         allAgreeImage.src = "./images/check.png";
 //       } else {
-//         allAgreeImage.src = "./images/done_check.png"; 
+//         allAgreeImage.src = "./images/done_check.png";
 //       }
 //     });
 //   });
@@ -125,7 +155,7 @@ function Postcode() {
 //         agreeButton.querySelector("img").src = "./images/nemo_check.png";
 //       } else {
 //         agreeButton.classList.add("checked");
-//         agreeButton.querySelector("img").src = "./images/nemo.png"; 
+//         agreeButton.querySelector("img").src = "./images/nemo.png";
 //       }
 //     });
 // }
@@ -158,7 +188,6 @@ function Postcode() {
 //       });
 //     }
 //   });
-
 
 document.addEventListener("DOMContentLoaded", function () {
   const allAgreeButton = document.querySelector(".all_agree_btn");
@@ -208,179 +237,166 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const btnJoin = document.getElementById("btnJoin");
 btnJoin.onclick = function () {
-    //주소
-    var postNumber = document.getElementById("addr_number").value;
-    var address = document.getElementById("address").value;
-    var extraAddress = document.getElementById("extraAddress").value;
-    var detailAddress = document.getElementById("detailAddress").value;
+  //주소
+  var postNumber = document.getElementById("addr_number").value;
+  var address = document.getElementById("address").value;
+  var extraAddress = document.getElementById("extraAddress").value;
+  var detailAddress = document.getElementById("detailAddress").value;
 
-    var password = document.getElementById("password").value;
-    var username = document.getElementById("name").value;
-    var phoneNumber = document.getElementById("phoneNumber").value;
+  var password = document.getElementById("password1").value;
+  var username = document.getElementById("name").value;
+  var phoneNumber = document.getElementById("phoneNumber").value;
 
-    // 주소합병
-    var  fullAddress = postNumber + " " + address + " " + extraAddress + " " + detailAddress;
+  // 주소합병
+  var fullAddress =
+    postNumber + " " + address + " " + extraAddress + " " + detailAddress;
 
-    //이메일합병
-    var emailInput = document.getElementById("email_id").value;
-    var emailSelect = document.getElementById("email_adr").value;
-    var fullEmail = emailInput + "@" + emailSelect;
+  //이메일합병
+  var emailInput = document.getElementById("email_id").value;
+  var emailSelect = document.getElementById("email_adr").value;
+  var fullEmail = emailInput + "@" + emailSelect;
 
+  const requestData = {
+    addr: fullAddress,
+    u_email: fullEmail,
+    password: password,
+    nickname: username,
+    phone: phoneNumber,
+  };
 
-    const requestData = {
-        addr: fullAddress,
-        u_email: fullEmail,
-        password: password,
-        nickname: username,
-        phone: phoneNumber
-    };
-
-    axios.post('/memberJoin', requestData)
-        .then(response => {
-
-            console.log(response.data);
-            window.location.href="/login";
-
-        })
-        .catch(error => {
-            console.error("Error sending data: ", error);
-        });
-}
+  axios
+    .post("/memberJoin", requestData)
+    .then((response) => {
+      console.log(response.data);
+      window.location.href = "/login";
+    })
+    .catch((error) => {
+      console.error("Error sending data: ", error);
+    });
+};
 
 // 휴대폰 인증번호 확인
 
 const phoneBtn = document.getElementById("phone_btn");
 const checkBtn = document.getElementById("check");
 
-phoneBtn.addEventListener("click",function(){
-document.getElementById('popup').classList.add('phidden'); // 팝업창이 생기는 것
-checkBtn.addEventListener("click",function(){
-var phoneNum = document.getElementById("phoneNumber").value;
-console.log(phoneNum);
+phoneBtn.addEventListener("click", function () {
+  document.getElementById("popup").classList.add("phidden"); // 팝업창이 생기는 것
+  checkBtn.addEventListener("click", function () {
+    var phoneNum = document.getElementById("phoneNumber").value;
+    console.log(phoneNum);
 
-function startSpinner() {
-  document.getElementById('spinner').style.display = 'block';
-}
+    function startSpinner() {
+      document.getElementById("spinner").style.display = "block";
+    }
 
+    function stopSpinner() {
+      document.getElementById("spinner").style.display = "none";
+    } // 스티너 생성 및 숨김 함수
 
-function stopSpinner() {
-  document.getElementById('spinner').style.display = 'none';
-} // 스티너 생성 및 숨김 함수
+    axios
+      .get("/checkPhone?phoneNum=" + phoneNum)
+      .then((response) => {
+        console.log("response" + response);
+        var userInput = document.getElementById("smscomfirmcheck").value;
 
-axios.get("/checkPhone?phoneNum=" + phoneNum)
-.then(response=>{
-        var userInput = document.getElementById('smscomfirmcheck').value;
-        console.log(userInput);
         var serverVerificationCode = response.data;
-        console.log("serverVerificationCode:" ,serverVerificationCode);
+        console.log("serverVerificationCode:", serverVerificationCode);
 
         if (userInput === String(serverVerificationCode)) {
-            // 인증이 성공한 경우
-            alert('인증이 성공했습니다.');
-            document.getElementById('popup').classList.add('phidden');
+          // 인증이 성공한 경우
+          alert("인증이 성공했습니다.");
+          document.getElementById("popup").classList.add("phidden");
         } else {
-            // 인증이 실패한 경우
-            alert('인증이 실패했습니다.');
-
+          // 인증이 실패한 경우
+          alert("인증이 실패했습니다.");
         }
-    })
-    .catch(error => {
-        console.error('데이터를 가져오지 못했습니다: ' + error);
-    });
-})
-
-
-})
+      })
+      .catch((error) => {
+        console.error("데이터를 가져오지 못했습니다: " + error);
+      });
+  });
+});
 
 // 번호 인증
-function phoneCheck(){
-console.log("phoneCheck clicked")
+function phoneCheck() {
+  console.log("phoneCheck clicked");
 
-var phonenum = document.getElementById("phoneNumber").value;
- var data = {to:phonenum};
- startSpinner();
-    axios.post("/sms/send",data)
-    .then(response=> {
-        stopSpinner();
-        console.log(response.data);
-        alert("인증번호가 전송되었습니다");
-         document.getElementById('popup').classList.remove('phidden');
-
+  var phonenum = document.getElementById("phoneNumber").value;
+  var data = { to: phonenum };
+  startSpinner();
+  axios
+    .post("/sms/send", data)
+    .then((response) => {
+      stopSpinner();
+      console.log(response.data);
+      alert("인증번호가 전송되었습니다");
+      document.getElementById("popup").classList.remove("phidden");
     })
-    .catch(error=>{
-    console.error("Error sending data: ", error);
+    .catch((error) => {
+      console.error("Error sending data: ", error);
     });
-
 }
 
 // 이메일 인증
 
 function startSpinner() {
-  document.getElementById('spinner').style.display = 'block';
+  document.getElementById("spinner").style.display = "block";
 }
 
 function stopSpinner() {
-  document.getElementById('spinner').style.display = 'none';
+  document.getElementById("spinner").style.display = "none";
 } // 스티너 생성 및 숨김 함수
 
-function emailCheck(){
-console.log("emailCheck clicked")
-startSpinner(); //실행되기전 함수 실행
-var emailadr = document.getElementById("email_id").value;
-var emailSelection = document.getElementById("email_adr").value;
-var FullEmail = emailadr+"@"+emailSelection;
-    axios.post("/sendEmail",{ FullEmail: FullEmail })
-    .then(response=> {
-
-    stopSpinner(); //실행되고 나서 함수 없애기
-    document.getElementById('popup1').classList.remove('ehidden');
-    console.log(response.data); //인증번호확인
-    alert("인증번호가 전송되었습니다");
+function emailCheck() {
+  console.log("emailCheck clicked");
+  startSpinner(); //실행되기전 함수 실행
+  var emailadr = document.getElementById("email_id").value;
+  var emailSelection = document.getElementById("email_adr").value;
+  var FullEmail = emailadr + "@" + emailSelection;
+  axios
+    .post("/sendEmail", { FullEmail: FullEmail })
+    .then((response) => {
+      stopSpinner(); //실행되고 나서 함수 없애기
+      document.getElementById("popup1").classList.remove("ehidden");
+      console.log(response.data); //인증번호확인
+      alert("인증번호가 전송되었습니다");
     })
-    .catch(error=>{
-    console.error("Error sending data: ", error);
+    .catch((error) => {
+      console.error("Error sending data: ", error);
     });
-
 }
 
 const emailBtn = document.getElementById("emailbtn");
 const checkBtn1 = document.getElementById("check1");
 
 // 이메일 인증번호 확인
-emailBtn.addEventListener("click",function(){
-
-
-checkBtn1.addEventListener("click",function(){
+emailBtn.addEventListener("click", function () {
+  checkBtn1.addEventListener("click", function () {
     var emailInput1 = document.getElementById("email_id").value;
     var emailSelect1 = document.getElementById("email_adr").value;
     var fullEmail1 = emailInput1 + "@" + emailSelect1;
 
-console.log(fullEmail1);
-axios.get("/checkEmail?email=" + fullEmail1)
-.then(response=>{
-        var userInput1 = document.getElementById('emailcomfirmcheck').value;
+    console.log(fullEmail1);
+    axios
+      .get("/checkEmail?email=" + fullEmail1)
+      .then((response) => {
+        var userInput1 = document.getElementById("emailcomfirmcheck").value;
         console.log(userInput1);
         var serverVerificationCode1 = response.data;
-        console.log("serverVerificationCode:" ,serverVerificationCode1);
+        console.log("serverVerificationCode:", serverVerificationCode1);
 
         if (userInput1 === String(serverVerificationCode1)) {
-            // 인증이 성공한 경우
-            alert('인증이 성공했습니다.');
-            document.getElementById('popup1').classList.add('ehidden');
+          // 인증이 성공한 경우
+          alert("인증이 성공했습니다.");
+          document.getElementById("popup1").classList.add("ehidden");
         } else {
-            // 인증이 실패한 경우
-            alert('인증이 실패했습니다.');
-
+          // 인증이 실패한 경우
+          alert("인증이 실패했습니다.");
         }
-    })
-    .catch(error => {
-        console.error('데이터를 가져오지 못했습니다: ' + error);
-    });
-})
-
-
-})
-
-
-
-
+      })
+      .catch((error) => {
+        console.error("데이터를 가져오지 못했습니다: " + error);
+      });
+  });
+});

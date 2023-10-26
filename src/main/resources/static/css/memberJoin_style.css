@@ -495,7 +495,25 @@ main>.section_join_header {
   padding-left: 10px;
   margin-right: 45px;
 }
+#passwordMatchMessage{
+  font-family: "Noto Sans KR";
+  margin-top:10px;
+}
+ .password_match_message {
+            color: green;
+        }
 
+.password_mismatch_message {
+            color: red;
+        }
+ .match-animation {
+            animation: matchHighlight 0.5s;
+        }
+
+@keyframes matchHighlight {
+            0% { background-color: transparent; }
+            100% { background-color: #75c166af; }
+        }
 .phone_input input {
   outline: none;
 }
