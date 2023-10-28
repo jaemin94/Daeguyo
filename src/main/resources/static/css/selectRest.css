@@ -37,6 +37,7 @@ display:flex;}
     margin-left: 15px;
     height: 60px;
     letter-spacing: 1px;
+    cursor: pointer;
   }
   .order_list:first-child li{
     margin-left: 0px;
@@ -68,6 +69,7 @@ display:flex;}
     margin-top 0.3s ease-in-out, 
     margin-bottom 0.3s ease-in-out, 
     box-shadow 0.3s ease-in-out;
+    cursor : pointer;
   }
 
 
@@ -146,3 +148,26 @@ display:flex;}
     font-size: 16px;
     font-weight: 500;
   }
+
+.random-item{
+    display: flex;
+    align-items: center;
+    }
+
+.random-dice{
+    margin-left:10px;
+    width:20px;
+    height:20px;
+}
+
+.choice-img{
+    width: 200px;
+    margin-left: 70%;
+    position: absolute;
+    bottom: 60px;
+    }
+
+.random-item:hover .random-dice {
+     transform: rotate(360deg);
+     transition: transform 1s ease;
+}
