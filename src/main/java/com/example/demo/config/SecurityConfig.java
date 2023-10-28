@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 				.antMatchers("/", "/public","/verifyIamport2/getToken","/verifyIamport2/cancel","/verifyIamport2/searchOne","/verifyIamport2/searchAll").permitAll()
 				.antMatchers("/sms/send","/checkPhone","/sendEmail","/checkEmail").permitAll()
-				.antMatchers("/memberJoin","/login").permitAll()
+				.antMatchers("/memberJoin","/login").permitAll()	// 기본 권한
 				.antMatchers("/menu_catagory","/selectRest","/selectRest/{food_catagory}","/review_tab").permitAll() // 주문정보
 				.antMatchers("/orderCheck","/orderCheck1").permitAll()	// 관리자 입장에서의 주문내역
 
