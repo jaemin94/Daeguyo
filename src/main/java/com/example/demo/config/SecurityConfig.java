@@ -35,11 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/images/**").permitAll()// 인가 처리
 
 
-				.antMatchers("/", "/public","/verifyIamport2/getToken","/verifyIamport2/cancel","/verifyIamport2/searchOne","/index","/verifyIamport2/searchAll").permitAll()
-				.antMatchers("/payorder","/payment/save","/selectOptions","/updateOrder","/cartdelete").permitAll()
+				.antMatchers("/", "/public","/verifyIamport2/getToken","/verifyIamport2/cancel","/verifyIamport2/searchOne","/verifyIamport2/searchAll").permitAll()
 				.antMatchers("/sms/send","/checkPhone","/sendEmail","/checkEmail").permitAll()
-				.antMatchers("/cart","/memberJoin","/menu_catagory","/myPage","/orderStatus","/review_tab","/selectRest","/memberUpdate","/login").permitAll()
-				.antMatchers("/resCheck","/orderCheck","/orderCheck1").permitAll()
+				.antMatchers("/memberJoin","/login").permitAll()
+				.antMatchers("/menu_catagory","/selectRest","/selectRest/{food_catagory}","/review_tab").permitAll() // 주문정보
+				.antMatchers("/orderCheck","/orderCheck1").permitAll()	// 관리자 입장에서의 주문내역
 
 
 																				// hasRole을 사용시 기본적으로 Role_ 이 제공된다
