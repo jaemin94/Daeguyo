@@ -28,9 +28,9 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/login")
-    public String loginPage(){
+    public void loginPage(){
 
-        return "login";
+
     }
 
 
