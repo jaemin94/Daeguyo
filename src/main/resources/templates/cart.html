@@ -214,7 +214,7 @@
 
   </body>
   <script>
-    var u_email = document.getElementById("email").textContent;
+    var nickName = document.getElementById("nickname").textContent;
     var phoneNumber = document.getElementById("phone").textContent;
     var elements = document.querySelectorAll(".main_name");
 
@@ -238,7 +238,7 @@ PortOne.requestPayment({
     currency: 'CURRENCY_KRW',
     channelKey: 'channel-key-d184ee7f-a639-44ef-81b3-d1aeb4eba934',
     payMethod: "CARD",
-    customer:{customerId:u_email,
+    customer:{customerId:nickName,
     phoneNumber:phoneNumber}
 }).then(function (response) {
 
