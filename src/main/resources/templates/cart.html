@@ -217,6 +217,7 @@
     var nickName = document.getElementById("nickname").textContent;
     var phoneNumber = document.getElementById("phone").textContent;
     var elements = document.querySelectorAll(".main_name");
+    var resnames = document.getElementById("res_name").textContent;
 
 for (var i = 0; i < elements.length; i++) {
     var resId = elements[i].querySelector("#res_id").textContent;
@@ -233,7 +234,7 @@ function requestPayment() {
 PortOne.requestPayment({
     storeId: 'store-e41c5842-2d91-4a60-90bf-3b70da11378f',
     paymentId: 'paymentId' + new Date().getTime(), // 고유한 결제 ID 생성
-    orderName: '나이키 와플 트레이너 2 SD',
+    orderName: resnames,
     totalAmount: total_price_int,
     currency: 'CURRENCY_KRW',
     channelKey: 'channel-key-d184ee7f-a639-44ef-81b3-d1aeb4eba934',
