@@ -981,10 +981,6 @@ button,input{
   }
 }
 
-.hidden{
-  display:none;
-}
-
 /*media query*/
 
 @media all and (max-width: 1310px) {
