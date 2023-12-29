@@ -180,8 +180,7 @@ header {
 }
 header > .align {
   display: flex;
-  justify-content: space-around;
-  flex: 1;
+  justify-content: center;
 }
 .scroll_btn {
   position: fixed;
@@ -222,7 +221,7 @@ header > .align {
   font-size: 20px;
   color: #ffffffd7;
   font-weight: 500;
-  width: 600px;
+  width: 500px;
   text-align: center;
 }
 .mainmenu > li {
@@ -751,6 +750,7 @@ footer {
 }
 
 @media all and (max-width: 1310px) {
+
   .recommand_img > div > a {
     width: 250px;
     height: 250px;
@@ -778,6 +778,9 @@ footer {
 @media all and (max-width: 1000px) {
   nav {
     display: none;
+  }
+  header > .align{
+    gap:80px;
   }
   .hamburger_btn {
     display: block;
@@ -818,6 +821,15 @@ footer {
 }
 
 @media all and (max-width: 800px) {
+
+  .logo > a > img {
+  width: 80px;
+    margin-top: 7px;
+    height: 80px;
+  }
+  header > .align{
+    gap: 50px;
+  }
   .recommand_img > div > a {
     width: 150px;
     height: 150px;
@@ -1085,6 +1097,30 @@ footer {
   .footer_nav > ul {
     margin-left: 0px;
   }
+  header > .align{
+    justify-content: center;
+    gap: 50px;
+  }
+  .quick_menu > a:nth-child(1){
+    font-size: 13px;
+    margin-top: 40px;
+    margin-right: 20px;
+
+  }
+  .quick_menu > a:nth-child(2){
+    width: 30px;
+    margin-right: 20px;
+    margin-top: 35px;
+  }
+  .quick_menu > a:nth-child(3){
+    width: 30px;
+    margin-top: 35px;
+  }
+  .location{
+    width: 30px;
+    margin-left: 20px;
+    margin-top: 35px;
+  }
 }
 @media all and (max-width: 560px) {
   .footer_nav > ul {
@@ -1097,7 +1133,10 @@ footer {
   }
 }
 
-@media all and (max-width: 460px) {
+@media all and (max-width: 480px) {
+  .logo{
+  display: none;
+  }
   .quick_menu > a:nth-child(1) {
     display: none;
   }
@@ -1242,22 +1281,17 @@ footer {
   .section_recent {
     height: 1000px;
   }
-  header > .align {
-    justify-content: space-between;
-  }
+
   .quick_menu {
-    align-items: center;
     margin-top: 0;
   }
   .quick_menu > a:nth-child(1) {
     margin-right: 10px;
     transition: all 0.6s ease-in-out;
-    margin-top: 10px;
-    width: 20px;
+    width: 25px;
   }
   .quick_menu > a:nth-child(2) {
-    margin-top: 10px;
-    width: 20px;
+    width: 25px;
   }
 
   .quick_menu > a > img {

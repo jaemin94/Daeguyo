@@ -97,7 +97,7 @@
         <a th:href="@{/myPage}" id="mypage"><span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUserNickname()} + 님"></span></a>
         <a th:href="@{/cart}"><img src="/images/storage.png" alt="장바구니"></a>
         <a  sec:authorize="isAuthenticated()" th:href="@{/logout}"><img src="/images/login.png" alt="로그아웃"></a>
-        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login.png" alt="로그인"></a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><img src="/images/login_mark.png" alt="로그인"></a>
         <a href="javascript:void(0);" class="location"><img src="/images/location.png" alt="지도찾기"></a>
       </div>
     </div>

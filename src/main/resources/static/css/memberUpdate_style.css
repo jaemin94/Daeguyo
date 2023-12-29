@@ -16,7 +16,7 @@ main>.section_join_header {
   display: flex;
   justify-content: flex-end;
   height: 100px;
-  width: 1100px;
+/*  width: 1100px;*/
   line-height: 100px;
   font-size: 20px;
   margin: 0 auto;
@@ -100,7 +100,7 @@ main>.section_join_header {
 
 /* 회원정보 입력 시작 */
 .section_enterInfo {
-  width: 1200px;
+/*  width: 1200px;*/
   height: 1300px;
   margin: 0 auto;
 }
@@ -111,7 +111,7 @@ main>.section_join_header {
   margin-top: 150px;
   font-size: 25px;
   padding-bottom: 30px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #4a4a4a;
   font-family: 'yg-jalnan';
   margin: 0 auto;
   width: 1100px;
@@ -137,6 +137,7 @@ main>.section_join_header {
 /* 이름 */
 .big_container>.name_container {
   height: 150px;
+  width: 1000px;
 }
 
 .name_container>.name_box {
@@ -144,7 +145,6 @@ main>.section_join_header {
 }
 
 .name_container>.name_input {
-  width: 1000px;
   border-left: none;
   /* 왼쪽 테두리 제거 */
   border-right: none;
@@ -152,20 +152,24 @@ main>.section_join_header {
   border-top: none;
   border-bottom: #919191 solid;
   outline: none;
+  position: relative;
 }
 
 .name_input>#nickname {
-  width: 950px;
   height: 50px;
   font-size: 20px;
   border: none;
   line-height: 50px;
   padding-left: 10px;
-
+  width: 100%;
 }
 
 .name_input>button {
   height: 100%;
+  position:absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
 }
 
 .name_input>button>img {
@@ -234,7 +238,7 @@ main>.section_join_header {
 
 .email_input>#email_id,
 #email_adr {
-  width: 36%;
+  width:auto;
   height: 50px;
   line-height: 50px;
   font-size: 18px;
@@ -277,6 +281,7 @@ main>.section_join_header {
 /* 비밀번호 */
 .big_container>.password1_container {
   height: 150px;
+  width: 1000px;
 }
 
 .password1_container>.password1_box {
@@ -284,7 +289,7 @@ main>.section_join_header {
 }
 
 .password1_container>.password1_input {
-  width: 1000px;
+
   border-left: none;
   /* 왼쪽 테두리 제거 */
   border-right: none;
@@ -292,10 +297,11 @@ main>.section_join_header {
   border-top: none;
   border-bottom: #919191 solid;
   outline: none;
+  position: relative;
 }
 
 .password1_input>#password1 {
-  width: 950px;
+width: 100%;
   height: 50px;
   font-size: 20px;
   border: none;
@@ -306,6 +312,10 @@ main>.section_join_header {
 
 .password1_input>button {
   height: 100%;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
 }
 
 .password1_input>button>img {
@@ -369,6 +379,7 @@ main>.section_join_header {
 /* 휴대폰번호 확인 */
 .big_container>.phone_container {
   height: 150px;
+  width: 1000px;
 }
 
 .phone_container>.phone_box {
@@ -376,7 +387,6 @@ main>.section_join_header {
 }
 
 .phone_container>.phone_input {
-  width: 1000px;
   border-left: none;
   /* 왼쪽 테두리 제거 */
   border-right: none;
@@ -384,16 +394,16 @@ main>.section_join_header {
   border-top: none;
   border-bottom: #919191 solid;
   outline: none;
+  position: relative;
 }
 
 .phone_input>#phone {
-  width: 890px;
   height: 50px;
   font-size: 20px;
   border: none;
   line-height: 50px;
   padding-left: 10px;
-
+width: 100%;
 }
 
 .phone_input input {
@@ -404,6 +414,10 @@ main>.section_join_header {
   background-color: #eaeaea;
   width: 100px;
   height: 50px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
 }
 
 #phone_btn {
@@ -474,7 +488,7 @@ main>.section_join_header {
 }
 
 .address>#address {
-  width: 970px;
+width: 100%;
   height: 35px;
 }
 
@@ -573,3 +587,308 @@ main>.section_join_header {
 
 /* 동의상자 작업 끝 */
 /* 김승훈 작업 끝 */
+
+
+/*media query*/
+
+@media all and (max-width: 1310px) {
+  .section_enterInfo>.section_header{
+    width: 800px;
+  }
+  .big_container>.name_container{
+    width: 800px;
+  }
+  .big_container>.email_container{
+    width: 800px;
+  }
+  .big_container>.password1_container{
+    width: 800px;
+  }
+  .big_container>.phone_container{
+    width: 800px;
+  }
+  .big_container>.addr_container{
+    width: 800px;
+  }
+  main>.section_join_header{
+    width: 800px;
+  }
+}
+
+@media all and (max-width: 1000px) {
+  nav {
+    display: none;
+  }
+  header > .align{
+    gap:80px;
+  }
+  .hamburger_btn {
+    display: block;
+  }
+
+}
+
+@media all and (max-width: 900px) {
+
+  .section_enterInfo>.section_header{
+    width: 600px;
+  }
+  .big_container>.name_container{
+    width: 600px;
+  }
+  .big_container>.email_container{
+    width: 600px;
+  }
+  .big_container>.password1_container{
+    width: 600px;
+  }
+  .big_container>.phone_container{
+    width: 600px;
+  }
+  .big_container>.addr_container{
+    width: 600px;
+  }
+  main>.section_join_header{
+    width: 600px;
+  }
+}
+
+@media all and (max-width: 800px) {
+
+  .logo > a > img {
+    width: 80px;
+    margin-top: 7px;
+    height: 80px;
+  }
+  header > .align{
+    gap: 50px;
+  }
+
+  .copyright {
+    flex-direction: column;
+    transition: all 0.6s ease-in-out;
+  }
+  .copyright > div {
+    font-size: 10px;
+  }
+  .footer_nav > ul {
+    font-size: 15px;
+    gap: 20px;
+    justify-content: center;
+  }
+  footer > .align {
+    text-align: center;
+  }
+  .footer_logo {
+    justify-content: center;
+  }
+  footer {
+    height: 450px;
+  }
+  .familysite {
+    margin-top: 10px;
+  }
+  footer {
+    height: 500px;
+  }
+
+  .section_enterInfo>.section_header{
+    width: 500px;
+  }
+  .big_container>.name_container{
+    width: 500px;
+  }
+  .big_container>.email_container{
+    width: 500px;
+  }
+  .big_container>.password1_container{
+    width: 500px;
+  }
+  .big_container>.phone_container{
+    width: 500px;
+  }
+  .big_container>.addr_container{
+    width: 500px;
+  }
+  main>.section_join_header{
+    width: 500px;
+  }
+  .section_agree>.agree_submit_zone{
+    width: 500px;
+  }
+}
+
+@media all and (max-width: 645px) {
+  .import {
+    display: none;
+  }
+
+  .import {
+    display: block;
+    transition: all 0.6s ease-in-out;
+  }
+  .copyright > div:nth-child(1) {
+    display: none;
+    transition: all 0.6s ease-in-out;
+  }
+  .footer_nav > ul {
+    font-size: 13px;
+    gap: 10px;
+    justify-content: center;
+    transition: all 0.6s ease-in-out;
+  }
+  .side_menu {
+    padding: 50px 50px;
+  }
+  .sns {
+    margin-left: 0px;
+  }
+  .footer_nav > ul {
+    margin-left: 0px;
+  }
+  header > .align{
+    justify-content: center;
+    gap: 50px;
+  }
+  .quick_menu > a:nth-child(1){
+    font-size: 13px;
+    margin-top: 40px;
+    margin-right: 20px;
+
+  }
+  .quick_menu > a:nth-child(2){
+    width: 30px;
+    margin-right: 20px;
+    margin-top: 35px;
+  }
+  .quick_menu > a:nth-child(3){
+    width: 30px;
+    margin-top: 35px;
+  }
+  .location{
+    width: 30px;
+    margin-left: 20px;
+    margin-top: 35px;
+  }
+}
+@media all and (max-width: 560px) {
+  .footer_nav > ul {
+    font-size: 15px;
+    gap: 10px;
+    flex-direction: column;
+  }
+  .import {
+    display: none;
+  }
+
+  .section_enterInfo>.section_header{
+    width: 400px;
+  }
+  .big_container>.name_container{
+    width: 400px;
+  }
+  .big_container>.email_container{
+    width: 400px;
+  }
+  .big_container>.password1_container{
+    width: 400px;
+  }
+  .big_container>.phone_container{
+    width: 400px;
+  }
+  .big_container>.addr_container{
+    width: 400px;
+  }
+  main>.section_join_header{
+    width: 400px;
+  }
+  .section_agree>.agree_submit_zone{
+    width: 400px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .logo{
+    display: none;
+  }
+  .quick_menu > a:nth-child(1) {
+    display: none;
+  }
+  .side_menu {
+    padding: 30px 30px;
+  }
+  .side_login > a {
+    font-size: 20px;
+  }
+  .side_login > a > strong {
+    font-size: 30px;
+  }
+  a.close {
+    font-size: 35px;
+  }
+  .import {
+    display: none;
+  }
+  footer {
+    height: 550px;
+  }
+}
+
+@media all and (max-width: 360px) {
+  .quick_menu{
+    align-items: center;
+  }
+  .side_login > a {
+    font-size: 15px;
+  }
+  .side_login > a > strong {
+    font-size: 25px;
+  }
+  a.close {
+    font-size: 25px;
+  }
+  .quick_menu > a:nth-child(1) {
+    margin-right: 10px;
+    transition: all 0.6s ease-in-out;
+    width: 25px;
+  }
+  .quick_menu > a:nth-child(2) {
+    width: 25px;
+    margin-top: 0;
+  }
+  .quick_menu > a:nth-child(3){
+  margin-top: 0;
+  }
+  .location{
+    margin-top: 0;
+  }
+
+  .quick_menu > a > img {
+    width: 20px;
+  }
+  .footer_logo > div {
+    margin-top: 5px;
+    margin-bottom: 30px;
+  }
+  .logo > a > img {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+  }
+  .hamburger_btn {
+    font-size: 2rem;
+    transition: all 0.6s ease-in-out;
+    margin-top: 35px;
+  }
+  .footer_logo {
+    flex-direction: column;
+  }
+
+  footer {
+    height: 580px;
+  }
+}
+
+.hidden{
+  display:none;
+}
